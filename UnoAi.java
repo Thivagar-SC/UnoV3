@@ -30,11 +30,13 @@ public class UnoAi {
             }
             if(currentlyPlacedCard.getValue() == 13)
             {
-                    
+                
             }
             if(currentlyPlacedCard.getValue() == 14)
             {
-
+                double randomColor  = (Math.random()*4);
+                int color = (int)Math.round(randomColor);
+                cardToPlace.changeColour(color);
             }
         }
     }
@@ -50,7 +52,7 @@ public class UnoAi {
 
     }
 
-    public void addCard(Card card, String source) {
+    private void addCard(Card card, String source) {
 
     }
 public void getcurrentCard(Card currentCard)
