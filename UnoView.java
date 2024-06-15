@@ -176,6 +176,7 @@ public class UnoView extends JPanel {
    */
   private void displayCards() {
     this.removeAll();
+    this.model.getCurrentPlayer().organizeHand();
     this.setFocusable(true);
     this.requestFocus();
     this.setHand();

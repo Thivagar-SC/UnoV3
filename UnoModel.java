@@ -102,11 +102,11 @@ public class UnoModel {
      */
     public void placeCard(int cardIndex, int playerID) // Avaneesh
     {
-        Player currentPlayer = players.get(playerID);
+        //Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
-            currentPlayer.getHand().remove(cardIndex);
+            this.player.getHand().remove(cardIndex);
             currentlyPlacedCard = cardToPlace;
             if (cardToPlace.getValue() == 10) {
                 direction *= -1;
