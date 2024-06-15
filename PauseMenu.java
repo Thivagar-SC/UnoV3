@@ -62,7 +62,6 @@ public class PauseMenu extends JPanel {
         buttonsBackground.add(Box.createVerticalStrut(10));
         buttonsBackground.add(quitGameButton);
         buttonsBackground.add(Box.createVerticalStrut(20));
-
     }
 
     public void setVisibility(){

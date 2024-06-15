@@ -13,7 +13,7 @@ public class UnoModel {
     private String gameState;
     private int turn;
     private Player player;
-    private UnoAi ai;
+    //private UnoAi ai;
     private Deck deck;
     private boolean safe;
     private int numberOfRounds;
@@ -28,6 +28,7 @@ public class UnoModel {
     // GUI variables
     private boolean menuSelection;
     private int state; //state of game
+    private int safeState;
 
     public final int MENU = 0;
     public final int SELECTION= 1;
@@ -35,6 +36,10 @@ public class UnoModel {
     public final int PAUSED = 3;
     public final int ENDGAME = 4;
     public final int RESET = 5;
+
+    public final int SAFE = 0;
+    public final int CALLED = 1;
+    public final int NOT_SAFE = 2;
 
 
 
@@ -186,8 +191,13 @@ public class UnoModel {
     /**
      * Sets the UNO state for the current player.
      */
-    public void setUNOState() {
-
+    public void setUNOState(int safeState)
+    {
+        if (this.safeState == CALLED && this.safeState == NOT_SAFE)
+        {
+            return;
+        }
+        this.safeState = safeState;
     }
 
     /**
@@ -338,7 +348,8 @@ public class UnoModel {
         this.view.update();
     }
 
-    public Card getCurrentCard(){
+    public Card getCurrentCard()
+    {
         return this.currentlyPlacedCard;
     }
 }
