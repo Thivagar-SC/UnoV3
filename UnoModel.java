@@ -237,7 +237,7 @@ public class UnoModel {
     public void startGame() {
         int numberRounds;
         String nameOfPlayer;
-        this.createSaveFile();
+        //this.createSaveFile();
         this.state = SELECTION;
         this.menuSelection = false;
         nameOfPlayer = this.view.getPlayerName();
@@ -278,7 +278,6 @@ public class UnoModel {
                     break;
                 }
                 fileNumber++; //Increments the file number if the file already exists
-                System.out.println(fileNumber);
             }
 
             if (saveFile != null && saveFile.createNewFile())
@@ -366,8 +365,9 @@ public class UnoModel {
         this.state = this.GAME;
         Card drawnCard = new Card(-1, -1); //placeholder card
         if (this.view.getDeckMod()){
-            while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()&&drawnCard.getValue() != this.currentlyPlacedCard.getValue()
-                &&drawnCard.getColour() != 4)
+            while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()
+                    && drawnCard.getValue() != this.currentlyPlacedCard.getValue()
+                    && drawnCard.getColour() != 4)
                 {
                     this.view.update();
                     //try {  -please help me
@@ -375,8 +375,8 @@ public class UnoModel {
                     drawnCard = this.deck.drawCard();
                     this.player.addCard(drawnCard, "");
                     this.view.update();
-                    System.out.println("#: "+drawnCard.getValue());
-                    System.out.println("Colour: "+drawnCard.getColour());
+                    System.out.println("#: " + drawnCard.getValue());
+                    System.out.println("Colour: "+ drawnCard.getColour());
                     //Thread.sleep(200);
                     //} catch (Exception e) {
                     //    System.out.println("error");
