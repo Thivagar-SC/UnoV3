@@ -46,7 +46,7 @@ public class Player {
     public void addCard(Card card, String source) {
 
         this.cards.add(card);
-        this.source = source;
+        this.source = source;this.organizeHand();
     }
 
     /**
@@ -142,9 +142,8 @@ public class Player {
      * @author Avaneesh
      */
     public void organizeHand() {
-        sortByNumbWithColour();
         sortByColour();
-        
+        sortByNumbWithColour();
     }
 
     /**

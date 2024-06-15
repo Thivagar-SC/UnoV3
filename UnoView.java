@@ -180,7 +180,6 @@ public class UnoView extends JPanel {
    */
   private void displayCards() {
     this.removeAll();
-    this.model.getCurrentPlayer().organizeHand();
     this.setFocusable(true);
     this.requestFocus();
     this.setHand();
@@ -323,7 +322,6 @@ public class UnoView extends JPanel {
    * @author Thivagar
    */
   public void update() {
-    
     switch (this.model.getState()) {
       case 0:
       this.mainMenu();

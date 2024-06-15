@@ -102,13 +102,13 @@ public class UnoModel {
      * @param cardIndex index of the card in the player's hand.
      * @param playerID  ID of the player placing the card.
      */
-    public void placeCard(Object card, int playerID) // Avaneesh
+    public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
         int cardIndex=-1;
         for (int x = 0; x<this.view.getCards().size();x++){
-          //  if (card.equals()this.view.getCards().get(x)){
-          //      card = x;
-          //  }
+            if (card.equals(this.view.getCards().get(x))){
+                cardIndex = x;
+            }
         }
         System.out.println("THE CARD LOCATION"+cardIndex);
         //Player currentPlayer = players.get(playerID); temporary removal -tk
@@ -131,6 +131,7 @@ public class UnoModel {
         }
         if (cardToPlace.getValue() == 14) {
         }
+        this.view.update();
 
     }
     private void plusTwoCard() //Avaneesh
