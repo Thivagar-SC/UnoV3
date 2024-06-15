@@ -136,8 +136,10 @@ public class UnoModel {
             }
         }
         if (cardToPlace.getValue() == 13) {
+           
         }
         if (cardToPlace.getValue() == 14) {
+            
         }
         this.view.update();
 
