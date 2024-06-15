@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import javax.swing.*;
 
 /**
  * CardSelector
@@ -52,8 +53,8 @@ public class CardSelector implements MouseListener {
      * @param e - event user preformed
      */
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse Clicked");
-        this.model.placeCard(0, 0);
+        System.out.println(((RoundedJPane)e.getSource()));
+        //this.model.placeCard((JPanel)e.getSource()., 0);
     }
 
     /**

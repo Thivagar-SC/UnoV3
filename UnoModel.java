@@ -86,8 +86,10 @@ public class UnoModel {
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players) {
-            if (player.getHand().isEmpty()) {
+        for (Player player : players)
+        {
+            if (player.getHand().isEmpty())
+            {
                 int totalScore = 0;
                 player.setWon();
             }
@@ -102,11 +104,11 @@ public class UnoModel {
      */
     public void placeCard(int cardIndex, int playerID) // Avaneesh
     {
-        Player currentPlayer = players.get(playerID);
+        //Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
-            currentPlayer.getHand().remove(cardIndex);
+            this.player.getHand().remove(cardIndex);
             currentlyPlacedCard = cardToPlace;
             if (cardToPlace.getValue() == 10) {
                 direction *= -1;
@@ -218,12 +220,12 @@ public class UnoModel {
         int numberRounds;
         String nameOfPlayer;
         this.createSaveFile();
-        this.state = 1;
+        this.state = SELECTION;
         this.menuSelection = false;
         nameOfPlayer = this.view.getPlayerName();
         numberRounds = this.view.getRounds();
         if (numberRounds > 0) {
-            this.state = 2;
+            this.state = GAME;
             this.numberOfRounds = numberRounds;
             player = new Player(0, nameOfPlayer); // player number temporary
             this.deck = new Deck();
@@ -231,7 +233,8 @@ public class UnoModel {
                 this.player.addCard(this.deck.drawCard(), "TBA");
             }
 
-        } else {
+        } else
+        {
             this.numberOfRounds = -1;
         }
 
