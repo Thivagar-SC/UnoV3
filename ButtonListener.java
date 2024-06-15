@@ -24,7 +24,7 @@ public class ButtonListener implements MouseListener
     public void mouseClicked(MouseEvent e)
     {
         System.out.println("Uno CALLED!");
-        model.setUNOState(1);
+        model.setUNOState(model.CALLED);
     }
 
     @Override

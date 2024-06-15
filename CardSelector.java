@@ -53,8 +53,9 @@ public class CardSelector implements MouseListener {
      * @param e - event user preformed
      */
     public void mouseClicked(MouseEvent e) {
+        
         System.out.println(((RoundedJPane)e.getSource()));
-        //this.model.placeCard((JPanel)e.getSource()., 0);
+        this.model.placeCard((RoundedJPane)e.getSource(), 0);
     }
 
     /**

@@ -8,6 +8,7 @@ import java.io.*;
  */
 public class UnoModel {
     private UnoView view;
+    private UnoButton unoButton;
     //private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
     private String gameState;
@@ -50,13 +51,20 @@ public class UnoModel {
         super();
     }
 
-    public void mainMenu(){
-        this.state = this.MENU;
-        this.numberOfRounds = -1;
-        this.menuSelection = true;
-        this.view.update();
+    /**
+     * Moves the game state to the main menu.
+     * Resets the number of rounds and menu selection status.
+     * Updates the view to reflect the changes.
+     */
+    public void mainMenu()
+    {
+        this.state = this.MENU; // Set the game state to main menu
+        this.numberOfRounds = -1; // Reset the number of rounds
+        this.menuSelection = true; // Set the menu selection status to true
+        this.view.update(); // Update the view to reflect the changes
     }
 
+    /** Resets the game when player chooses to return to main menu */
     public void reset(){
         this.view.update();
         this.state = this.RESET;
@@ -102,8 +110,15 @@ public class UnoModel {
      * @param cardIndex index of the card in the player's hand.
      * @param playerID  ID of the player placing the card.
      */
-    public void placeCard(int cardIndex, int playerID) // Avaneesh
+    public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
+        int cardIndex=-1;
+        for (int x = 0; x<this.view.getCards().size();x++){
+            if (card.equals(this.view.getCards().get(x))){
+                cardIndex = x;
+            }
+        }
+        System.out.println("THE CARD LOCATION"+cardIndex);
         //Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
@@ -126,6 +141,7 @@ public class UnoModel {
         if (cardToPlace.getValue() == 14) {
             
         }
+        this.view.update();
 
     }
     private void plusTwoCard() //Avaneesh
@@ -210,7 +226,7 @@ public class UnoModel {
      * @return - true if the player is safe, false otherwise.
      */
     public boolean isSafe() {
-        return true; // placeholder
+        return safeState == SAFE;
     }
 
 
@@ -346,7 +362,19 @@ public class UnoModel {
         this.view = gui;
     }
 
-
+    public void drawFromDeck(){
+        this.state = this.GAME;
+        Card drawnCard = this.deck.drawCard();
+        if (this.view.getDeckMod()){
+            while (drawnCard.getColour() == this.currentlyPlacedCard.getColour()||drawnCard.getValue() == this.currentlyPlacedCard.getValue()
+                ||drawnCard.getValue()>=13){
+                    this.player.addCard(drawnCard, "");
+                    drawnCard = this.deck.drawCard();
+                }
+        }
+        this.player.addCard(this.deck.drawCard(), "TBA");
+        this.view.update();
+    }
     public void drawCard() {
         this.state = this.GAME;
         this.player.addCard(this.deck.drawCard(), "TBA");

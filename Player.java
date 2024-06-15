@@ -9,6 +9,7 @@ import java.util.*;
  * @since 2024/06/12
  */
 public class Player {
+    private UnoModel model; //model of the Uno game
     private String playerName; // name of the player
     private boolean wonRound; // if player won or not
     private int totalScore; // score of player
@@ -46,7 +47,7 @@ public class Player {
     public void addCard(Card card, String source) {
 
         this.cards.add(card);
-        this.source = source;
+        this.source = source;this.organizeHand();
     }
 
     /**
@@ -103,6 +104,16 @@ public class Player {
         return playerName;
     }
 
+    public int getUnoState()
+    {
+        if (getHand().size() != 1)
+        {
+            return model.SAFE;
+        }
+        else
+            return model.NOT_SAFE;
+    }
+
     /**
      * setWon
      * sets if player won the game
@@ -142,9 +153,9 @@ public class Player {
      * @author Avaneesh
      */
     public void organizeHand() {
+        
         sortByNumbWithColour();
         sortByColour();
-        
     }
 
     /**
@@ -177,6 +188,7 @@ public class Player {
      * @author Avaneesh
      */
     private void sortByNumbWithColour() {
+        System.out.println("org");
         int minIndex;
         for (int x = 0; x < cards.size(); x++) { // for each card
             int color = cards.get(x).getColour();
