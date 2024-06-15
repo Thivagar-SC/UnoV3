@@ -362,17 +362,28 @@ public class UnoModel {
 
     public void drawFromDeck(){
         this.state = this.GAME;
-        Card drawnCard = this.deck.drawCard();
+        Card drawnCard = new Card(-1, -1); //placeholder card
         if (this.view.getDeckMod()){
-            while (drawnCard.getColour() == this.currentlyPlacedCard.getColour()||drawnCard.getValue() == this.currentlyPlacedCard.getValue()
-                ||drawnCard.getValue()>=13){
-                    this.player.addCard(drawnCard, "");
+            while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()&&drawnCard.getValue() != this.currentlyPlacedCard.getValue()
+                &&drawnCard.getColour() != 4)
+                {
+                    this.view.update();
+                    //try {  -please help me
+
                     drawnCard = this.deck.drawCard();
+                    this.player.addCard(drawnCard, "");
+                    this.view.update();
+                    //Thread.sleep(200);
+                    //} catch (Exception e) {
+                    //    System.out.println("error");
+                    //}
                 }
+                return;
         }
         this.player.addCard(this.deck.drawCard(), "TBA");
         this.view.update();
     }
+
     public void drawCard() {
         this.state = this.GAME;
         this.player.addCard(this.deck.drawCard(), "TBA");
