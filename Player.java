@@ -142,8 +142,9 @@ public class Player {
      * @author Avaneesh
      */
     public void organizeHand() {
-        sortByColour();
+        
         sortByNumbWithColour();
+        sortByColour();
     }
 
     /**
@@ -176,6 +177,7 @@ public class Player {
      * @author Avaneesh
      */
     private void sortByNumbWithColour() {
+        System.out.println("org");
         int minIndex;
         for (int x = 0; x < cards.size(); x++) { // for each card
             int color = cards.get(x).getColour();

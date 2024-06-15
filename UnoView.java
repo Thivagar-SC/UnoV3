@@ -180,11 +180,13 @@ public class UnoView extends JPanel {
    */
   private void displayCards() {
     this.removeAll();
+    
     this.setFocusable(true);
     this.requestFocus();
     this.setHand();
     this.removeAll();
     this.setLayout(null);
+    System.out.println("or3g");
 
     ImgComponent img;
 
@@ -322,6 +324,7 @@ public class UnoView extends JPanel {
    * @author Thivagar
    */
   public void update() {
+    
     switch (this.model.getState()) {
       case 0:
       this.mainMenu();
