@@ -192,7 +192,6 @@ public class UnoView extends JPanel {
     this.setHand();
     this.removeAll();
     this.setLayout(null);
-    System.out.println("or3g");
 
     ImgComponent img;
 

@@ -375,6 +375,8 @@ public class UnoModel {
                     drawnCard = this.deck.drawCard();
                     this.player.addCard(drawnCard, "");
                     this.view.update();
+                    System.out.println("#: "+drawnCard.getValue());
+                    System.out.println("Colour: "+drawnCard.getColour());
                     //Thread.sleep(200);
                     //} catch (Exception e) {
                     //    System.out.println("error");
@@ -382,7 +384,10 @@ public class UnoModel {
                 }
                 return;
         }
-        this.player.addCard(this.deck.drawCard(), "TBA");
+        drawnCard = this.deck.drawCard();
+        this.player.addCard(drawnCard, "TBA");
+        System.out.println("#: "+drawnCard.getValue());
+        System.out.println("Colour: "+drawnCard.getColour());
         this.view.update();
     }
 
