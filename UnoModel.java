@@ -8,6 +8,7 @@ import java.io.*;
  */
 public class UnoModel {
     private UnoView view;
+    private UnoButton unoButton;
     //private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
     private String gameState;
@@ -223,7 +224,7 @@ public class UnoModel {
      * @return - true if the player is safe, false otherwise.
      */
     public boolean isSafe() {
-        return true; // placeholder
+        return safeState == SAFE;
     }
 
 

@@ -9,6 +9,7 @@ import java.util.*;
  * @since 2024/06/12
  */
 public class Player {
+    private UnoModel model; //model of the Uno game
     private String playerName; // name of the player
     private boolean wonRound; // if player won or not
     private int totalScore; // score of player
@@ -101,6 +102,16 @@ public class Player {
      */
     public String getPlayerName() {
         return playerName;
+    }
+
+    public int getUnoState()
+    {
+        if (getHand().size() != 1)
+        {
+            return model.SAFE;
+        }
+        else
+            return model.NOT_SAFE;
     }
 
     /**
