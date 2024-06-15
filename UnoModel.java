@@ -50,13 +50,20 @@ public class UnoModel {
         super();
     }
 
-    public void mainMenu(){
-        this.state = this.MENU;
-        this.numberOfRounds = -1;
-        this.menuSelection = true;
-        this.view.update();
+    /**
+     * Moves the game state to the main menu.
+     * Resets the number of rounds and menu selection status.
+     * Updates the view to reflect the changes.
+     */
+    public void mainMenu()
+    {
+        this.state = this.MENU; // Set the game state to main menu
+        this.numberOfRounds = -1; // Reset the number of rounds
+        this.menuSelection = true; // Set the menu selection status to true
+        this.view.update(); // Update the view to reflect the changes
     }
 
+    /** Resets the game when player chooses to return to main menu */
     public void reset(){
         this.view.update();
         this.state = this.RESET;
