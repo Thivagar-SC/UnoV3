@@ -142,8 +142,9 @@ public class Player {
      * @author Avaneesh
      */
     public void organizeHand() {
-        sortByColour();
         sortByNumbWithColour();
+        sortByColour();
+        
     }
 
     /**
