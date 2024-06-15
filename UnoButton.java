@@ -6,4 +6,9 @@ public class UnoButton
 
         isActive = false;
     }
+
+    public void update()
+    {
+
+    }
 }
