@@ -22,6 +22,7 @@ public class UnoView extends JPanel {
   private JPanel menu = new JPanel();
   private JPanel gameSelect = new JPanel();
   private JButton startGame = new JButton();
+  private JButton quitGame = new JButton();
   private JTextArea numberOfRounds = new JTextArea();
   private JTextArea playerName = new JTextArea();
   private JTextField roundInput = new JTextField();
@@ -81,9 +82,12 @@ public class UnoView extends JPanel {
     this.removeAll();
     this.startGame.setText("Start");
     this.startGame.setPreferredSize(new Dimension(200, 100));
+    this.quitGame.setText("Quit Game");
+    this.quitGame.setPreferredSize(new Dimension(200, 100));
 
     this.setBackground(Color.LIGHT_GRAY);
     this.menu.add(this.startGame);
+    this.menu.add(this.quitGame);
     this.add(this.menu, BorderLayout.WEST);
     this.refresh();
   }
@@ -252,6 +256,7 @@ public class UnoView extends JPanel {
     MenuListener mSelect = new MenuListener(this.model);
     this.playGame.addActionListener(mSelect);
     this.startGame.addActionListener(mSelect);// tba
+    this.quitGame.addActionListener(mSelect);
   }
 
   /**
