@@ -148,6 +148,7 @@ public class UnoView extends JPanel {
     this.deck.setBounds(50, 100, 211, 336);
     img.setBounds(0, 0, 211, 336);
     this.deck.add(img);
+    this.deck.set
     this.add(deck);
     this.deck.setVisible(true);
     }
