@@ -359,7 +359,19 @@ public class UnoModel {
         this.view = gui;
     }
 
-
+    public void drawFromDeck(){
+        this.state = this.GAME;
+        Card drawnCard = this.deck.drawCard();
+        if (this.view.getDeckMod()){
+            while (drawnCard.getColour() == this.currentlyPlacedCard.getColour()||drawnCard.getValue() == this.currentlyPlacedCard.getValue()
+                ||drawnCard.getValue()>=13){
+                    this.player.addCard(drawnCard, "");
+                    drawnCard = this.deck.drawCard();
+                }
+        }
+        this.player.addCard(this.deck.drawCard(), "TBA");
+        this.view.update();
+    }
     public void drawCard() {
         this.state = this.GAME;
         this.player.addCard(this.deck.drawCard(), "TBA");

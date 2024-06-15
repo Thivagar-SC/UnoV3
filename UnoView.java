@@ -32,6 +32,7 @@ public class UnoView extends JPanel {
   private RoundedJPane currentCard;
   private PauseMenu pauseMenu;
   private File cardFile = new File("Cards");
+  private JRadioButton deckModifier = new JRadioButton("IDK what to call this");
 
   /**
    * UnoView
@@ -119,8 +120,13 @@ public class UnoView extends JPanel {
     this.gameSelect.add(nameInput);
     this.gameSelect.add(playGame);
     this.add(gameSelect, BorderLayout.CENTER);
+    this.add(deckModifier,BorderLayout.SOUTH);
     this.refresh();
 
+  }
+
+  public boolean getDeckMod(){
+    return(this.deckModifier.isSelected());
   }
 
   /**
@@ -148,7 +154,6 @@ public class UnoView extends JPanel {
     this.deck.setBounds(50, 100, 211, 336);
     img.setBounds(0, 0, 211, 336);
     this.deck.add(img);
-    this.deck.set
     this.add(deck);
     this.deck.setVisible(true);
     }
