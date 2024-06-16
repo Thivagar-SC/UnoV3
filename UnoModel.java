@@ -492,30 +492,28 @@ public class UnoModel
         try
         {
             output = new PrintWriter("SaveFiles/" + saveFile.getName());
+            output.println("LAST GAME'S RESULTS: \n");
+            output.println("Player's name: " + player.getPlayerName());
 
-                if (player.hasWon())
-                {
-                    output.println("Player's name: " + player.getPlayerName());
-                    output.println("You won!");
-                    //More
-                    output.close();
-                } else
-                {
-                    output.println("Player's name: " + player.getPlayerName());
-                    output.println("You lost!");
-                    //More
-                    output.close();
-                }
+            if (player.hasWon())
+            {
+                output.println("You won!");
+            } else
+            {
+                output.println("You lost!");
+            }
 
-        }
-        catch (FileNotFoundException e)
+            output.println("Total scores: " + player.getTotalScore());
+            //More
+            output.close();
+
+        } catch (FileNotFoundException e)
         {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
         //Needs to finish the sortByScore method to write the 1st, 2nd, 3rd and 4th place
-
 
     }
 }
