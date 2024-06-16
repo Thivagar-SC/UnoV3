@@ -1,14 +1,14 @@
 import java.util.ArrayList;
-import java.util.*;
 
 /**
  * Player
  * Player object storing info on the user
- * 
+ *
  * @author Avaneesh
  * @since 2024/06/12
  */
-public class Player {
+public class Player
+{
     private UnoModel model; //model of the Uno game
     private String playerName; // name of the player
     private boolean wonRound; // if player won or not
@@ -21,86 +21,94 @@ public class Player {
     /**
      * Player
      * Player Constructor
-     * 
-     * @author tba
+     *
      * @param playerNumber - player id
      * @param playerName   - player userbane
+     * @author tba
      */
-    public Player(int playerNumber, String playerName) {
+    public Player(int playerNumber, String playerName, UnoModel model)
+    {
         this.playerNumber = playerNumber;
         this.playerName = playerName;
+        this.model = model;
         this.wonRound = false;
         this.totalScore = 0;
         this.selectable = false;
-        this.cards = new ArrayList<Card>();
-
+        this.cards = new ArrayList<>();
+        model.setUNOState(model.SAFE);
     }
 
     /**
      * addCard
      * adds a card to users hand
-     * 
-     * @author tba
+     *
      * @param card   - card being added
      * @param source - why player is drawing a card (may not be needed we'll see)
+     * @author tba
      */
-    public void addCard(Card card, String source) {
-
+    public void addCard(Card card, String source)
+    {
         this.cards.add(card);
-        this.source = source;this.organizeHand();
+        this.source = source;
+        this.organizeHand();
     }
 
     /**
      * placeCard
      * places a card out of the users hand
-     * 
-     * @author tba
+     *
      * @param cardIndex - location of users card in hand
+     * @author tba
      */
-    public void placeCard(int cardIndex) {
+    public void placeCard(int cardIndex)
+    {
         cards.remove(cardIndex);
     }
 
     /**
      * getHand
      * returns the hand of the user
-     * 
-     * @author tba
+     *
      * @return cards
+     * @author tba
      */
-    public ArrayList<Card> getHand() {
+    public ArrayList<Card> getHand()
+    {
         return cards;
     }
 
     /**
      * setSelectable
      * sets if user can select his cards
-     * 
+     *
      * @author tba
      */
-    public void setSelectable() {
+    public void setSelectable()
+    {
         this.selectable = !this.selectable;
     }
 
     /**
      * setGetSelectable
      * returns if users turn
-     * 
-     * @author tba
+     *
      * @return THISS IS AN ERROR JKNEJN
+     * @author tba
      */
-    public boolean setGetSelectable() {
+    public boolean setGetSelectable()
+    {
         return setGetSelectable();
     }
 
     /**
      * getPlayerName
      * returns users name
-     * 
-     * @author Avaneesh
+     *
      * @return playerName
+     * @author Avaneesh
      */
-    public String getPlayerName() {
+    public String getPlayerName()
+    {
         return playerName;
     }
 
@@ -109,51 +117,59 @@ public class Player {
         if (getHand().size() != 1)
         {
             return model.SAFE;
-        }
-        else
+        } else
             return model.NOT_SAFE;
     }
 
     /**
      * setWon
      * sets if player won the game
-     * 
+     *
      * @author AVaneesh
      */
-    public void setWon() {
+    public void setWon()
+    {
         this.wonRound = true;
+    }
+
+    public boolean hasWon()
+    {
+        return wonRound;
     }
 
     /**
      * getTotalScore
      * returns players score
-     * 
-     * @author Avaneesh
+     *
      * @return totalScore
+     * @author Avaneesh
      */
-    public int getTotalScore() {
+    public int getTotalScore()
+    {
         return totalScore;
     }
 
     /**
      * GetPlayerID
      * returns players id
-     * 
-     * @author Avaneesh
+     *
      * @return playerNumber
+     * @author Avaneesh
      */
-    public int GetPlayerID() {
+    public int GetPlayerID()
+    {
         return playerNumber;
     }
 
     /**
      * organizeHand
      * sorts cards in players hand
-     * 
+     *
      * @author Avaneesh
      */
-    public void organizeHand() {
-        
+    public void organizeHand()
+    {
+
         sortByNumbWithColour();
         sortByColour();
     }
@@ -161,17 +177,21 @@ public class Player {
     /**
      * sortByColour
      * sorts cards in players hand by colour
-     * 
+     *
      * @author Avaneesh
      */
-    private void sortByColour() {
+    private void sortByColour()
+    {
         int minIndex;
-        for (int x = 0; x < cards.size(); x++) { // for each card
+        for (int x = 0; x < cards.size(); x++)
+        { // for each card
             minIndex = x;
-            for (int y = x + 1; y < cards.size(); y++) { // for every unsorted card
-                if (cards.get(y).getColour() < cards.get(minIndex).getColour()) { // if card colour is different prior
-                                                                                  // in index than current colour being
-                                                                                  // sorted
+            for (int y = x + 1; y < cards.size(); y++)
+            { // for every unsorted card
+                if (cards.get(y).getColour() < cards.get(minIndex).getColour())
+                { // if card colour is different prior
+                    // in index than current colour being
+                    // sorted
                     minIndex = y;
                 }
             }
@@ -184,24 +204,30 @@ public class Player {
     /**
      * sortByNumbWithColour
      * sorts cards in players hand by number saving colour order as priority
-     * 
+     *
      * @author Avaneesh
      */
-    private void sortByNumbWithColour() {
+    private void sortByNumbWithColour()
+    {
         System.out.println("org");
         int minIndex;
-        for (int x = 0; x < cards.size(); x++) { // for each card
+        for (int x = 0; x < cards.size(); x++)
+        { // for each card
             int color = cards.get(x).getColour();
             int endIndex = x;
-            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // tba u do this i cant be
-                                                                                          // bothered
+            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color)
+            { // tba u do this i cant be
+                // bothered
                 endIndex++;
             }
 
-            for (int a = x; a < cards.size(); a++) { // u can do this
+            for (int a = x; a < cards.size(); a++)
+            { // u can do this
                 minIndex = a;
-                for (int y = a + 1; y < cards.size(); y++) {
-                    if (cards.get(y).getValue() < cards.get(minIndex).getValue()) {
+                for (int y = a + 1; y < cards.size(); y++)
+                {
+                    if (cards.get(y).getValue() < cards.get(minIndex).getValue())
+                    {
                         minIndex = y;
                     }
                 }
