@@ -70,6 +70,7 @@ public class UnoAi {
                 cardToPlace.changeColour(color);
             }
         }
+        
     }
 
     /**
@@ -105,3 +106,4 @@ public class UnoAi {
     }
 
 }
+        
