@@ -8,7 +8,7 @@
  */
 public class Card {
     private final int cardFaceValue; // value of card
-    private int colour; // color of cardgg
+    private int colour; // color of card
 
     /**
      * Card

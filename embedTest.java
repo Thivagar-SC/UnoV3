@@ -4,6 +4,10 @@ import java.io.File;
 import java.net.*;
 
 public class embedTest {
+    /**
+     * The hell is this
+     * @param args idek
+     */
     public static void main(String[] args) {
         JFrame test = new JFrame();
         test.setSize(new Dimension(100,100));

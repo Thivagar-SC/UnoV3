@@ -40,7 +40,7 @@ public class escListener implements KeyListener, ActionListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        model.inputForESC(e.getKeyCode());
+        model.pauseByESC(e.getKeyCode());
     }
 
     /**

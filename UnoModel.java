@@ -6,7 +6,8 @@ import java.io.*;
  * This class represents the model of the Uno game.
  * It manages the game state, players, deck, and game logic.
  */
-public class UnoModel {
+public class UnoModel
+{
     private UnoView view;
     private UnoButton unoButton;
     //private PauseMenu pauseMenu;
@@ -34,7 +35,7 @@ public class UnoModel {
     private int pauseCount = 0;
 
     public final int MENU = 0;
-    public final int SELECTION= 1;
+    public final int SELECTION = 1;
     public final int GAME = 2;
     public final int PAUSED = 3;
     public final int ENDGAME = 4;
@@ -45,11 +46,11 @@ public class UnoModel {
     public final int NOT_SAFE = 2;
 
 
-
     /**
      * Constructor for UnoModel.
      */
-    public UnoModel() {
+    public UnoModel()
+    {
         super();
     }
 
@@ -66,8 +67,11 @@ public class UnoModel {
         this.view.update(); // Update the view to reflect the changes
     }
 
-    /** Resets the game when player chooses to return to main menu */
-    public void reset(){
+    /**
+     * Resets the game when player chooses to return to main menu
+     */
+    public void reset()
+    {
         this.view.update();
         this.state = this.RESET;
         this.view.update();
@@ -84,18 +88,31 @@ public class UnoModel {
         turn = (turn + skip * direction);
     }
 
-
-    public int getState(){
+    /**
+     * Gets the current state of the game
+     *
+     * @return the current state of the game
+     */
+    public int getState()
+    {
         return this.state;
     }
 
-    public void setState(int x){
-        this.state = x;
+    /**
+     * Sets the current state of the game
+     *
+     * @param state the new state of the game
+     */
+    public void setState(int state)
+    {
+        this.state = state;
     }
+
     /**
      * Checks if the current round is over.
      */
-    public void checkIfRoundIsOver() {
+    public void checkIfRoundIsOver()
+    {
         for (Player player : players)
         {
             if (player.getHand().isEmpty())
@@ -110,37 +127,45 @@ public class UnoModel {
     /**
      * Places a card from a player's hand.
      *
-     * @param card comment this because idk
-     * @param playerID  ID of the player placing the card.
+     * @param card     the card to be placed.
+     * @param playerID ID of the player placing the card.
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
-        int cardIndex=-1;
-        for (int x = 0; x<this.view.getCards().size();x++){
-            if (card.equals(this.view.getCards().get(x))){
+        int cardIndex = -1;
+        for (int x = 0; x < this.view.getCards().size(); x++)
+        {
+            if (card.equals(this.view.getCards().get(x)))
+            {
                 cardIndex = x;
             }
         }
-        System.out.println("THE CARD LOCATION"+cardIndex);
+        System.out.println("THE CARD LOCATION" + cardIndex);
         //Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
-                || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
+                || cardToPlace.getValue() == currentlyPlacedCard.getValue())
+        {
             this.player.getHand().remove(cardIndex);
             currentlyPlacedCard = cardToPlace;
-            if (cardToPlace.getValue() == 10) {
+            if (cardToPlace.getValue() == 10)
+            {
                 direction *= -1;
                 nextTurn(1);
-            } else if (cardToPlace.getValue() == 11) {
+            } else if (cardToPlace.getValue() == 11)
+            {
                 plusTwoCard();
-            } else if (cardToPlace.getValue() == 12) {
+            } else if (cardToPlace.getValue() == 12)
+            {
                 nextTurn(2);
             }
         }
-        if (cardToPlace.getValue() == 13) {
+        if (cardToPlace.getValue() == 13)
+        {
 
         }
-        if (cardToPlace.getValue() == 14) {
+        if (cardToPlace.getValue() == 14)
+        {
 
         }
 
@@ -148,6 +173,10 @@ public class UnoModel {
         this.view.update();
 
     }
+
+    /**
+     * Adds 2 cards to the player's hand if no counter
+     */
     private void plusTwoCard() //Avaneesh
     {
         int totalStack = 2;
@@ -161,7 +190,8 @@ public class UnoModel {
      *
      * @return the current player.
      */
-    public Player getCurrentPlayer() {
+    public Player getCurrentPlayer()
+    {
         return player;
     }
 
@@ -178,12 +208,14 @@ public class UnoModel {
      *
      * @param keyCode - the key code of the pressed key.
      */
-    public void inputForESC(int keyCode) {
+    public void pauseByESC(int keyCode)
+    {
         if (keyCode == KeyEvent.VK_ESCAPE)
         {
             System.out.println("Esc is pressed");
             pauseGame();
-            if (pauseCount==2){
+            if (pauseCount == 2)
+            {
                 pauseGame();
                 pauseGame();
                 pauseCount = 0;
@@ -192,13 +224,17 @@ public class UnoModel {
         }
     }
 
+    /**
+     * Pauses the game
+     */
     public void pauseGame()
     {
-        if (getState() == this.PAUSED){
+        if (getState() == this.PAUSED)
+        {
             this.state = this.GAME;
-        }
-        else{
-        this.state = this.PAUSED;
+        } else
+        {
+            this.state = this.PAUSED;
         }
         pauseCount++;
         view.update();
@@ -219,7 +255,8 @@ public class UnoModel {
      *
      * @return the current colour.
      */
-    public int getCurrentColour() {
+    public int getCurrentColour()
+    {
         return 0; // placeholder
     }
 
@@ -240,23 +277,23 @@ public class UnoModel {
      *
      * @return - SAFE if the player is safe, NOT_SAFE otherwise.
      */
-    public int isSafe(int safeState) {
+    public int isSafe(int safeState)
+    {
         if (player.getHand().size() != 1)
         {
             return SAFE;
-        }
-        else
+        } else
         {
             return NOT_SAFE;
         }
     }
 
 
-
     /**
      * Starts the game.
      */
-    public void startGame() {
+    public void startGame()
+    {
         int numberRounds;
         String nameOfPlayer;
         this.createSaveFile();
@@ -264,12 +301,14 @@ public class UnoModel {
         this.menuSelection = false;
         nameOfPlayer = this.view.getPlayerName();
         numberRounds = this.view.getRounds();
-        if (numberRounds > 0) {
+        if (numberRounds > 0)
+        {
             this.state = GAME;
             this.numberOfRounds = numberRounds;
             player = new Player(0, nameOfPlayer); // player number temporary
             this.deck = new Deck();
-            for (int x = 1; x <= 7; x++) {
+            for (int x = 1; x <= 7; x++)
+            {
                 this.player.addCard(this.deck.drawCard(), "TBA");
             }
 
@@ -283,8 +322,8 @@ public class UnoModel {
     }
 
     /**
-    * Creates a save file after user starts the game
-    */
+     * Creates a save file after user starts the game
+     */
     public void createSaveFile()
     {
         try
@@ -304,13 +343,11 @@ public class UnoModel {
             if (saveFile != null && saveFile.createNewFile())
             {
                 System.out.println("File created: " + saveFile.getName());
-            }
-            else
+            } else
             {
                 System.out.println("File already exists.");
             }
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -320,9 +357,10 @@ public class UnoModel {
     /**
      * Places the first card in the pile to start off the game
      */
-    public void placeStarterCard(){
+    public void placeStarterCard()
+    {
         Card cuCard = this.deck.drawCard();
-        while (cuCard.getValue()>9) //while card is invalid to start with
+        while (cuCard.getValue() > 9) //while card is invalid to start with
         {
             this.deck.addCard(cuCard);
             cuCard = this.deck.drawCard();
@@ -332,42 +370,47 @@ public class UnoModel {
 
     /**
      * Raises the hovered card above the rest
-     * */
+     */
     public void raiseCard(Object card)
     {
-        this.view.updateCard(true,card);
+        this.view.updateCard(true, card);
     }
 
     /**
      * Drops the raised card back down if mouse no longer hovers
-     * */
-    public void dropCard(Object card) {
-        this.view.updateCard(false,card);
+     */
+    public void dropCard(Object card)
+    {
+        this.view.updateCard(false, card);
     }
 
     // ta=ba
-    public int getNumberOfRound() {
+    public int getNumberOfRound()
+    {
         return this.numberOfRounds;
     }
 
     /**
      * Starts game startup
      */
-    public void startSelection() {
+    public void startSelection()
+    {
         this.state = 1;
         this.menuSelection = true;
         this.view.update();
     }
 
     // tba
-    public boolean getMenuSelect() {
+    public boolean getMenuSelect()
+    {
         return this.menuSelection;
     }
 
     /**
      * Moves to the next round.
      */
-    public void nextRound() {
+    public void nextRound()
+    {
 
     }
 
@@ -377,45 +420,50 @@ public class UnoModel {
      * @param card - the card to check.
      * @return - true if the card is legal, false otherwise.
      */
-    public boolean isLegal(Card card) {
+    public boolean isLegal(Card card)
+    {
         return true; // placeholder
     }
 
-    public void setGUI(UnoView gui) {
+    public void setGUI(UnoView gui)
+    {
         this.view = gui;
     }
 
-    public void drawFromDeck(){
+    public void drawFromDeck()
+    {
         this.state = this.GAME;
         Card drawnCard = new Card(-1, -1); //placeholder card
-        if (this.view.getDeckMod()){
+        if (this.view.getDeckMod())
+        {
             while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()
                     && drawnCard.getValue() != this.currentlyPlacedCard.getValue()
                     && drawnCard.getColour() != 4)
-                {
-                    this.view.update();
-                    //try {  -please help me
+            {
+                this.view.update();
+                //try {  -please help me
 
-                    drawnCard = this.deck.drawCard();
-                    this.player.addCard(drawnCard, "");
-                    this.view.update();
-                    System.out.println("#: " + drawnCard.getValue());
-                    System.out.println("Colour: "+ drawnCard.getColour());
-                    //Thread.sleep(200);
-                    //} catch (Exception e) {
-                    //    System.out.println("error");
-                    //}
-                }
-                return;
+                drawnCard = this.deck.drawCard();
+                this.player.addCard(drawnCard, "");
+                this.view.update();
+                System.out.println("#: " + drawnCard.getValue());
+                System.out.println("Colour: " + drawnCard.getColour());
+                //Thread.sleep(200);
+                //} catch (Exception e) {
+                //    System.out.println("error");
+                //}
+            }
+            return;
         }
         drawnCard = this.deck.drawCard();
         this.player.addCard(drawnCard, "TBA");
-        System.out.println("#: "+drawnCard.getValue());
-        System.out.println("Colour: "+drawnCard.getColour());
+        System.out.println("#: " + drawnCard.getValue());
+        System.out.println("Colour: " + drawnCard.getColour());
         this.view.update();
     }
 
-    public void drawCard() {
+    public void drawCard()
+    {
         this.state = this.GAME;
         this.player.addCard(this.deck.drawCard(), "TBA");
         this.view.update();
@@ -428,14 +476,15 @@ public class UnoModel {
 
     /**
      * Sorts the winner and the rest by the scores
-     * */
+     */
     public void sortByScore()
     {
 
     }
+
     /**
      * Writes game result of each round to a save file
-     * */
+     */
     public void gameResultOutput() throws IOException
     {
         output = new PrintWriter(saveFile);
@@ -443,14 +492,12 @@ public class UnoModel {
         if (player.hasWon())
         {
             output.println("You won!");
-        }
-        else
+        } else
         {
             output.println("You lost!");
         }
 
         //Needs to finish the sortByScore method to write the 1st, 2nd, 3rd and 4th place
-
 
 
     }
