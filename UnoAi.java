@@ -19,9 +19,15 @@ public class UnoAi {
         this.wonRound = false;
         this.cards = new ArrayList<>();
         this.model = model;
+        this.delayTime = 3000;
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
+        try {
+            Thread.sleep((long) delayTime);
+        } catch (InterruptedException e) {
+        System.out.println("delay");
+        }
         if (currentlyPlacedCard.getValue() == 13) {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
@@ -30,6 +36,7 @@ public class UnoAi {
                 } else {
                     for (int y = 0; y < 4; y++) {
                         model.drawCard();
+                        
                     }
 
                 }
@@ -78,7 +85,7 @@ public class UnoAi {
     public void hitUNO() {
         if (cards.size() == 1) {
 
-    }
+    }   
 }
 
     /**
