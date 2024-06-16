@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * ImgComponent
  * obtains images requested for uno game
- * 
+ *
  * @author Thivagar Kesavan
  * @since 2024/06/12
  */
@@ -16,9 +16,9 @@ public class ImgComponent extends JComponent {
     /**
      * ImgComponent
      * ImgComponent Constructor
-     * 
-     * @author Thivagar
+     *
      * @param imageFile - image file being requested
+     * @author Thivagar
      */
     public ImgComponent(String imageFile) {
         super();
@@ -29,9 +29,9 @@ public class ImgComponent extends JComponent {
     /**
      * paintComponent
      * Overrides paintComponent method of JComponent to display image
-     * 
-     * @author Thivagar
+     *
      * @param g - graphics to draw images
+     * @author Thivagar
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

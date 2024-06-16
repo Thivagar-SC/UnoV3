@@ -17,7 +17,7 @@ public class UnoAi {
     public UnoAi(int playerNumber, UnoModel model) {
         this.playerNumber = playerNumber;
         this.wonRound = false;
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.model = model;
     }
 
@@ -57,9 +57,13 @@ public class UnoAi {
                 currentCard = cardToPlace;
             }
             if (currentlyPlacedCard.getValue() == 13) {
+            if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
 
             }
+            if (currentlyPlacedCard.getValue() == 14) {
+                double randomColor = (Math.random() * 4);
+                int color = (int) Math.round(randomColor);
             if (currentlyPlacedCard.getValue() == 14) {
                 double randomColor = (Math.random() * 4);
                 int color = (int) Math.round(randomColor);
@@ -68,16 +72,30 @@ public class UnoAi {
         }
     }
 
+    /**
+     * Hits UNO when the AI's hand has one card
+     */
     public void hitUNO() {
+        if (cards.size() == 1) {
+
         if (cards.size() == 1) {
 
         }
     }
 
+    /**
+     * Hits a block when to counter UNO other players
+     */
     public void hitBlock() {
 
     }
 
+    /**
+     * Adds a card to the AI's hand
+     *
+     * @param card   the card to be added
+     * @param source idk what this is
+     */
     private void addCard(Card card, String source) {
 
     }

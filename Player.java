@@ -1,15 +1,14 @@
 import java.util.ArrayList;
-import java.util.*;
 
 /**
  * Player
  * Player object storing info on the user
- * 
+ *
  * @author Avaneesh
  * @since 2024/06/12
  */
 public class Player {
-    private UnoModel model; //model of the Uno game
+    private UnoModel model; // model of the Uno game
     private String playerName; // name of the player
     private boolean wonRound; // if player won or not
     private int totalScore; // score of player
@@ -21,41 +20,42 @@ public class Player {
     /**
      * Player
      * Player Constructor
-     * 
-     * @author tba
+     *
      * @param playerNumber - player id
      * @param playerName   - player userbane
+     * @author tba
      */
-    public Player(int playerNumber, String playerName) {
+    public Player(int playerNumber, String playerName, UnoModel model) {
         this.playerNumber = playerNumber;
         this.playerName = playerName;
+        this.model = model;
         this.wonRound = false;
         this.totalScore = 0;
         this.selectable = false;
-        this.cards = new ArrayList<Card>();
-
+        this.cards = new ArrayList<>();
+        model.setUNOState(model.SAFE);
     }
 
     /**
      * addCard
      * adds a card to users hand
-     * 
-     * @author tba
+     *
      * @param card   - card being added
      * @param source - why player is drawing a card (may not be needed we'll see)
+     * @author tba
      */
     public void addCard(Card card, String source) {
-
         this.cards.add(card);
-        this.source = source;this.organizeHand();
+        this.source = source;
+        this.organizeHand();
     }
 
     /**
      * placeCard
      * places a card out of the users hand
-     * 
-     * @author tba
+     *
      * @param cardIndex - location of users card in hand
+     * @author tba
      */
     public void placeCard(int cardIndex) {
         cards.remove(cardIndex);
@@ -64,9 +64,9 @@ public class Player {
     /**
      * getHand
      * returns the hand of the user
-     * 
-     * @author tba
+     *
      * @return cards
+     * @author tba
      */
     public ArrayList<Card> getHand() {
         return cards;
@@ -75,7 +75,7 @@ public class Player {
     /**
      * setSelectable
      * sets if user can select his cards
-     * 
+     *
      * @author tba
      */
     public void setSelectable() {
@@ -85,9 +85,9 @@ public class Player {
     /**
      * setGetSelectable
      * returns if users turn
-     * 
-     * @author tba
+     *
      * @return THISS IS AN ERROR JKNEJN
+     * @author tba
      */
     public boolean setGetSelectable() {
         return setGetSelectable();
@@ -96,40 +96,41 @@ public class Player {
     /**
      * getPlayerName
      * returns users name
-     * 
-     * @author Avaneesh
+     *
      * @return playerName
+     * @author Avaneesh
      */
     public String getPlayerName() {
         return playerName;
     }
 
-    public int getUnoState()
-    {
-        if (getHand().size() != 1)
-        {
+    public int getUnoState() {
+        if (getHand().size() != 1) {
             return model.SAFE;
-        }
-        else
+        } else
             return model.NOT_SAFE;
     }
 
     /**
      * setWon
      * sets if player won the game
-     * 
+     *
      * @author AVaneesh
      */
     public void setWon() {
         this.wonRound = true;
     }
 
+    public boolean hasWon() {
+        return wonRound;
+    }
+
     /**
      * getTotalScore
      * returns players score
-     * 
-     * @author Avaneesh
+     *
      * @return totalScore
+     * @author Avaneesh
      */
     public int getTotalScore() {
         return totalScore;
@@ -138,9 +139,9 @@ public class Player {
     /**
      * GetPlayerID
      * returns players id
-     * 
-     * @author Avaneesh
+     *
      * @return playerNumber
+     * @author Avaneesh
      */
     public int GetPlayerID() {
         return playerNumber;
@@ -149,11 +150,11 @@ public class Player {
     /**
      * organizeHand
      * sorts cards in players hand
-     * 
+     *
      * @author Avaneesh
      */
     public void organizeHand() {
-        
+
         sortByNumbWithColour();
         sortByColour();
     }
@@ -161,7 +162,7 @@ public class Player {
     /**
      * sortByColour
      * sorts cards in players hand by colour
-     * 
+     *
      * @author Avaneesh
      */
     private void sortByColour() {
@@ -184,7 +185,7 @@ public class Player {
     /**
      * sortByNumbWithColour
      * sorts cards in players hand by number saving colour order as priority
-     * 
+     *
      * @author Avaneesh
      */
     private void sortByNumbWithColour() {

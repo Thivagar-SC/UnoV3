@@ -10,8 +10,10 @@ import java.io.*;
  * @since 2024/06/12
  */
 public class imgComp2 extends JComponent {
-    ImageIcon image; // imageIcon requested to show
-    File holder; // File of image
+    private ImageIcon image; // imageIcon requested to show
+    private File holder; // File of image
+    private int width;
+    private int height;
 
     /**
      * ImgComponent
@@ -20,10 +22,12 @@ public class imgComp2 extends JComponent {
      * @author Thivagar
      * @param imageFile - image file being requested
      */
-    public imgComp2(String imageFile) {
+    public imgComp2(String imageFile, int width, int hight) {
         super();
         this.image = new ImageIcon(imageFile);// g
-        this.setPreferredSize(new Dimension(1000, 1000));
+        this.width = width;
+        this.height = hight;
+        this.setPreferredSize(new Dimension(width, hight));
     }
 
     /**
@@ -35,6 +39,6 @@ public class imgComp2 extends JComponent {
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(this.image.getImage(), 0, 0, 100, 100, null);
+        g.drawImage(this.image.getImage(), 0, 0, this.width, this.height, null);
     }
 }

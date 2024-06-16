@@ -4,7 +4,7 @@ import javax.swing.*;
 /**
  * RoundedJPane
  * Rounded layered pane to hold card img
- * 
+ *
  * @author Thivagar Kesavan
  * @since 2024/06/12
  */
@@ -19,30 +19,30 @@ public class RoundedJPane extends JLayeredPane {
     private final int BLACK = 4;
 
     private int currentColour; // cards current colour
-    private int h = 336; // height of card
-    private int w = 211; // width of card
+    private int height = 336; // height of card
+    private int width = 211; // width of card
 
     /**
      * RoundedJPane
      * RoundedJPane Constructor
-     * 
-     * @author Thivagar
+     *
      * @param radius - radius of card edges
      * @param colour - colour of card background
+     * @author Thivagar
      */
     public RoundedJPane(int radius, int colour) {
         this.radius = radius;
         this.currentColour = colour;
-        this.setPreferredSize(new Dimension(w, h));
-        
+        this.setPreferredSize(new Dimension(width, height));
+
     }
 
     /**
      * paintComponent
      * Overrides paintComponent method of JComponent to display image
-     * 
-     * @author Thivagar
+     *
      * @param g - graphics to draw images
+     * @author Thivagar
      */
     public void paintComponent(Graphics g) {
         setColor(this.currentColour, g);
@@ -54,10 +54,10 @@ public class RoundedJPane extends JLayeredPane {
     /**
      * setColor
      * sets background colour
-     * 
-     * @author Thivagar
+     *
      * @param g     - graphics to draw images
      * @param color - colour to be set
+     * @author Thivagar
      */
     public void setColor(int color, Graphics g) {
         switch (color) {
@@ -70,7 +70,7 @@ public class RoundedJPane extends JLayeredPane {
                 break;
 
             case YELLOW:
-                g.setColor(new Color(240, 207, 41)); //less eye blinding yellow
+                g.setColor(new Color(240, 207, 41)); // less eye blinding yellow
                 break;
 
             case GREEN:

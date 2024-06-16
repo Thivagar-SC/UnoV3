@@ -2,7 +2,7 @@ import java.util.*;
 
 /**
  * Deck class represents a deck of playing cards.
- * 
+ *
  * @author Tanner
  * @since 06/07/2024
  */
@@ -23,7 +23,7 @@ public class Deck {
     /**
      * Deck
      * Default constructor of deck
-     * 
+     *
      * @author tba
      * @since 2024/06/12
      */
@@ -38,9 +38,9 @@ public class Deck {
      * drawCard
      * Draws the first card in the deck.
      * If the deck is empty, calls fillDeck() to refill the deck.
-     * 
-     * @author tba
+     *
      * @return The card drawn from the deck.
+     * @author tba
      */
     public Card drawCard() {
         if (deck.isEmpty()) {
@@ -54,7 +54,7 @@ public class Deck {
     /**
      * fillDeck
      * Refills and shuffles deck if all cards are drawn or a new game started
-     * 
+     *
      * @author tba
      */
     public void fillDeck() {
@@ -67,14 +67,14 @@ public class Deck {
     /**
      * removeCard
      * Removes the first card from the deck
-     * 
+     *
      * @author tba
      */
     public void removeCard() {
         deck.remove(0);
     }
 
-    public void addCard(Card card) //adds a card back into the deck
+    public void addCard(Card card) // adds a card back into the deck
     {
         this.deck.add(0, card);
         Collections.shuffle(deck);
@@ -83,7 +83,7 @@ public class Deck {
     /**
      * addSpecialCards
      * adds all non number cards to deck
-     * 
+     *
      * @author tba
      */
     public void addSpecialCards() {
@@ -97,77 +97,79 @@ public class Deck {
     /**
      * addPlusFourCards
      * adds +4 cards to deck
-     * 
+     *
      * @author tba
      */
     public void addPlusFourCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(13, COLOUR_BLACK));
+            deck.add(new Card(13, COLOUR_BLACK, 50));
         }
     }
 
     /**
      * addWildCards
      * adds colour changing cards to deck
-     * 
+     *
      * @author tba
      */
     public void addWildCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(14, COLOUR_BLACK));
+            deck.add(new Card(14, COLOUR_BLACK, 50));
         }
     }
 
     /**
      * addBlockCards
      * adds skip turn card to deck
-     * 
+     *
      * @author tba
      */
     public void addBlockCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(12, i));
-            deck.add(new Card(12, i));
+            deck.add(new Card(12, i, 20));
+            deck.add(new Card(12, i, 20));
         }
     }
 
     /**
      * addReverseCards
      * adds reverse action order card to deck
-     * 
+     *
      * @author tba
      */
     public void addReverseCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(10, i));
-            deck.add(new Card(10, i));
+            deck.add(new Card(10, i, 20));
+            deck.add(new Card(10, i, 20));
         }
     }
 
     /**
      * addPlusTwoCards
      * adds draw 2 card to deck
-     * 
+     *
      * @author tba
      */
     public void addPlusTwoCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(11, i));
-            deck.add(new Card(11, i));
+            deck.add(new Card(11, i, 20));
+            deck.add(new Card(11, i, 20));
         }
     }
 
     /**
      * addNumberCards
      * Method to add 80 number cards from 4 different colours to the deck
-     * 
+     *
      * @author tba
      */
     public void addNumberCards() {
         for (int cardFaceValue = 0; cardFaceValue < numberCards / 8; cardFaceValue++) {
             for (int colour = 0; colour < 4; colour++) {
-                deck.add(new Card(cardFaceValue, colour));
-                deck.add(new Card(cardFaceValue, colour));
+                for (int scoreValue = 0; scoreValue < 10; scoreValue++) {
+                    deck.add(new Card(cardFaceValue, colour, scoreValue));
+                    deck.add(new Card(cardFaceValue, colour, scoreValue));
+                }
             }
         }
     }
@@ -175,7 +177,7 @@ public class Deck {
     /**
      * getSelectable
      * returns if the deck is currently available to be pressed
-     * 
+     *
      * @author tba
      */
     public boolean getSelectable() {
@@ -185,7 +187,7 @@ public class Deck {
     /**
      * setSelectable
      * sets if the deck should be allowed to be accessed by the user
-     * 
+     *
      * @author tba
      */
     public void setSelectable(boolean selectable) {
