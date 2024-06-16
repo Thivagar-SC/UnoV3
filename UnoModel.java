@@ -102,13 +102,15 @@ public class UnoModel {
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players) {
-            if (player.getHand().isEmpty()) {
-                player.setWon();
+        for (Player player : players)
+        {
+            if (player.getHand().isEmpty())
+            {
+                int totalScore = 0;
+                totalScore += player.getTotalScore();
             }
-
         }
-        int totalScore = 0;
+        player.setWon();
     }
 
     /**

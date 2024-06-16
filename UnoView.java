@@ -29,7 +29,7 @@ public class UnoView extends JPanel {
     private JTextField roundInput = new JTextField();
     private JTextField nameInput = new JTextField();
     private JButton playGame = new JButton();
-    private RoundedJPane deck = new RoundedJPane(50, 4);;
+    private RoundedJPane deck = new RoundedJPane(50, 4);
     private RoundedJPane currentCard;
     private PauseMenu pauseMenu;
     private File cardFile = new File("Images");
