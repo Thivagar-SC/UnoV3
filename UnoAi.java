@@ -35,6 +35,7 @@ public class UnoAi {
                 }
             }
         }
+    
         if (currentlyPlacedCard.getValue() == 11) {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
@@ -48,6 +49,7 @@ public class UnoAi {
                 }
             }
         }
+    
         for (int x = 0; x < cards.size(); x++) {
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
@@ -56,14 +58,11 @@ public class UnoAi {
                 cards.remove(x);
                 currentCard = cardToPlace;
             }
-            if (currentlyPlacedCard.getValue() == 13) {
+
             if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
 
             }
-            if (currentlyPlacedCard.getValue() == 14) {
-                double randomColor = (Math.random() * 4);
-                int color = (int) Math.round(randomColor);
             if (currentlyPlacedCard.getValue() == 14) {
                 double randomColor = (Math.random() * 4);
                 int color = (int) Math.round(randomColor);
@@ -79,10 +78,8 @@ public class UnoAi {
     public void hitUNO() {
         if (cards.size() == 1) {
 
-        if (cards.size() == 1) {
-
-        }
     }
+}
 
     /**
      * Hits a block when to counter UNO other players
@@ -106,4 +103,5 @@ public class UnoAi {
     }
 
 }
+
         
