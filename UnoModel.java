@@ -112,6 +112,10 @@ public class UnoModel {
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
+        if(currentlyPlacedCard.getValue() == 13)
+        {
+         
+        }
         int cardIndex=-1;
         for (int x = 0; x<this.view.getCards().size();x++){
             if (card.equals(this.view.getCards().get(x))){
