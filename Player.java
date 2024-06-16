@@ -26,15 +26,16 @@ public class Player
      * @param playerName   - player userbane
      * @author tba
      */
-    public Player(int playerNumber, String playerName)
+    public Player(int playerNumber, String playerName, UnoModel model)
     {
         this.playerNumber = playerNumber;
         this.playerName = playerName;
+        this.model = model;
         this.wonRound = false;
         this.totalScore = 0;
         this.selectable = false;
-        this.cards = new ArrayList<Card>();
-
+        this.cards = new ArrayList<>();
+        model.setUNOState(model.SAFE);
     }
 
     /**
@@ -47,7 +48,6 @@ public class Player
      */
     public void addCard(Card card, String source)
     {
-
         this.cards.add(card);
         this.source = source;
         this.organizeHand();

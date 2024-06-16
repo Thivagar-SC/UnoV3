@@ -43,6 +43,8 @@ public class UnoView extends JPanel
     private JTextArea aiName = new JTextArea("AI #1");
     private JTextArea aiName2 = new JTextArea("AI #2");
     private JTextArea aiName3 = new JTextArea("AI #3");
+    private UnoButton unoButton = new UnoButton();
+    private UnoBlockButton unoBlockButton = new UnoBlockButton();
 
 
     /**
@@ -263,6 +265,7 @@ public class UnoView extends JPanel
         {
             this.name1.setText("GUEST");
         }
+        this.name1.setEditable(false);
         this.add(icon1);
         this.add(name1);
         //System.out.println(aiImage.getAbsol);
@@ -276,8 +279,11 @@ public class UnoView extends JPanel
         this.aiName2.setOpaque(false);
         this.aiName3.setOpaque(false);
         this.aiName.setFont(new Font("Times New Roman", 1, 30));
+        this.aiName.setEditable(false);
         this.aiName2.setFont(new Font("Times New Roman", 1, 30));
+        this.aiName2.setEditable(false);
         this.aiName3.setFont(new Font("Times New Roman", 1, 30));
+        this.aiName3.setEditable(false);
 
         this.aiIcon.setBounds(1600, 200, 100, 100);
         this.aiIcon2.setBounds(50, 200, 100, 100);
@@ -295,6 +301,17 @@ public class UnoView extends JPanel
         this.add(aiName3);
 
 
+    }
+
+    /**
+     * Displays Uno and Uno Block buttons
+     *
+     * someone do this because idk what to do here
+     */
+    public void displayUnoButtons()
+    {
+        this.add(this.unoButton);
+        this.add(this.unoBlockButton);
     }
 
     /**
@@ -458,6 +475,7 @@ public class UnoView extends JPanel
                 this.displayDeck();
                 this.displayIcons();
                 this.displayCurrentCard();
+                //this.displayUnoButtons();
                 break;
             case 3:
                 this.setPauseState();

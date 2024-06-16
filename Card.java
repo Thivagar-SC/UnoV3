@@ -9,6 +9,7 @@
 public class Card {
     private final int cardFaceValue; // value of card
     private int colour; // color of card
+    private final int scoreValue; // score value of cards
 
     /**
      * Card
@@ -18,10 +19,34 @@ public class Card {
      * @param cardFaceValue - set value of card
      * @param colour        - colour card will be
      */
-    public Card(int cardFaceValue, int colour) {
+    public Card(int cardFaceValue, int colour, int scoreValue) {
         super();
         this.cardFaceValue = cardFaceValue;
         this.colour = colour;
+        this.scoreValue = scoreValue;
+    }
+
+    /**
+     * Gets score value based on the cards
+     * Number cards are their own number values
+     * Wild and Wild +4 are worth 50, others are 20
+     *
+     * @return the value based on the cards
+     */
+    public int getScoreValue()
+    {
+        if (cardFaceValue < 10)
+        {
+            return scoreValue;
+        }
+        else if (scoreValue == 13 || scoreValue == 14)
+        {
+            return 50;
+        }
+        else
+        {
+            return 20;
+        }
     }
 
     /**

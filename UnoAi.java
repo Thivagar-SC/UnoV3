@@ -19,8 +19,9 @@ public class UnoAi
     {
         this.playerNumber = playerNumber;
         this.wonRound = false;
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.model = model;
+        model.setUNOState(model.SAFE);
     }
 
     /**

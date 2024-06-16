@@ -9,7 +9,6 @@ import java.io.*;
 public class UnoModel
 {
     private UnoView view;
-    private UnoButton unoButton;
     //private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
     private String gameState;
@@ -24,9 +23,7 @@ public class UnoModel
     private List<Integer> points;
     private List<String> winners;
     private List<Player> players;
-    private BufferedReader input;
-    private PrintWriter output;
-    public File saveFile = null;
+    public File saveFile;
     private int direction = 1;
     // GUI variables
     private boolean menuSelection;
@@ -117,11 +114,11 @@ public class UnoModel
         {
             if (player.getHand().isEmpty())
             {
-                int totalScore = 0;
                 player.setWon();
             }
 
         }
+        int totalScore = 0;
     }
 
     /**
@@ -288,6 +285,20 @@ public class UnoModel
         }
     }
 
+    /**
+     * Adds two cards to the slow player's hand
+     *
+     * @param player the player affected by the UNO Block
+     */
+    public void addTwoFromUnoBlock(Player player)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            this.setUNOState(SAFE);
+            this.player.addCard(deck.drawCard(), "Didn't call UNO in time");
+        }
+    }
+
 
     /**
      * Starts the game.
@@ -305,7 +316,7 @@ public class UnoModel
         {
             this.state = GAME;
             this.numberOfRounds = numberRounds;
-            player = new Player(0, nameOfPlayer); // player number temporary
+            player = new Player(0, nameOfPlayer, this); // player number temporary
             this.deck = new Deck();
             this.gameResultOutput(); //placed here to test
 
@@ -435,7 +446,7 @@ public class UnoModel
     public void drawFromDeck()
     {
         this.state = this.GAME;
-        Card drawnCard = new Card(-1, -1); //placeholder card
+        Card drawnCard = new Card(-1, -1, -1); //placeholder card
         if (this.view.getDeckMod())
         {
             while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()
@@ -486,12 +497,14 @@ public class UnoModel
 
     /**
      * Writes game result of each round to a save file
+     *
+     * @author Tanner
      */
     public void gameResultOutput()
     {
         try
         {
-            output = new PrintWriter("SaveFiles/" + saveFile.getName());
+            PrintWriter output = new PrintWriter("SaveFiles/" + saveFile.getName());
             output.println("LAST GAME'S RESULTS: \n");
             output.println("Player's name: " + player.getPlayerName());
 
