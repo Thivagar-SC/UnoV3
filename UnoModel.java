@@ -30,6 +30,7 @@ public class UnoModel {
     private boolean menuSelection;
     private int state; //state of game
     private int safeState;
+    private int pauseCount = 0;
 
     public final int MENU = 0;
     public final int SELECTION= 1;
@@ -179,6 +180,12 @@ public class UnoModel {
         {
             System.out.println("Esc is pressed");
             pauseGame();
+            if (pauseCount==2){
+                pauseGame();
+                pauseGame();
+                pauseCount = 0;
+            }
+            
         }
     }
 
@@ -190,6 +197,7 @@ public class UnoModel {
         else{
         this.state = this.PAUSED;
         }
+        pauseCount++;
         view.update();
     }
 

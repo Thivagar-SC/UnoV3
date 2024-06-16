@@ -34,6 +34,14 @@ public class UnoView extends JPanel {
   private File cardFile = new File("Images");
   private JRadioButton deckModifier = new JRadioButton("Keep Drawing");
   private JPanel icon1 = new JPanel();
+  private JTextArea name1 = new JTextArea("Guest");
+  private JPanel aiIcon = new JPanel();
+  private JPanel aiIcon2 = new JPanel();
+  private JPanel aiIcon3 = new JPanel();
+  private JTextArea aiName = new JTextArea("AI #1");
+  private JTextArea aiName2 = new JTextArea("AI #2");
+  private JTextArea aiName3 = new JTextArea("AI #3");
+
 
   /**
    * UnoView
@@ -152,7 +160,7 @@ public class UnoView extends JPanel {
   private void displayDeck() {
     try{
     ImgComponent img = new ImgComponent((new File(cardFile,"_HiddenCard.png")).getCanonicalPath());
-    this.deck.setBounds(50, 100, 211, 336);
+    this.deck.setBounds(700, 500, 211, 336);
     img.setBounds(0, 0, 211, 336);
     this.deck.add(img);
     this.add(deck);
@@ -174,7 +182,7 @@ public class UnoView extends JPanel {
     ImgComponent a = new ImgComponent(new File(cardFile,(this.model.getCurrentCard().getValue() + ".png").trim()).getAbsolutePath());
     a.setBounds(0, 0, 211, 336);
     this.currentCard.add(a);
-    this.currentCard.setBounds(500, 100, 211, 336);
+    this.currentCard.setBounds(1000, 500, 211, 336);
     this.add(this.currentCard);
     this.refresh();
   }
@@ -212,8 +220,59 @@ public class UnoView extends JPanel {
   }
 
   public void displayIcons(){
-    File icon1 = new File(cardFile,"userIcon.png");
-    ImgComponent user = new ImgComponent(TOOL_TIP_TEXT_KEY);
+    File ply1 = new File(cardFile,"userIcon.png");
+    imgComp2 user = new imgComp2(ply1.getAbsolutePath(),100,100);
+    File ai1 = new File(cardFile,"aiIcon.png");
+    imgComp2 aiImage = new imgComp2(ai1.getAbsolutePath(),100,100);
+    imgComp2 aiImage2 = new imgComp2(ai1.getAbsolutePath(),100,100);
+    imgComp2 aiImage3 = new imgComp2(ai1.getAbsolutePath(),100,100);
+
+
+
+    this.icon1.add(user);
+    this.icon1.setBounds(10,800,100,100);
+    this.icon1.setOpaque(false);
+    this.name1.setBounds(10,910,400,400);
+    this.name1.setOpaque(false);
+  this.name1.setText(this.nameInput.getText());
+    this.name1.setFont(new Font("Times New Roman", 1, 30));
+    if (this.nameInput.getText().equals("")){
+      this.name1.setText("GUEST");
+    }
+    this.add(icon1);
+    this.add(name1);
+    //System.out.println(aiImage.getAbsol);
+    this.aiIcon.add(aiImage);
+   this.aiIcon2.add(aiImage2);
+    this.aiIcon3.add(aiImage3);
+    this.aiIcon.setOpaque(false);
+    this.aiIcon2.setOpaque(false);
+    this.aiIcon3.setOpaque(false);
+    this.aiName.setOpaque(false);
+    this.aiName2.setOpaque(false);
+    this.aiName3.setOpaque(false);
+    this.aiName.setFont(new Font("Times New Roman", 1, 30));
+    this.aiName2.setFont(new Font("Times New Roman", 1, 30));
+    this.aiName3.setFont(new Font("Times New Roman", 1, 30));
+    
+    this.aiIcon.setBounds(1600,200,100,100);
+    this.aiIcon2.setBounds(50,200,100,100);
+    this.aiIcon3.setBounds(850,10,100,100);
+    this.aiName.setBounds(1700,250,100,100);
+    this.aiName2.setBounds(950,50,100,150);
+    this.aiName3.setBounds(150,250,100,100);
+    
+
+    this.add(aiIcon);
+    this.add(aiName);
+    this.add(aiIcon2);
+    this.add(aiName2);
+    this.add(aiIcon3);
+    this.add(aiName3);
+
+
+
+
   }
 
   /**
@@ -344,6 +403,7 @@ public class UnoView extends JPanel {
       case 2:
       this.displayCards();
       this.displayDeck();
+      this.displayIcons();
       this.displayCurrentCard();
         break;
       case 3:
