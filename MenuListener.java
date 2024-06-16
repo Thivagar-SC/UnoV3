@@ -31,7 +31,7 @@ public class MenuListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Start")) { // if user hits start button
             model.startSelection();
-        } else if (e.getActionCommand().equals("Play!")) { // if user hits play button
+        } else if (e.getActionCommand().equals("Play!") || e.getActionCommand().equals("Restart Game")) { // if user hits play button
             model.startGame();
         } else if (e.getActionCommand().equals("Quit Game")) {// if user hits quit game button {
             model.quitGame();

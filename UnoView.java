@@ -22,6 +22,7 @@ public class UnoView extends JPanel {
     private boolean isPaused;
     // components for gui
     private JPanel menu = new JPanel();
+    private JPanel postGame = new JPanel();
     private JPanel gameSelect = new JPanel();
     private JButton startGame = new JButton();
     private JButton quitGame = new JButton();
@@ -43,6 +44,8 @@ public class UnoView extends JPanel {
     private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
 
     private JTextArea[] aiName = new JTextArea[3];
+    private JButton returnToMainMenu;
+    private JButton restartGame;
 
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
@@ -322,6 +325,31 @@ public class UnoView extends JPanel {
 
     }
 
+    public void postGameMenu()
+    {
+
+        this.removeAll();
+        pauseMenu.quitGameButton = new JButton("Return to Main Menu");
+        restartGame = new JButton("Restart Game");
+        quitGame = new JButton("Quit Game");
+
+        this.setLayout(new BorderLayout());
+        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 100));
+        this.restartGame.setPreferredSize(new Dimension(300, 100));
+        this.restartGame.setFont(new Font("Arial", Font.BOLD, 20));
+        this.quitGame.setPreferredSize(new Dimension(300, 100));
+        this.quitGame.setFont(new Font("Arial", Font.BOLD, 20));
+
+        this.setBackground(Color.PINK);
+        this.postGame.add(pauseMenu.quitToMainMenuButton);
+        this.postGame.add(this.restartGame);
+        this.postGame.add(this.quitGame);
+        this.add(this.postGame, BorderLayout.SOUTH);
+        this.refresh();
+
+
+    }
+
     /**
      * Displays Uno and Uno Block buttons
      *
@@ -384,6 +412,17 @@ public class UnoView extends JPanel {
         MenuListener mSelect = new MenuListener(this.model);
         this.playGame.addActionListener(mSelect);
         this.startGame.addActionListener(mSelect);// tba
+        this.quitGame.addActionListener(mSelect);
+    }
+
+    /**
+     * Assigns a controller to the buttons in post game menu
+     */
+    private void registerPostGameControllers() {
+        MenuListener mSelect = new MenuListener(this.model);
+        escListener pMenu = new escListener(this.model, this);
+        this.returnToMainMenu.addActionListener(pMenu);
+        this.restartGame.addActionListener(mSelect);// tba
         this.quitGame.addActionListener(mSelect);
     }
 
@@ -466,17 +505,18 @@ public class UnoView extends JPanel {
                 this.gameSetup();
                 break;
             case 2:
-                this.displayCards();
-                this.displayDeck();
-                this.displayIcons();
-                this.displayCurrentCard();
+                this.postGameMenu();
+//                this.displayCards();
+//                this.displayDeck();
+//                this.displayIcons();
+//                this.displayCurrentCard();
                 // this.displayUnoButtons();
                 break;
             case 3:
                 this.setPauseState();
                 break;
             case 4:
-                // this.setPauseState();
+                model.checkIfRoundIsOver();
                 break;
             case 5:
                 this.removeComp();
