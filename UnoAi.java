@@ -30,7 +30,7 @@ public class UnoAi {
             }
             if(currentlyPlacedCard.getValue() == 13)
             {
-                
+                nextPlayerTurn();
             }
             if(currentlyPlacedCard.getValue() == 14)
             {
