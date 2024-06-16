@@ -23,6 +23,24 @@ public class UnoAi {
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard)
     {
+        if(currentlyPlacedCard.getValue() == 13)
+        {
+            for(int x = 0; x < cards.size(); x++){
+            Card cardCheck = cards.get(x);
+                if(cardCheck.getValue() == 13)
+                {
+                    
+                }
+                else
+                {
+                    for(int y = 0; y < 4; y++)
+                    {
+                        //cards.add(model.drawCard());
+                    }
+                    
+                }
+        }
+        }
          for(int x = 0; x < cards.size(); x++)
          {            Card cardToPlace = cards.get(x);
             if(cardToPlace.getColour() == currentlyPlacedCard.getColour() || cardToPlace.getValue() == currentlyPlacedCard.getValue() || cardToPlace.getValue() == 13 || cardToPlace.getValue() == 14)
@@ -32,7 +50,8 @@ public class UnoAi {
             }
             if(currentlyPlacedCard.getValue() == 13)
             {
-                nextPlayerTurn();
+                model.nextTurn(1);
+
             }
             if(currentlyPlacedCard.getValue() == 14)
             {
@@ -64,3 +83,4 @@ public void getcurrentCard(Card currentCard)
 
 
 }
+
