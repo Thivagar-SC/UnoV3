@@ -7,9 +7,8 @@ import java.util.ArrayList;
  * @author Avaneesh
  * @since 2024/06/12
  */
-public class Player
-{
-    private UnoModel model; //model of the Uno game
+public class Player {
+    private UnoModel model; // model of the Uno game
     private String playerName; // name of the player
     private boolean wonRound; // if player won or not
     private int totalScore; // score of player
@@ -26,8 +25,7 @@ public class Player
      * @param playerName   - player userbane
      * @author tba
      */
-    public Player(int playerNumber, String playerName, UnoModel model)
-    {
+    public Player(int playerNumber, String playerName, UnoModel model) {
         this.playerNumber = playerNumber;
         this.playerName = playerName;
         this.model = model;
@@ -46,8 +44,7 @@ public class Player
      * @param source - why player is drawing a card (may not be needed we'll see)
      * @author tba
      */
-    public void addCard(Card card, String source)
-    {
+    public void addCard(Card card, String source) {
         this.cards.add(card);
         this.source = source;
         this.organizeHand();
@@ -60,8 +57,7 @@ public class Player
      * @param cardIndex - location of users card in hand
      * @author tba
      */
-    public void placeCard(int cardIndex)
-    {
+    public void placeCard(int cardIndex) {
         cards.remove(cardIndex);
     }
 
@@ -72,8 +68,7 @@ public class Player
      * @return cards
      * @author tba
      */
-    public ArrayList<Card> getHand()
-    {
+    public ArrayList<Card> getHand() {
         return cards;
     }
 
@@ -83,8 +78,7 @@ public class Player
      *
      * @author tba
      */
-    public void setSelectable()
-    {
+    public void setSelectable() {
         this.selectable = !this.selectable;
     }
 
@@ -95,8 +89,7 @@ public class Player
      * @return THISS IS AN ERROR JKNEJN
      * @author tba
      */
-    public boolean setGetSelectable()
-    {
+    public boolean setGetSelectable() {
         return setGetSelectable();
     }
 
@@ -107,15 +100,12 @@ public class Player
      * @return playerName
      * @author Avaneesh
      */
-    public String getPlayerName()
-    {
+    public String getPlayerName() {
         return playerName;
     }
 
-    public int getUnoState()
-    {
-        if (getHand().size() != 1)
-        {
+    public int getUnoState() {
+        if (getHand().size() != 1) {
             return model.SAFE;
         } else
             return model.NOT_SAFE;
@@ -127,13 +117,11 @@ public class Player
      *
      * @author AVaneesh
      */
-    public void setWon()
-    {
+    public void setWon() {
         this.wonRound = true;
     }
 
-    public boolean hasWon()
-    {
+    public boolean hasWon() {
         return wonRound;
     }
 
@@ -144,8 +132,7 @@ public class Player
      * @return totalScore
      * @author Avaneesh
      */
-    public int getTotalScore()
-    {
+    public int getTotalScore() {
         return totalScore;
     }
 
@@ -156,8 +143,7 @@ public class Player
      * @return playerNumber
      * @author Avaneesh
      */
-    public int GetPlayerID()
-    {
+    public int GetPlayerID() {
         return playerNumber;
     }
 
@@ -167,8 +153,7 @@ public class Player
      *
      * @author Avaneesh
      */
-    public void organizeHand()
-    {
+    public void organizeHand() {
 
         sortByNumbWithColour();
         sortByColour();
@@ -180,18 +165,14 @@ public class Player
      *
      * @author Avaneesh
      */
-    private void sortByColour()
-    {
+    private void sortByColour() {
         int minIndex;
-        for (int x = 0; x < cards.size(); x++)
-        { // for each card
+        for (int x = 0; x < cards.size(); x++) { // for each card
             minIndex = x;
-            for (int y = x + 1; y < cards.size(); y++)
-            { // for every unsorted card
-                if (cards.get(y).getColour() < cards.get(minIndex).getColour())
-                { // if card colour is different prior
-                    // in index than current colour being
-                    // sorted
+            for (int y = x + 1; y < cards.size(); y++) { // for every unsorted card
+                if (cards.get(y).getColour() < cards.get(minIndex).getColour()) { // if card colour is different prior
+                                                                                  // in index than current colour being
+                                                                                  // sorted
                     minIndex = y;
                 }
             }
@@ -207,27 +188,21 @@ public class Player
      *
      * @author Avaneesh
      */
-    private void sortByNumbWithColour()
-    {
+    private void sortByNumbWithColour() {
         System.out.println("org");
         int minIndex;
-        for (int x = 0; x < cards.size(); x++)
-        { // for each card
+        for (int x = 0; x < cards.size(); x++) { // for each card
             int color = cards.get(x).getColour();
             int endIndex = x;
-            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color)
-            { // tba u do this i cant be
-                // bothered
+            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // tba u do this i cant be
+                                                                                          // bothered
                 endIndex++;
             }
 
-            for (int a = x; a < cards.size(); a++)
-            { // u can do this
+            for (int a = x; a < cards.size(); a++) { // u can do this
                 minIndex = a;
-                for (int y = a + 1; y < cards.size(); y++)
-                {
-                    if (cards.get(y).getValue() < cards.get(minIndex).getValue())
-                    {
+                for (int y = a + 1; y < cards.size(); y++) {
+                    if (cards.get(y).getValue() < cards.get(minIndex).getValue()) {
                         minIndex = y;
                     }
                 }

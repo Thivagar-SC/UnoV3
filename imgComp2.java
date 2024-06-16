@@ -14,6 +14,7 @@ public class imgComp2 extends JComponent {
     private File holder; // File of image
     private int width;
     private int height;
+
     /**
      * ImgComponent
      * ImgComponent Constructor

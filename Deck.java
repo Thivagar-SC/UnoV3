@@ -6,8 +6,7 @@ import java.util.*;
  * @author Tanner
  * @since 06/07/2024
  */
-public class Deck
-{
+public class Deck {
     // Variable declarations
     private List<Card> deck; // List of cards in the deck
     private final int numberCards = 80; // 80 number cards including number 0 to 9
@@ -28,8 +27,7 @@ public class Deck
      * @author tba
      * @since 2024/06/12
      */
-    public Deck()
-    {
+    public Deck() {
         super();
         deck = new ArrayList<>();
         this.fillDeck();
@@ -44,10 +42,8 @@ public class Deck
      * @return The card drawn from the deck.
      * @author tba
      */
-    public Card drawCard()
-    {
-        if (deck.isEmpty())
-        {
+    public Card drawCard() {
+        if (deck.isEmpty()) {
             fillDeck();
         }
         Card drawnCard = deck.get(0);
@@ -61,8 +57,7 @@ public class Deck
      *
      * @author tba
      */
-    public void fillDeck()
-    {
+    public void fillDeck() {
         deck.clear();
         addNumberCards();
         addSpecialCards();
@@ -75,12 +70,11 @@ public class Deck
      *
      * @author tba
      */
-    public void removeCard()
-    {
+    public void removeCard() {
         deck.remove(0);
     }
 
-    public void addCard(Card card) //adds a card back into the deck
+    public void addCard(Card card) // adds a card back into the deck
     {
         this.deck.add(0, card);
         Collections.shuffle(deck);
@@ -92,8 +86,7 @@ public class Deck
      *
      * @author tba
      */
-    public void addSpecialCards()
-    {
+    public void addSpecialCards() {
         addPlusTwoCards();
         addPlusFourCards();
         addReverseCards();
@@ -107,10 +100,8 @@ public class Deck
      *
      * @author tba
      */
-    public void addPlusFourCards()
-    {
-        for (int i = 0; i < 4; i++)
-        {
+    public void addPlusFourCards() {
+        for (int i = 0; i < 4; i++) {
             deck.add(new Card(13, COLOUR_BLACK, 50));
         }
     }
@@ -121,10 +112,8 @@ public class Deck
      *
      * @author tba
      */
-    public void addWildCards()
-    {
-        for (int i = 0; i < 4; i++)
-        {
+    public void addWildCards() {
+        for (int i = 0; i < 4; i++) {
             deck.add(new Card(14, COLOUR_BLACK, 50));
         }
     }
@@ -135,10 +124,8 @@ public class Deck
      *
      * @author tba
      */
-    public void addBlockCards()
-    {
-        for (int i = 0; i < 4; i++)
-        {
+    public void addBlockCards() {
+        for (int i = 0; i < 4; i++) {
             deck.add(new Card(12, i, 20));
             deck.add(new Card(12, i, 20));
         }
@@ -150,10 +137,8 @@ public class Deck
      *
      * @author tba
      */
-    public void addReverseCards()
-    {
-        for (int i = 0; i < 4; i++)
-        {
+    public void addReverseCards() {
+        for (int i = 0; i < 4; i++) {
             deck.add(new Card(10, i, 20));
             deck.add(new Card(10, i, 20));
         }
@@ -165,10 +150,8 @@ public class Deck
      *
      * @author tba
      */
-    public void addPlusTwoCards()
-    {
-        for (int i = 0; i < 4; i++)
-        {
+    public void addPlusTwoCards() {
+        for (int i = 0; i < 4; i++) {
             deck.add(new Card(11, i, 20));
             deck.add(new Card(11, i, 20));
         }
@@ -180,14 +163,10 @@ public class Deck
      *
      * @author tba
      */
-    public void addNumberCards()
-    {
-        for (int cardFaceValue = 0; cardFaceValue < numberCards / 8; cardFaceValue++)
-        {
-            for (int colour = 0; colour < 4; colour++)
-            {
-                for (int scoreValue = 0; scoreValue < 10; scoreValue++)
-                {
+    public void addNumberCards() {
+        for (int cardFaceValue = 0; cardFaceValue < numberCards / 8; cardFaceValue++) {
+            for (int colour = 0; colour < 4; colour++) {
+                for (int scoreValue = 0; scoreValue < 10; scoreValue++) {
                     deck.add(new Card(cardFaceValue, colour, scoreValue));
                     deck.add(new Card(cardFaceValue, colour, scoreValue));
                 }
@@ -201,8 +180,7 @@ public class Deck
      *
      * @author tba
      */
-    public boolean getSelectable()
-    {
+    public boolean getSelectable() {
         return selectable;
     }
 
@@ -212,8 +190,7 @@ public class Deck
      *
      * @author tba
      */
-    public void setSelectable(boolean selectable)
-    {
+    public void setSelectable(boolean selectable) {
         this.selectable = selectable;
     }
 }

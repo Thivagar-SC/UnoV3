@@ -33,18 +33,12 @@ public class Card {
      *
      * @return the value based on the cards
      */
-    public int getScoreValue()
-    {
-        if (cardFaceValue < 10)
-        {
+    public int getScoreValue() {
+        if (cardFaceValue < 10) {
             return scoreValue;
-        }
-        else if (scoreValue == 13 || scoreValue == 14)
-        {
+        } else if (scoreValue == 13 || scoreValue == 14) {
             return 50;
-        }
-        else
-        {
+        } else {
             return 20;
         }
     }

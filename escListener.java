@@ -1,34 +1,27 @@
 import java.awt.event.*;
 
-public class escListener implements KeyListener, ActionListener
-{
+public class escListener implements KeyListener, ActionListener {
     private UnoView view;
     private UnoModel model;
     private PauseMenu pauseMenu;
 
-    public escListener(UnoModel model,UnoView view)
-    {
+    public escListener(UnoModel model, UnoView view) {
         this.model = model;
         this.view = view;
     }
 
-    public void actionPerformed (ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
         System.out.println("RUNNING");
-        if (e.getActionCommand().equals("Resume"))
-        {
+        if (e.getActionCommand().equals("Resume")) {
             model.pauseGame();
-        }
-        else if (e.getActionCommand().equals("Return to Main Menu"))// something
+        } else if (e.getActionCommand().equals("Return to Main Menu"))// something
         {
             model.reset();
-        }
-        else if (e.getActionCommand().equals("Quit Game")) // something else
+        } else if (e.getActionCommand().equals("Quit Game")) // something else
         {
             model.quitGame();
         }
     }
-
 
     /**
      * keyPressed
@@ -38,8 +31,7 @@ public class escListener implements KeyListener, ActionListener
      * @param e - TBA
      */
     @Override
-    public void keyPressed(KeyEvent e)
-    {
+    public void keyPressed(KeyEvent e) {
         model.pauseByESC(e.getKeyCode());
     }
 

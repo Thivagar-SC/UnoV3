@@ -10,8 +10,7 @@ import java.util.*;
  * @author Tanner
  * @since 2024/06/12
  */
-public class PauseMenu extends JPanel
-{
+public class PauseMenu extends JPanel {
 
     private boolean isPaused; // if game is paused
     public JLabel pauseLabel; // label shows that the game is currently paused
@@ -26,8 +25,7 @@ public class PauseMenu extends JPanel
      *
      * @author Tanner
      */
-    public PauseMenu()
-    {
+    public PauseMenu() {
         super();
         isPaused = false;
         this.setVisible(this.isPaused);
@@ -71,15 +69,12 @@ public class PauseMenu extends JPanel
         buttonsBackground.add(Box.createVerticalStrut(30));
     }
 
-    public void setVisibility()
-    {
+    public void setVisibility() {
         this.isPaused = !this.isPaused;
         this.setVisible(this.isPaused);
     }
 
-
-    public void update()
-    {
+    public void update() {
     }
 
     /**
@@ -88,8 +83,7 @@ public class PauseMenu extends JPanel
      *
      * @author Thivagar
      */
-    public boolean isPaused()
-    {
+    public boolean isPaused() {
         return this.isPaused;
     }
 
@@ -99,8 +93,7 @@ public class PauseMenu extends JPanel
      * @param g man idek
      */
     @Override
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         g.setColor(new Color(144, 143, 143, 204));
         g.fillRect(0, 0, 1920, 1080);
     }

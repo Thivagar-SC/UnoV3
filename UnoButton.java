@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class UnoButton extends JButton implements MouseListener
-{
+public class UnoButton extends JButton implements MouseListener {
     public UnoModel model; // model of UNO game
     public Player player; // player of UNO game
     public boolean isActive;
@@ -10,48 +9,42 @@ public class UnoButton extends JButton implements MouseListener
     /**
      * Default constructor
      */
-    public UnoButton()
-    {
+    public UnoButton() {
         isActive = false;
     }
 
     /**
-     * Enables the UNO Button only when the player is not safe or safe and has 2 cards in hand
+     * Enables the UNO Button only when the player is not safe or safe and has 2
+     * cards in hand
      */
-    public void update()
-    {
+    public void update() {
         isActive = player.getUnoState() == model.NOT_SAFE
                 || player.getUnoState() == model.SAFE && player.getHand().size() == 2;
     }
 
     @Override
-    public void mouseClicked(MouseEvent e)
-    {
+    public void mouseClicked(MouseEvent e) {
         System.out.println("Uno CALLED!");
         model.setUNOState(model.CALLED);
     }
 
     @Override
-    public void mousePressed(MouseEvent e)
-    {
+    public void mousePressed(MouseEvent e) {
 
     }
 
     @Override
-    public void mouseReleased(MouseEvent e)
-    {
+    public void mouseReleased(MouseEvent e) {
 
     }
 
     @Override
-    public void mouseEntered(MouseEvent e)
-    {
+    public void mouseEntered(MouseEvent e) {
 
     }
 
     @Override
-    public void mouseExited(MouseEvent e)
-    {
+    public void mouseExited(MouseEvent e) {
 
     }
 }

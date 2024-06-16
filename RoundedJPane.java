@@ -8,8 +8,7 @@ import javax.swing.*;
  * @author Thivagar Kesavan
  * @since 2024/06/12
  */
-public class RoundedJPane extends JLayeredPane
-{
+public class RoundedJPane extends JLayeredPane {
     private int radius; // radius of card rounded corners
 
     // Value of each colour
@@ -31,8 +30,7 @@ public class RoundedJPane extends JLayeredPane
      * @param colour - colour of card background
      * @author Thivagar
      */
-    public RoundedJPane(int radius, int colour)
-    {
+    public RoundedJPane(int radius, int colour) {
         this.radius = radius;
         this.currentColour = colour;
         this.setPreferredSize(new Dimension(width, height));
@@ -46,8 +44,7 @@ public class RoundedJPane extends JLayeredPane
      * @param g - graphics to draw images
      * @author Thivagar
      */
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         setColor(this.currentColour, g);
         g.fillRoundRect(0, 0, 195, 295, this.radius, this.radius);
         super.paintComponent(g);
@@ -62,10 +59,8 @@ public class RoundedJPane extends JLayeredPane
      * @param color - colour to be set
      * @author Thivagar
      */
-    public void setColor(int color, Graphics g)
-    {
-        switch (color)
-        {
+    public void setColor(int color, Graphics g) {
+        switch (color) {
             case RED:
                 g.setColor(Color.RED);
                 break;
@@ -75,7 +70,7 @@ public class RoundedJPane extends JLayeredPane
                 break;
 
             case YELLOW:
-                g.setColor(new Color(240, 207, 41)); //less eye blinding yellow
+                g.setColor(new Color(240, 207, 41)); // less eye blinding yellow
                 break;
 
             case GREEN:
