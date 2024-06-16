@@ -65,7 +65,7 @@ public class UnoAi {
     public void hitUNO() {
         if(cards.size() == 1)
         {
-
+            
         }
     }
 
