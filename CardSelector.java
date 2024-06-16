@@ -54,7 +54,7 @@ public class CardSelector implements MouseListener {
      */
     public void mouseClicked(MouseEvent e) {
         
-        System.out.println(((RoundedJPane)e.getSource()));
+        //System.out.println(((RoundedJPane)e.getSource()));
         this.model.placeCard((RoundedJPane)e.getSource(), 0);
     }
 

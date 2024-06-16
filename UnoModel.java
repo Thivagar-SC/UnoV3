@@ -184,8 +184,12 @@ public class UnoModel {
 
     public void pauseGame()
     {
-
+        if (getState() == this.PAUSED){
+            this.state = this.GAME;
+        }
+        else{
         this.state = this.PAUSED;
+        }
         view.update();
     }
 

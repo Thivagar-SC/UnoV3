@@ -31,8 +31,9 @@ public class UnoView extends JPanel {
   private RoundedJPane deck= new RoundedJPane(50, 4);;
   private RoundedJPane currentCard;
   private PauseMenu pauseMenu;
-  private File cardFile = new File("Cards");
+  private File cardFile = new File("Images");
   private JRadioButton deckModifier = new JRadioButton("Keep Drawing");
+  private JPanel icon1 = new JPanel();
 
   /**
    * UnoView
@@ -86,7 +87,7 @@ public class UnoView extends JPanel {
     this.quitGame.setText("Quit Game");
     this.quitGame.setPreferredSize(new Dimension(200, 100));
 
-    this.setBackground(Color.LIGHT_GRAY);
+    this.setBackground(Color.PINK);
     this.menu.add(this.startGame);
     this.menu.add(this.quitGame);
     this.add(this.menu, BorderLayout.WEST);
@@ -199,7 +200,7 @@ public class UnoView extends JPanel {
     for (int x = 0; x < this.model.getCurrentPlayer().getHand().size(); x++) { // for each card
       Card currentCard = this.model.getCurrentPlayer().getHand().get(x);
       this.cards.get(x).setBounds(
-          ((this.getWidth() - 200) / (this.model.getCurrentPlayer().getHand().size() + 1) * x) + 20, 500, 211, 336);
+          (int)Math.round((((this.getWidth() - 200) / (this.model.getCurrentPlayer().getHand().size() + 1) * x))/1.25 + 250), 850, 211, 336);
       img = new ImgComponent(new File(cardFile,(currentCard.getValue() + ".png".trim())).getAbsolutePath());
       img.setBounds(0, 0, 211, 336);
       this.cards.get(x).add(img);
@@ -208,6 +209,11 @@ public class UnoView extends JPanel {
 
     this.registerControllers(); // new card also needs to be clickable
     this.refresh();
+  }
+
+  public void displayIcons(){
+    File icon1 = new File(cardFile,"userIcon.png");
+    ImgComponent user = new ImgComponent(TOOL_TIP_TEXT_KEY);
   }
 
   /**
@@ -282,7 +288,7 @@ public class UnoView extends JPanel {
   private void raiseCard(Object aCard) {
     for (int x = 0; x < this.cards.size(); x++) {
       if (this.cards.get(x).equals(aCard)) {
-        this.cards.get(x).setBounds(this.cards.get(x).getX(), 420, 211, 336);
+        this.cards.get(x).setBounds(this.cards.get(x).getX(), 750, 211, 336);
       }
     }
     this.refresh();
@@ -298,7 +304,7 @@ public class UnoView extends JPanel {
   private void dropCard(Object aCard) {
     for (int x = 0; x < this.cards.size(); x++) {
       if (this.cards.get(x).equals(aCard)) {
-        this.cards.get(x).setBounds(this.cards.get(x).getX(), 500, 211, 336);
+        this.cards.get(x).setBounds(this.cards.get(x).getX(), 850, 211, 336);
       }
     }
     this.refresh();
