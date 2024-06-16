@@ -102,13 +102,15 @@ public class UnoModel {
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players) {
-            if (player.getHand().isEmpty()) {
-                player.setWon();
+        for (Player player : players)
+        {
+            if (player.getHand().isEmpty())
+            {
+                int totalScore = 0;
+                totalScore += player.getTotalScore();
             }
-
         }
-        int totalScore = 0;
+        player.setWon();
     }
 
     /**
@@ -119,10 +121,33 @@ public class UnoModel {
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
-        if(currentlyPlacedCard.getValue() == 13)
-        {
-         
+         if (currentlyPlacedCard.getValue() == 13) {
+            for (int x = 0; x < cardsInHand.size(); x++) {
+                Card cardCheck = cardsInHand.get(x);
+                if (cardCheck.getValue() == 13) {
+
+                } else {
+                    for (int y = 0; y < 4; y++) {
+                        drawCard();
+                    }
+
+                }
+            }
         }
+        if (currentlyPlacedCard.getValue() == 11) {
+            for (int x = 0; x < cardsInHand.size(); x++) {
+                Card cardCheck = cardsInHand.get(x);
+                if (cardCheck.getValue() == 11) {
+
+                } else {
+                    for (int y = 0; y < 2; y++) {
+                        drawCard();
+                    }
+
+                }
+            }
+        }
+
         int cardIndex=-1;
         for (int x = 0; x<this.view.getCards().size();x++){
             if (card.equals(this.view.getCards().get(x))){
@@ -146,7 +171,7 @@ public class UnoModel {
             }
         }
         if (cardToPlace.getValue() == 13) {
-
+            
         }
         if (cardToPlace.getValue() == 14) {
 

@@ -133,6 +133,11 @@ public class Player {
      * @author Avaneesh
      */
     public int getTotalScore() {
+        totalScore = 0;
+        for (Card card : cards)
+        {
+            totalScore += card.getScoreValue();
+        }
         return totalScore;
     }
 
