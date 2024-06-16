@@ -25,6 +25,7 @@ public class UnoModel {
     private List<Player> players;
     private BufferedReader input;
     private PrintWriter output;
+    public File saveFile = null;
     private int direction = 1;
     // GUI variables
     private boolean menuSelection;
@@ -75,7 +76,7 @@ public class UnoModel {
 
     /**
      * Moves to the next turn.
-     * 
+     *
      * @param skip number of players to skip.
      */
     public void nextTurn(int skip) // Avaneesh
@@ -102,13 +103,14 @@ public class UnoModel {
                 int totalScore = 0;
                 player.setWon();
             }
+
         }
     }
 
     /**
      * Places a card from a player's hand.
-     * 
-     * @param cardIndex index of the card in the player's hand.
+     *
+     * @param card comment this because idk
      * @param playerID  ID of the player placing the card.
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
@@ -133,15 +135,16 @@ public class UnoModel {
                 plusTwoCard();
             } else if (cardToPlace.getValue() == 12) {
                 nextTurn(2);
-
             }
         }
         if (cardToPlace.getValue() == 13) {
-           
+
         }
         if (cardToPlace.getValue() == 14) {
-            
+
         }
+
+
         this.view.update();
 
     }
@@ -150,18 +153,18 @@ public class UnoModel {
         int totalStack = 2;
         int nextPlayer = (turn + direction);
 
-        
+
     }
 
     /**
      * Returns the current player.
-     * 
+     *
      * @return the current player.
      */
     public Player getCurrentPlayer() {
         return player;
     }
-    
+
     /**
      * Quits the game.
      */
@@ -172,7 +175,7 @@ public class UnoModel {
 
     /**
      * Handles input for the ESC key.
-     * 
+     *
      * @param keyCode - the key code of the pressed key.
      */
     public void inputForESC(int keyCode) {
@@ -185,7 +188,7 @@ public class UnoModel {
                 pauseGame();
                 pauseCount = 0;
             }
-            
+
         }
     }
 
@@ -203,7 +206,7 @@ public class UnoModel {
 
     /**
      * Changes the color of the next card to be played.
-     * 
+     *
      * @param colour - the new color.
      */
     public void changeColour(int colour) // Avaneesh
@@ -213,7 +216,7 @@ public class UnoModel {
 
     /**
      * Returns the current colour of the next card to be played.
-     * 
+     *
      * @return the current colour.
      */
     public int getCurrentColour() {
@@ -234,11 +237,18 @@ public class UnoModel {
 
     /**
      * Checks if the current player is safe.
-     * 
-     * @return - true if the player is safe, false otherwise.
+     *
+     * @return - SAFE if the player is safe, NOT_SAFE otherwise.
      */
-    public boolean isSafe() {
-        return safeState == SAFE;
+    public int isSafe(int safeState) {
+        if (player.getHand().size() != 1)
+        {
+            return SAFE;
+        }
+        else
+        {
+            return NOT_SAFE;
+        }
     }
 
 
@@ -249,7 +259,7 @@ public class UnoModel {
     public void startGame() {
         int numberRounds;
         String nameOfPlayer;
-        //this.createSaveFile();
+        this.createSaveFile();
         this.state = SELECTION;
         this.menuSelection = false;
         nameOfPlayer = this.view.getPlayerName();
@@ -279,7 +289,6 @@ public class UnoModel {
     {
         try
         {
-            File saveFile = null;
             int fileNumber = 1; //Starts with the first file number
 
             while (this.state == 1)
@@ -308,6 +317,9 @@ public class UnoModel {
         }
     }
 
+    /**
+     * Places the first card in the pile to start off the game
+     */
     public void placeStarterCard(){
         Card cuCard = this.deck.drawCard();
         while (cuCard.getValue()>9) //while card is invalid to start with
@@ -318,10 +330,17 @@ public class UnoModel {
         this.currentlyPlacedCard = cuCard;
     }
 
-    public void raiseCard(Object card) {
+    /**
+     * Raises the hovered card above the rest
+     * */
+    public void raiseCard(Object card)
+    {
         this.view.updateCard(true,card);
     }
 
+    /**
+     * Drops the raised card back down if mouse no longer hovers
+     * */
     public void dropCard(Object card) {
         this.view.updateCard(false,card);
     }
@@ -353,15 +372,8 @@ public class UnoModel {
     }
 
     /**
-     * Ends the game.
-     */
-    public void endGame() {
-
-    }
-
-    /**
      * Checks if a card is legal to play.
-     * 
+     *
      * @param card - the card to check.
      * @return - true if the card is legal, false otherwise.
      */
@@ -412,5 +424,34 @@ public class UnoModel {
     public Card getCurrentCard()
     {
         return this.currentlyPlacedCard;
+    }
+
+    /**
+     * Sorts the winner and the rest by the scores
+     * */
+    public void sortByScore()
+    {
+
+    }
+    /**
+     * Writes game result of each round to a save file
+     * */
+    public void gameResultOutput() throws IOException
+    {
+        output = new PrintWriter(saveFile);
+
+        if (player.hasWon())
+        {
+            output.println("You won!");
+        }
+        else
+        {
+            output.println("You lost!");
+        }
+
+        //Needs to finish the sortByScore method to write the 1st, 2nd, 3rd and 4th place
+
+
+
     }
 }

@@ -9,7 +9,7 @@ import java.io.*;
 /**
  * UnoView
  * View displaying game
- * 
+ *
  * @author Thivagar Kesavan
  * @since 2024/06/12
  */
@@ -46,7 +46,7 @@ public class UnoView extends JPanel {
   /**
    * UnoView
    * UnoView Constructor
-   * 
+   *
    * @author Thivagar
    * @param uModel - model of game
    */
@@ -62,7 +62,7 @@ public class UnoView extends JPanel {
   /**
    * getPlayerName
    * returns players username
-   * 
+   *
    * TO be moved to model in due time
    */
   public String getPlayerName() {
@@ -83,7 +83,7 @@ public class UnoView extends JPanel {
   /**
    * mainMenu
    * Opening display of uno game
-   * 
+   *
    * @author Thivagar
    */
   private void mainMenu() { // gui temporary for use
@@ -105,7 +105,7 @@ public class UnoView extends JPanel {
   /**
    * gameSetup
    * Display game setup of uno (rounds etc)
-   * 
+   *
    * @author Thivagar
    */
   private void gameSetup() {
@@ -141,7 +141,7 @@ public class UnoView extends JPanel {
   /**
    * setHand
    * adding new cards to show
-   * 
+   *
    * @author Thivagar
    */
   private void setHand() {
@@ -154,7 +154,7 @@ public class UnoView extends JPanel {
   /**
    * displayDeck
    * displays deck of cards
-   * 
+   *
    * @author Thivagar
    */
   private void displayDeck() {
@@ -167,14 +167,14 @@ public class UnoView extends JPanel {
     this.deck.setVisible(true);
     }
     catch(Exception e){
-      
+
     }
   }
 
   /**
    * displayCurrentCard
    * displays card in play
-   * 
+   *
    * @author Thivagar
    */
   private void displayCurrentCard() {
@@ -190,12 +190,12 @@ public class UnoView extends JPanel {
   /**
    * displayCards
    * displays cards of user
-   * 
+   *
    * @author Thivagar
    */
   private void displayCards() {
     this.removeAll();
-    
+
     this.setFocusable(true);
     this.requestFocus();
     this.setHand();
@@ -254,14 +254,14 @@ public class UnoView extends JPanel {
     this.aiName.setFont(new Font("Times New Roman", 1, 30));
     this.aiName2.setFont(new Font("Times New Roman", 1, 30));
     this.aiName3.setFont(new Font("Times New Roman", 1, 30));
-    
+
     this.aiIcon.setBounds(1600,200,100,100);
     this.aiIcon2.setBounds(50,200,100,100);
     this.aiIcon3.setBounds(850,10,100,100);
     this.aiName.setBounds(1700,250,100,100);
     this.aiName2.setBounds(950,50,100,150);
     this.aiName3.setBounds(150,250,100,100);
-    
+
 
     this.add(aiIcon);
     this.add(aiName);
@@ -278,7 +278,7 @@ public class UnoView extends JPanel {
   /**
    * registerControllers
    * register available user actions
-   * 
+   *
    * @author Thivagar
    */
   private void registerControllers() {
@@ -295,9 +295,9 @@ public class UnoView extends JPanel {
       this.pauseMenu.quitToMainMenuButton.removeActionListener(listener);
       this.pauseMenu.quitGameButton.removeActionListener(listener);
       this.pauseMenu.resumeButton.removeActionListener(listener);
-    
+
     }
-    if (this.model.getState()==2) { // if rounds have been chosen
+    if (this.model.getState()== model.GAME) { // if rounds have been chosen
       for (MouseListener listener : this.deck.getMouseListeners()) { // remove prior listeners
         this.deck.removeMouseListener(listener);
       } // SHOULD CHANGE LATER
@@ -308,17 +308,17 @@ public class UnoView extends JPanel {
         }
         this.cards.get(x).addMouseListener(setup);
       }
-      
+
     this.deck.addMouseListener(addCard);
     this.addKeyListener(pauseGame);
-    
+
     this.pauseMenu.quitGameButton.addActionListener(pauseGame);
     this.pauseMenu.quitToMainMenuButton.addActionListener(pauseGame);
     this.pauseMenu.resumeButton.addActionListener(pauseGame);
-      
+
   }
 
-    
+
   }
 
   private void registerStarterControllers(){
@@ -331,7 +331,7 @@ public class UnoView extends JPanel {
   /**
    * getCards
    * returns all the card visuals
-   * 
+   *
    * @author Thivagar
    */
   public ArrayList<RoundedJPane> getCards() {
@@ -341,7 +341,7 @@ public class UnoView extends JPanel {
   /**
    * raiseCard
    * raises selected card
-   * 
+   *
    * @author Thivagar
    */
   private void raiseCard(Object aCard) {
@@ -357,7 +357,7 @@ public class UnoView extends JPanel {
   /**
    * dropCard
    * lowers selected card
-   * 
+   *
    * @author Thivagar
    */
   private void dropCard(Object aCard) {
@@ -388,11 +388,11 @@ public class UnoView extends JPanel {
   /**
    * update
    * updates gui based on changes
-   * 
+   *
    * @author Thivagar
    */
   public void update() {
-    
+
     switch (this.model.getState()) {
       case 0:
       this.mainMenu();
@@ -428,11 +428,11 @@ public class UnoView extends JPanel {
     // this.pauseMenu.setBackground(Color.BLACK);
     this.pauseMenu.setVisibility();
 
-    for (Component comp : this.getComponents()) 
+    for (Component comp : this.getComponents())
     {
         comp.setVisible(!comp.isVisible());
     }
-    
+
     this.add(pauseMenu);
     this.refresh();
   }
@@ -440,7 +440,7 @@ public class UnoView extends JPanel {
   /**
    * refresh
    * updates gui to show new changes
-   * 
+   *
    * @author Thivagar
    */
   public void refresh() {
