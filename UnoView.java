@@ -36,12 +36,10 @@ public class UnoView extends JPanel {
     private JRadioButton deckModifier = new JRadioButton("Keep Drawing");
     private JPanel icon1 = new JPanel();
     private JTextArea name1 = new JTextArea("Guest");
-    private JPanel aiIcon = new JPanel();
-    private JPanel aiIcon2 = new JPanel();
-    private JPanel aiIcon3 = new JPanel();
-    private JTextArea aiName = new JTextArea("AI #1");
-    private JTextArea aiName2 = new JTextArea("AI #2");
-    private JTextArea aiName3 = new JTextArea("AI #3");
+    private JPanel[] aiIcon = new JPanel[3];
+    private JPanel[] aiCards = new JPanel[3];
+    private JTextArea[] aiName = new JTextArea[3];
+
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
 
@@ -237,6 +235,14 @@ public class UnoView extends JPanel {
         imgComp2 aiImage2 = new imgComp2(ai1.getAbsolutePath(), 100, 100);
         imgComp2 aiImage3 = new imgComp2(ai1.getAbsolutePath(), 100, 100);
 
+        this.aiName[0] = new JTextArea("AI #1");
+        this.aiName[1] = new JTextArea("AI #2");
+        this.aiName[2] = new JTextArea("AI #3");
+
+        this.aiIcon[0] = new JPanel();
+        this.aiIcon[1] = new JPanel();
+        this.aiIcon[2] = new JPanel();
+
         this.icon1.add(user);
         this.icon1.setBounds(10, 800, 100, 100);
         this.icon1.setOpaque(false);
@@ -250,36 +256,38 @@ public class UnoView extends JPanel {
         this.name1.setEditable(false);
         this.add(icon1);
         this.add(name1);
+
         // System.out.println(aiImage.getAbsol);
-        this.aiIcon.add(aiImage);
-        this.aiIcon2.add(aiImage2);
-        this.aiIcon3.add(aiImage3);
-        this.aiIcon.setOpaque(false);
-        this.aiIcon2.setOpaque(false);
-        this.aiIcon3.setOpaque(false);
-        this.aiName.setOpaque(false);
-        this.aiName2.setOpaque(false);
-        this.aiName3.setOpaque(false);
-        this.aiName.setFont(new Font("Times New Roman", 1, 30));
-        this.aiName.setEditable(false);
-        this.aiName2.setFont(new Font("Times New Roman", 1, 30));
-        this.aiName2.setEditable(false);
-        this.aiName3.setFont(new Font("Times New Roman", 1, 30));
-        this.aiName3.setEditable(false);
+        this.aiIcon[0].add(aiImage);
+        this.aiIcon[1].add(aiImage2);
+        this.aiIcon[2].add(aiImage3);
+        this.aiIcon[0].setOpaque(false);
+        this.aiIcon[1].setOpaque(false);
+        this.aiIcon[2].setOpaque(false);
 
-        this.aiIcon.setBounds(1600, 200, 100, 100);
-        this.aiIcon2.setBounds(50, 200, 100, 100);
-        this.aiIcon3.setBounds(850, 10, 100, 100);
-        this.aiName.setBounds(1700, 250, 100, 100);
-        this.aiName2.setBounds(950, 50, 100, 150);
-        this.aiName3.setBounds(150, 250, 100, 100);
+        this.aiName[0].setBackground(new Color(0,0,0,0));
+        this.aiName[1].setBackground(new Color(0,0,0,0));
+        this.aiName[2].setBackground(new Color(0,0,0,0));
+        this.aiName[0].setFont(new Font("Times New Roman", 1, 30));
+        this.aiName[0].setEditable(false);
+        this.aiName[1].setFont(new Font("Times New Roman", 1, 30));
+        this.aiName[1].setEditable(false);
+        this.aiName[2].setFont(new Font("Times New Roman", 1, 30));
+        this.aiName[2].setEditable(false);
 
-        this.add(aiIcon);
-        this.add(aiName);
-        this.add(aiIcon2);
-        this.add(aiName2);
-        this.add(aiIcon3);
-        this.add(aiName3);
+        this.aiIcon[0].setBounds(1600, 200, 100, 100);
+        this.aiIcon[1].setBounds(50, 200, 100, 100);
+        this.aiIcon[2].setBounds(850, 10, 100, 100);
+        this.aiName[0].setBounds(1700, 250, 100, 100);
+        this.aiName[1].setBounds(950, 50, 100, 150);
+        this.aiName[2].setBounds(150, 250, 100, 100);
+
+        this.add(aiIcon[0]);
+        this.add(aiName[0]);
+        this.add(aiIcon[1]);
+        this.add(aiName[1]);
+        this.add(aiIcon[2]);
+        this.add(aiName[2]);
 
     }
 
@@ -458,7 +466,6 @@ public class UnoView extends JPanel {
         this.pauseMenu.setBounds(0, 0, 1920, 1080);
         for (Component comp : this.getComponents()) {
             comp.setVisible(!comp.isVisible());
-            System.out.println(this.aiIcon.isVisible());
         }
         this.pauseMenu.setVisibility();
         this.add(pauseMenu);
