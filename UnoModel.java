@@ -9,12 +9,12 @@ import java.io.*;
 public class UnoModel {
     private UnoView view;
     private UnoButton unoButton;
-    //private PauseMenu pauseMenu;
+    // private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
     private String gameState;
     private int turn;
     private Player player;
-    //private UnoAi ai;
+    // private UnoAi ai;
     private Deck deck;
     private boolean safe;
     private int numberOfRounds;
@@ -28,12 +28,12 @@ public class UnoModel {
     private int direction = 1;
     // GUI variables
     private boolean menuSelection;
-    private int state; //state of game
+    private int state; // state of game
     private int safeState;
     private int pauseCount = 0;
 
     public final int MENU = 0;
-    public final int SELECTION= 1;
+    public final int SELECTION = 1;
     public final int GAME = 2;
     public final int PAUSED = 3;
     public final int ENDGAME = 4;
@@ -42,8 +42,6 @@ public class UnoModel {
     public final int SAFE = 0;
     public final int CALLED = 1;
     public final int NOT_SAFE = 2;
-
-
 
     /**
      * Constructor for UnoModel.
@@ -57,8 +55,7 @@ public class UnoModel {
      * Resets the number of rounds and menu selection status.
      * Updates the view to reflect the changes.
      */
-    public void mainMenu()
-    {
+    public void mainMenu() {
         this.state = this.MENU; // Set the game state to main menu
         this.numberOfRounds = -1; // Reset the number of rounds
         this.menuSelection = true; // Set the menu selection status to true
@@ -66,7 +63,7 @@ public class UnoModel {
     }
 
     /** Resets the game when player chooses to return to main menu */
-    public void reset(){
+    public void reset() {
         this.view.update();
         this.state = this.RESET;
         this.view.update();
@@ -83,22 +80,20 @@ public class UnoModel {
         turn = (turn + skip * direction);
     }
 
-
-    public int getState(){
+    public int getState() {
         return this.state;
     }
 
-    public void setState(int x){
+    public void setState(int x) {
         this.state = x;
     }
+
     /**
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players)
-        {
-            if (player.getHand().isEmpty())
-            {
+        for (Player player : players) {
+            if (player.getHand().isEmpty()) {
                 int totalScore = 0;
                 player.setWon();
             }
@@ -113,14 +108,14 @@ public class UnoModel {
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
-        int cardIndex=-1;
-        for (int x = 0; x<this.view.getCards().size();x++){
-            if (card.equals(this.view.getCards().get(x))){
+        int cardIndex = -1;
+        for (int x = 0; x < this.view.getCards().size(); x++) {
+            if (card.equals(this.view.getCards().get(x))) {
                 cardIndex = x;
             }
         }
-        System.out.println("THE CARD LOCATION"+cardIndex);
-        //Player currentPlayer = players.get(playerID); temporary removal -tk
+        System.out.println("THE CARD LOCATION" + cardIndex);
+        // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
@@ -137,20 +132,20 @@ public class UnoModel {
             }
         }
         if (cardToPlace.getValue() == 13) {
-           
+
         }
         if (cardToPlace.getValue() == 14) {
-            
+
         }
         this.view.update();
 
     }
-    private void plusTwoCard() //Avaneesh
+
+    private void plusTwoCard() // Avaneesh
     {
         int totalStack = 2;
         int nextPlayer = (turn + direction);
 
-        
     }
 
     /**
@@ -161,12 +156,11 @@ public class UnoModel {
     public Player getCurrentPlayer() {
         return player;
     }
-    
+
     /**
      * Quits the game.
      */
-    public void quitGame()
-    {
+    public void quitGame() {
         System.exit(0);
     }
 
@@ -176,29 +170,23 @@ public class UnoModel {
      * @param keyCode - the key code of the pressed key.
      */
     public void inputForESC(int keyCode) {
-        if (keyCode == KeyEvent.VK_ESCAPE)
-        {
+        if (keyCode == KeyEvent.VK_ESCAPE) {
             System.out.println("Esc is pressed");
+
             pauseGame();
-            if (pauseCount==2){
-                pauseGame();
-                pauseGame();
-                pauseCount = 0;
-            }
-            
         }
     }
 
-    public void pauseGame()
-    {
-        if (getState() == this.PAUSED){
+    public void pauseGame() {
+        if (getState() == this.PAUSED) {
+            pauseCount++;
+            view.update();
             this.state = this.GAME;
+        } else {
+            this.state = this.PAUSED;
+            pauseCount++;
+            view.update();
         }
-        else{
-        this.state = this.PAUSED;
-        }
-        pauseCount++;
-        view.update();
     }
 
     /**
@@ -223,10 +211,8 @@ public class UnoModel {
     /**
      * Sets the UNO state for the current player.
      */
-    public void setUNOState(int safeState)
-    {
-        if (this.safeState == CALLED && this.safeState == NOT_SAFE)
-        {
+    public void setUNOState(int safeState) {
+        if (this.safeState == CALLED && this.safeState == NOT_SAFE) {
             return;
         }
         this.safeState = safeState;
@@ -241,15 +227,13 @@ public class UnoModel {
         return safeState == SAFE;
     }
 
-
-
     /**
      * Starts the game.
      */
     public void startGame() {
         int numberRounds;
         String nameOfPlayer;
-        //this.createSaveFile();
+        // this.createSaveFile();
         this.state = SELECTION;
         this.menuSelection = false;
         nameOfPlayer = this.view.getPlayerName();
@@ -263,8 +247,7 @@ public class UnoModel {
                 this.player.addCard(this.deck.drawCard(), "TBA");
             }
 
-        } else
-        {
+        } else {
             this.numberOfRounds = -1;
         }
 
@@ -273,44 +256,35 @@ public class UnoModel {
     }
 
     /**
-    * Creates a save file after user starts the game
-    */
-    public void createSaveFile()
-    {
-        try
-        {
+     * Creates a save file after user starts the game
+     */
+    public void createSaveFile() {
+        try {
             File saveFile = null;
-            int fileNumber = 1; //Starts with the first file number
+            int fileNumber = 1; // Starts with the first file number
 
-            while (this.state == 1)
-            {
+            while (this.state == 1) {
                 saveFile = new File("SaveFiles/Save File #" + fileNumber + ".txt");
-                if (!saveFile.exists())
-                {
+                if (!saveFile.exists()) {
                     break;
                 }
-                fileNumber++; //Increments the file number if the file already exists
+                fileNumber++; // Increments the file number if the file already exists
             }
 
-            if (saveFile != null && saveFile.createNewFile())
-            {
+            if (saveFile != null && saveFile.createNewFile()) {
                 System.out.println("File created: " + saveFile.getName());
-            }
-            else
-            {
+            } else {
                 System.out.println("File already exists.");
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
 
-    public void placeStarterCard(){
+    public void placeStarterCard() {
         Card cuCard = this.deck.drawCard();
-        while (cuCard.getValue()>9) //while card is invalid to start with
+        while (cuCard.getValue() > 9) // while card is invalid to start with
         {
             this.deck.addCard(cuCard);
             cuCard = this.deck.drawCard();
@@ -319,11 +293,11 @@ public class UnoModel {
     }
 
     public void raiseCard(Object card) {
-        this.view.updateCard(true,card);
+        this.view.updateCard(true, card);
     }
 
     public void dropCard(Object card) {
-        this.view.updateCard(false,card);
+        this.view.updateCard(false, card);
     }
 
     // ta=ba
@@ -373,33 +347,32 @@ public class UnoModel {
         this.view = gui;
     }
 
-    public void drawFromDeck(){
+    public void drawFromDeck() {
         this.state = this.GAME;
-        Card drawnCard = new Card(-1, -1); //placeholder card
-        if (this.view.getDeckMod()){
+        Card drawnCard = new Card(-1, -1); // placeholder card
+        if (this.view.getDeckMod()) {
             while (drawnCard.getColour() != this.currentlyPlacedCard.getColour()
                     && drawnCard.getValue() != this.currentlyPlacedCard.getValue()
-                    && drawnCard.getColour() != 4)
-                {
-                    this.view.update();
-                    //try {  -please help me
+                    && drawnCard.getColour() != 4) {
+                this.view.update();
+                // try { -please help me
 
-                    drawnCard = this.deck.drawCard();
-                    this.player.addCard(drawnCard, "");
-                    this.view.update();
-                    System.out.println("#: " + drawnCard.getValue());
-                    System.out.println("Colour: "+ drawnCard.getColour());
-                    //Thread.sleep(200);
-                    //} catch (Exception e) {
-                    //    System.out.println("error");
-                    //}
-                }
-                return;
+                drawnCard = this.deck.drawCard();
+                this.player.addCard(drawnCard, "");
+                this.view.update();
+                System.out.println("#: " + drawnCard.getValue());
+                System.out.println("Colour: " + drawnCard.getColour());
+                // Thread.sleep(200);
+                // } catch (Exception e) {
+                // System.out.println("error");
+                // }
+            }
+            return;
         }
         drawnCard = this.deck.drawCard();
         this.player.addCard(drawnCard, "TBA");
-        System.out.println("#: "+drawnCard.getValue());
-        System.out.println("Colour: "+drawnCard.getColour());
+        System.out.println("#: " + drawnCard.getValue());
+        System.out.println("Colour: " + drawnCard.getColour());
         this.view.update();
     }
 
@@ -409,8 +382,7 @@ public class UnoModel {
         this.view.update();
     }
 
-    public Card getCurrentCard()
-    {
+    public Card getCurrentCard() {
         return this.currentlyPlacedCard;
     }
 }
