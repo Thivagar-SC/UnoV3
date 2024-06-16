@@ -296,15 +296,18 @@ public class UnoView extends JPanel {
 
     public void postGameMenu()
     {
+
         this.removeAll();
         pauseMenu.quitGameButton = new JButton("Return to Main Menu");
         restartGame = new JButton("Restart Game");
         quitGame = new JButton("Quit Game");
 
         this.setLayout(new BorderLayout());
-        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(200, 100));
-        this.restartGame.setPreferredSize(new Dimension(200, 100));
-        this.quitGame.setPreferredSize(new Dimension(200, 100));
+        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 100));
+        this.restartGame.setPreferredSize(new Dimension(300, 100));
+        this.restartGame.setFont(new Font("Arial", Font.BOLD, 20));
+        this.quitGame.setPreferredSize(new Dimension(300, 100));
+        this.quitGame.setFont(new Font("Arial", Font.BOLD, 20));
 
         this.setBackground(Color.PINK);
         this.postGame.add(pauseMenu.quitToMainMenuButton);
