@@ -32,7 +32,7 @@ public class UnoView extends JPanel {
   private RoundedJPane currentCard;
   private PauseMenu pauseMenu;
   private File cardFile = new File("Cards");
-  private JRadioButton deckModifier = new JRadioButton("IDK what to call this");
+  private JRadioButton deckModifier = new JRadioButton("Keep Drawing");
 
   /**
    * UnoView
@@ -192,7 +192,6 @@ public class UnoView extends JPanel {
     this.setHand();
     this.removeAll();
     this.setLayout(null);
-    System.out.println("or3g");
 
     ImgComponent img;
 

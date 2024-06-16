@@ -12,11 +12,11 @@ public class Deck {
     private final int numberCards = 80; // 80 number cards including number 0 to 9
     private int topOfDeck;
 
-    private final int colourRed = 0; // ID for colours
-    private final int colourBlue = 1;
-    private final int colourYellow = 2;
-    private final int colourGreen = 3;
-    private final int COLOR_BLACK = 4;
+    private final int COLOUR_RED = 0; // ID for colours
+    private final int COLOUR_BLUE = 1;
+    private final int COLOUR_YELLOW = 2;
+    private final int COLOUR_GREEN = 3;
+    private final int COLOUR_BLACK = 4;
 
     private boolean selectable = true; // Sets selectable to not equal itself
 
@@ -102,7 +102,7 @@ public class Deck {
      */
     public void addPlusFourCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(13, COLOR_BLACK));
+            deck.add(new Card(13, COLOUR_BLACK));
         }
     }
 
@@ -114,7 +114,7 @@ public class Deck {
      */
     public void addWildCards() {
         for (int i = 0; i < 4; i++) {
-            deck.add(new Card(14, COLOR_BLACK));
+            deck.add(new Card(14, COLOUR_BLACK));
         }
     }
 
