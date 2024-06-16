@@ -505,18 +505,18 @@ public class UnoView extends JPanel {
                 this.gameSetup();
                 break;
             case 2:
-                this.postGameMenu();
-//                this.displayCards();
-//                this.displayDeck();
-//                this.displayIcons();
-//                this.displayCurrentCard();
-                // this.displayUnoButtons();
+                this.displayCards();
+                this.displayDeck();
+                this.displayIcons();
+                this.displayCurrentCard();
+                this.displayUnoButtons();
                 break;
             case 3:
                 this.setPauseState();
                 break;
             case 4:
                 model.checkIfRoundIsOver();
+                this.postGameMenu();
                 break;
             case 5:
                 this.removeComp();
