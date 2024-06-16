@@ -292,9 +292,9 @@ public class UnoModel
      */
     public void addTwoFromUnoBlock(Player player)
     {
+        this.setUNOState(SAFE);
         for (int i = 0; i < 2; i++)
         {
-            this.setUNOState(SAFE);
             this.player.addCard(deck.drawCard(), "Didn't call UNO in time");
         }
     }
