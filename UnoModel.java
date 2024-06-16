@@ -307,6 +307,8 @@ public class UnoModel
             this.numberOfRounds = numberRounds;
             player = new Player(0, nameOfPlayer); // player number temporary
             this.deck = new Deck();
+            this.gameResultOutput(); //placed here to test
+
             for (int x = 1; x <= 7; x++)
             {
                 this.player.addCard(this.deck.drawCard(), "TBA");
@@ -485,16 +487,31 @@ public class UnoModel
     /**
      * Writes game result of each round to a save file
      */
-    public void gameResultOutput() throws IOException
+    public void gameResultOutput()
     {
-        output = new PrintWriter(saveFile);
+        try
+        {
+            output = new PrintWriter("SaveFiles/" + saveFile.getName());
 
-        if (player.hasWon())
+                if (player.hasWon())
+                {
+                    output.println("Player's name: " + player.getPlayerName());
+                    output.println("You won!");
+                    //More
+                    output.close();
+                } else
+                {
+                    output.println("Player's name: " + player.getPlayerName());
+                    output.println("You lost!");
+                    //More
+                    output.close();
+                }
+
+        }
+        catch (FileNotFoundException e)
         {
-            output.println("You won!");
-        } else
-        {
-            output.println("You lost!");
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
 
         //Needs to finish the sortByScore method to write the 1st, 2nd, 3rd and 4th place
