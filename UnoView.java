@@ -223,8 +223,6 @@ public class UnoView extends JPanel {
     escListener pauseGame = new escListener(this.model, this);
 
     // set listeners
-
-    System.out.println(this.model.getNumberOfRound());
     for (KeyListener listener : this.getKeyListeners()) {
       this.removeKeyListener(listener);
     }
@@ -258,7 +256,7 @@ public class UnoView extends JPanel {
     
   }
 
-  public void registerStarterControllers(){
+  private void registerStarterControllers(){
     MenuListener mSelect = new MenuListener(this.model);
     this.playGame.addActionListener(mSelect);
     this.startGame.addActionListener(mSelect);// tba
@@ -360,7 +358,7 @@ public class UnoView extends JPanel {
   }
 
   private void setPauseState() {
-    this.pauseMenu.setBounds(0, 0, 1000, 1000);
+    this.pauseMenu.setBounds(0, 0, 2000, 1200);
     // this.pauseMenu.setBackground(Color.BLACK);
     this.pauseMenu.setVisibility();
 
@@ -379,7 +377,7 @@ public class UnoView extends JPanel {
    * 
    * @author Thivagar
    */
-  private void refresh() {
+  public void refresh() {
     this.repaint();
     this.revalidate();
   }

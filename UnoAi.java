@@ -11,12 +11,14 @@ public class UnoAi {
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
     private Card currentCard;
+    private UnoModel model;
 
     // I aint commenting this yet
-    public UnoAi(int playerNumber) {
+    public UnoAi(int playerNumber, UnoModel model) {
         this.playerNumber = playerNumber;
         this.wonRound = false;
         this.cards = new ArrayList<Card>();
+        this.model = model;
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard)

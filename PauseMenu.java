@@ -81,6 +81,6 @@ public class PauseMenu extends JPanel {
     public void paintComponent(Graphics g)
     {
         g.setColor(new Color(144, 143, 143, 204));
-        g.fillRect(0, 0, 1000, 1000);
+        g.fillRect(0, 0, 2000, 1200);
     }
 }

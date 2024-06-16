@@ -21,7 +21,7 @@ public class UnoStartUp
         UnoModel b = new UnoModel();
         UnoView a = new UnoView(b);
         JFrame test = new JFrame();
-        test.setSize(new Dimension(1000, 1000));
+        test.setSize(new Dimension(2000, 1200));
         test.setResizable(false);
         test.setContentPane(a);
         test.setVisible(true);
