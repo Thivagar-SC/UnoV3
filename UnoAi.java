@@ -22,6 +22,10 @@ public class UnoAi {
         this.delayTime = 3000;
     }
 
+    public ArrayList<Card> getHand(){
+        return this.cards;
+    }
+
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
         try {
             Thread.sleep((long) delayTime);
@@ -110,8 +114,8 @@ public class UnoAi {
      * @param card   the card to be added
      * @param source idk what this is
      */
-    private void addCard(Card card, String source) {
-
+    public void addCard(Card card, String source) {
+        this.cards.add(card);
     }
 
     public void getcurrentCard(Card currentCard) {

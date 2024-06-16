@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener; //recode later if time so this is unneeded
 import java.util.*;
+import java.util.List;
 import java.io.*;
 
 /**
@@ -38,6 +39,9 @@ public class UnoView extends JPanel {
     private JTextArea name1 = new JTextArea("Guest");
     private JPanel[] aiIcon = new JPanel[3];
     private JPanel[] aiCards = new JPanel[3];
+   
+    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
+
     private JTextArea[] aiName = new JTextArea[3];
 
     private UnoButton unoButton = new UnoButton();
@@ -134,6 +138,31 @@ public class UnoView extends JPanel {
 
     }
 
+    private void setAiHands(){
+        List<RoundedJPane> hand1 = new ArrayList<RoundedJPane>();
+        List<RoundedJPane> hand2 = new ArrayList<RoundedJPane>();
+        List<RoundedJPane> hand3 = new ArrayList<RoundedJPane>();
+        File caImg = new File(cardFile,"_HiddenCard.png");
+        aiHands.add(0, hand1);
+        aiHands.add(1, hand2);
+        aiHands.add(2, hand3);
+        for (int x = 0; x<this.model.getAi().length;x++){
+            for (int y = 0; y<this.model.getAi()[x].getHand().size();y++){
+                imgComp2 img = new imgComp2(caImg.getAbsolutePath(),70,112);
+                img.setBounds(0,0,70,112);
+                aiHands.get(x).add(new RoundedJPane(60,5));//colour doesnt need to be accurate as player wont see ai cards until placed
+                aiHands.get(x).get(y).add(img);
+                aiHands.get(x).get(y).setBounds(10+y*100,1+x*100,70,112);
+                aiHands.get(x).get(y).setBackground(new Color(0,0,0,0));
+                this.add(aiHands.get(x).get(y));
+            }
+        }
+
+        aiHands.set(0, hand1);
+        aiHands.set(1, hand2);
+        aiHands.set(2, hand3);
+    }
+
     public boolean getDeckMod() {
         return (this.deckModifier.isSelected());
     }
@@ -199,6 +228,7 @@ public class UnoView extends JPanel {
         this.setFocusable(true);
         this.requestFocus();
         this.setHand();
+        this.setAiHands();
         this.removeAll();
         this.setLayout(null);
 
@@ -216,10 +246,11 @@ public class UnoView extends JPanel {
             this.cards.get(x).add(img);
             this.add(cards.get(x));
         }
-
+        this.setAiHands();
         this.registerControllers(); // new card also needs to be clickable
         this.refresh();
     }
+
 
     /**
      * displayIcons

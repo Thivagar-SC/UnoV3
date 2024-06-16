@@ -28,7 +28,7 @@ public class UnoModel {
     private boolean menuSelection;
     private int state; // state of game
     private int safeState;
-    private int pauseCount = 0;
+    private UnoAi[] aiEnemy = new UnoAi[3];
 
     public final int MENU = 0;
     public final int SELECTION = 1;
@@ -102,10 +102,8 @@ public class UnoModel {
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players)
-        {
-            if (player.getHand().isEmpty())
-            {
+        for (Player player : players) {
+            if (player.getHand().isEmpty()) {
                 int totalScore = 0;
                 totalScore += player.getTotalScore();
             }
@@ -121,7 +119,7 @@ public class UnoModel {
      */
     public void placeCard(RoundedJPane card, int playerID) // Avaneesh
     {
-         if (currentlyPlacedCard.getValue() == 13) {
+        if (currentlyPlacedCard.getValue() == 13) {
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 13) {
@@ -148,9 +146,9 @@ public class UnoModel {
             }
         }
 
-        int cardIndex=-1;
-        for (int x = 0; x<this.view.getCards().size();x++){
-            if (card.equals(this.view.getCards().get(x))){
+        int cardIndex = -1;
+        for (int x = 0; x < this.view.getCards().size(); x++) {
+            if (card.equals(this.view.getCards().get(x))) {
                 cardIndex = x;
             }
         }
@@ -171,7 +169,7 @@ public class UnoModel {
             }
         }
         if (cardToPlace.getValue() == 13) {
-            
+
         }
         if (cardToPlace.getValue() == 14) {
 
@@ -224,12 +222,10 @@ public class UnoModel {
      */
     public void pauseGame() {
         if (getState() == this.PAUSED) {
-            pauseCount++;
             view.update();
             this.state = this.GAME;
         } else {
             this.state = this.PAUSED;
-            pauseCount++;
             view.update();
         }
     }
@@ -303,11 +299,17 @@ public class UnoModel {
             this.state = GAME;
             this.numberOfRounds = numberRounds;
             player = new Player(0, nameOfPlayer, this); // player number temporary
+            aiEnemy[0] = new UnoAi(1, this);
+            aiEnemy[1] = new UnoAi(1, this);
+            aiEnemy[2] = new UnoAi(1, this);
             this.deck = new Deck();
             this.gameResultOutput(); // placed here to test
 
             for (int x = 1; x <= 7; x++) {
                 this.player.addCard(this.deck.drawCard(), "TBA");
+                this.aiEnemy[0].addCard(this.deck.drawCard(), "TBA");
+                this.aiEnemy[1].addCard(this.deck.drawCard(), "TBA");
+                this.aiEnemy[2].addCard(this.deck.drawCard(), "TBA");
             }
 
         } else {
@@ -316,6 +318,24 @@ public class UnoModel {
 
         this.placeStarterCard();
         this.view.update();
+    }
+
+    public UnoAi getCurrentAi() {
+        switch (turn) {
+            case 0:
+                return this.aiEnemy[0];
+            case 1:
+                return this.aiEnemy[1];
+
+            case 2:
+                return this.aiEnemy[2];
+
+            case 3:
+                return this.aiEnemy[3];
+
+            default:
+                return null;
+        }
     }
 
     /**
@@ -369,6 +389,10 @@ public class UnoModel {
      */
     public void dropCard(Object card) {
         this.view.updateCard(false, card);
+    }
+
+    public UnoAi[] getAi(){
+        return this.aiEnemy;
     }
 
     // ta=ba
