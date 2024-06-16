@@ -36,7 +36,7 @@ public class UnoAi {
                 } else {
                     for (int y = 0; y < 4; y++) {
                         model.drawCard();
-                        
+
                     }
 
                 }
@@ -65,7 +65,14 @@ public class UnoAi {
                 cards.remove(x);
                 currentCard = cardToPlace;
             }
-
+            if(currentlyPlacedCard.getValue() == 10)
+            {
+                
+            }
+            if(currentlyPlacedCard.getValue() == 12)
+            {
+                model.nextTurn(1);
+            }
             if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
 
@@ -75,6 +82,8 @@ public class UnoAi {
                 int color = (int) Math.round(randomColor);
                 cardToPlace.changeColour(color);
             }
+            
+            
         }
         
     }
