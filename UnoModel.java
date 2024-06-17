@@ -622,7 +622,7 @@ public class UnoModel {
                 output.println("Winner of this game: " + aiWinner);
             }
 
-            output.println("Total scores: " + player.getTotalScore());
+            output.println(" Your total score: " + player.getTotalScore());
 
             for (int i = 0; i < 3; i++)
             {
