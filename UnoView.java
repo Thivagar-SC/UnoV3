@@ -15,8 +15,7 @@ import java.io.*;
 public class UnoView extends JPanel {
     private UnoModel model; // model of game
     private ArrayList<RoundedJPane> cards = new ArrayList<RoundedJPane>(); // display of users cards
-    private int roundCount = 0; //current round
-    private boolean isPaused; //if pause menu is up
+    private int roundCount = 0; // current round
 
     // components for gui
     private JPanel menu = new JPanel();
@@ -36,11 +35,11 @@ public class UnoView extends JPanel {
     private JRadioButton deckModifier = new JRadioButton("Keep Drawing");
     private JPanel icon1 = new JPanel();
     private JTextArea name1 = new JTextArea("Guest");
-    private JPanel[] aiIcon = new JPanel[3];
-    private JPanel[] aiCards = new JPanel[3];
-    private boolean playerTurn = true; // temp
-    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>(); //2d array of all enemy cards 
-    private JTextArea[] aiName = new JTextArea[3];
+    private JPanel[] aiIcon = new JPanel[3]; // 3 robot icons
+    private JPanel[] aiCards = new JPanel[3]; // 3 robot panels holding their cards
+    private boolean playerTurn = true;
+    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>(); // 2d array of all enemy cards
+    private JTextArea[] aiName = new JTextArea[3]; // 3 robot names
     private JButton returnToMainMenu;
     private JButton restartGame;
     private JPanel mods = new JPanel();
@@ -50,11 +49,11 @@ public class UnoView extends JPanel {
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
 
-    //for color changing cards
-    private JButton red = new JButton("Red");
-    private JButton blue = new JButton("Blue");
-    private JButton yellow = new JButton("Yellow");
-    private JButton green = new JButton("Green");
+    // for color changing cards
+    private final JButton RED = new JButton("Red");
+    private final JButton BLUE = new JButton("Blue");
+    private final JButton YELLOW = new JButton("Yellow");
+    private final JButton GREEN = new JButton("Green");
 
     /**
      * UnoView
@@ -77,24 +76,25 @@ public class UnoView extends JPanel {
      * returns players username
      * 
      * @return this.nameInput.getText()
-     *@author Thivagar Kesavan
+     * @author Thivagar Kesavan
      */
     public String getPlayerName() {
         return this.nameInput.getText();
     }
 
-    /**getRounds
+    /**
+     * getRounds
      * returns number of rounds user inputed
      * 
      * @return number
      * @author Thivagar Kesavan
      */
     public int getRounds() {
-        int number = -1;
+        int number = -1; // default return if input is invalid
         try {
-            number = Integer.parseInt(this.roundInput.getText());
+            number = Integer.parseInt(this.roundInput.getText()); // set round count to a number if possible
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("Please enter a valid value");
         }
         return number;
     }
@@ -105,10 +105,12 @@ public class UnoView extends JPanel {
      *
      * @author Thivagar
      */
-    private void mainMenu() { // gui temporary for use
+    private void mainMenu() {
         this.setLayout(new BorderLayout());
-        this.cards.clear();
-        this.removeAll();
+        this.cards.clear(); // reset cards from potential previous rounds
+        this.removeAll(); // remove old gui
+
+        // GUI
         this.startGame.setText("Start");
         this.startGame.setPreferredSize(new Dimension(200, 100));
         this.quitGame.setText("Quit Game");
@@ -154,15 +156,24 @@ public class UnoView extends JPanel {
         numCards.setBorder(BorderFactory.createLineBorder(Color.black));
         this.startingCards.add(actualNum);
         this.mods.add(startingCards);
-        this.actualNum.setFont(new Font("Times New Roman", 1, 30));
+
+        this.actualNum.setFont(new Font("Times New Roman", 1, 30));//Font setting
         this.numCards.setFont(new Font("Times New Roman", 1, 30));
         this.deckModifier.setFont(new Font("Times New Roman", 1, 30));
         this.actualNum.setPreferredSize(new Dimension(400, 50));
-        this.add(gameSelect, BorderLayout.CENTER);
+        this.add(gameSelect, BorderLayout.CENTER);//adding to main panel
         this.add(mods, BorderLayout.SOUTH);
         this.refresh();
     }
 
+    /**
+     * getNumOfStartingCards
+     * returns the number of cards the user wants to start with
+     *
+     * @return Integer.parseInt(this.actualNum.getText())
+     * @return 7 - default
+     * @author Thivagar Kesavan
+     */
     public int getNumOfStartingCards() {
         try {
             return Integer.parseInt(this.actualNum.getText());
@@ -172,12 +183,18 @@ public class UnoView extends JPanel {
         }
     }
 
+    /**
+     * setAiHands
+     * Display all ai cards
+     *
+     * @author Thivagar
+     */
     private void setAiHands() {
-        List<RoundedJPane> hand1 = new ArrayList<RoundedJPane>();
+        List<RoundedJPane> hand1 = new ArrayList<RoundedJPane>();//images of ai cards 
         List<RoundedJPane> hand2 = new ArrayList<RoundedJPane>();
         List<RoundedJPane> hand3 = new ArrayList<RoundedJPane>();
         File caImg = new File(cardFile, "_HiddenCard.png");
-        aiCards[0] = new JPanel();
+        aiCards[0] = new JPanel();  //setting card images
         aiCards[1] = new JPanel();
         aiCards[2] = new JPanel();
         aiCards[0].setLayout(null);
@@ -186,7 +203,7 @@ public class UnoView extends JPanel {
         aiCards[0].setBackground(new Color(0, 0, 0, 0));
         aiCards[1].setBackground(new Color(0, 0, 0, 0));
         aiCards[2].setBackground(new Color(0, 0, 0, 0));
-
+        //setting card locations and adding them
         aiCards[0].setBounds(10, 350, 400, 112);
         this.add(aiCards[0]);
         aiCards[1].setBounds(1400, 350, 400, 112);
@@ -197,8 +214,8 @@ public class UnoView extends JPanel {
         aiHands.add(0, hand1);
         aiHands.add(1, hand2);
         aiHands.add(2, hand3);
-        for (int x = 0; x < this.model.getAi().length; x++) {
-            for (int y = 0; y < this.model.getAi()[x].getHand().size(); y++) {
+        for (int x = 0; x < this.model.getAi().length; x++) {//for each ai
+            for (int y = 0; y < this.model.getAi()[x].getHand().size(); y++) {//for each ai cards
                 imgComp2 img = new imgComp2(caImg.getAbsolutePath(), 70, 112);
                 img.setBounds(0, 0, 70, 112);
                 aiHands.get(x).add(new RoundedJPane(60, 5));// colour doesnt need to be accurate as player wont see ai
@@ -207,17 +224,23 @@ public class UnoView extends JPanel {
                 aiHands.get(x).get(y).setBounds((int) Math.round(
                         (((300) / (this.model.getAi()[x].getHand().size() + 1) * y))
                                 + 20),
-                        0, 70, 112);
+                        0, 70, 112);//formula to determine location of card
                 aiHands.get(x).get(y).setBackground(new Color(0, 0, 0, 0));
                 aiCards[x].add(aiHands.get(x).get(y));
             }
         }
 
-        aiHands.set(0, hand1);
+        aiHands.set(0, hand1); //setting each ai hand
         aiHands.set(1, hand2);
         aiHands.set(2, hand3);
     }
 
+    /**
+     * getDeckMod
+     * returns if the user selected the deck mod
+     * @return this.deckModifier.isSelected()
+     * @author Thivagar
+     */
     public boolean getDeckMod() {
         return (this.deckModifier.isSelected());
     }
@@ -242,7 +265,7 @@ public class UnoView extends JPanel {
      * @author Thivagar
      */
     private void displayDeck() {
-        try {
+        try { //get image of deck and display it
             ImgComponent img = new ImgComponent((new File(cardFile, "_HiddenCard.png")).getCanonicalPath());
             this.deck.setBounds(700, 500, 211, 336);
             img.setBounds(0, 0, 211, 336);
@@ -262,7 +285,7 @@ public class UnoView extends JPanel {
      *
      * @author Thivagar
      */
-    public void displayCurrentCard() {
+    public void displayCurrentCard() { //get icon of current card and display it
         this.currentCard = new RoundedJPane(50, this.model.getCurrentCard().getColour());
         ImgComponent a = new ImgComponent(
                 new File(cardFile, (this.model.getCurrentCard().getValue() + ".png").trim()).getAbsolutePath());
@@ -279,17 +302,17 @@ public class UnoView extends JPanel {
      *
      * @author Thivagar
      */
-    private void displayCards() {
+    private void displayCards() { //displays all user cards
         this.removeAll();
 
-        this.setFocusable(true);
+        this.setFocusable(true); //setup
         this.requestFocus();
         this.setHand();
         this.setAiHands();
         this.removeAll();
         this.setLayout(null);
 
-        ImgComponent img;
+        ImgComponent img; //img of card
 
         for (int x = 0; x < this.model.getCurrentPlayer().getHand().size(); x++) { // for each card
             Card currentCard = this.model.getCurrentPlayer().getHand().get(x);
@@ -297,8 +320,8 @@ public class UnoView extends JPanel {
                     (int) Math.round(
                             (((this.getWidth() - 200) / (this.model.getCurrentPlayer().getHand().size() + 1) * x))
                                     / 1.25 + 250),
-                    850, 211, 336);
-            img = new ImgComponent(new File(cardFile, (currentCard.getValue() + ".png".trim())).getAbsolutePath());
+                    850, 211, 336);//determine location of card dependent on number of cards
+            img = new ImgComponent(new File(cardFile, (currentCard.getValue() + ".png".trim())).getAbsolutePath());//get link to image
             img.setBounds(0, 0, 211, 336);
             this.cards.get(x).add(img);
             this.add(cards.get(x));
@@ -312,12 +335,12 @@ public class UnoView extends JPanel {
 
     /**
      * displayIcons
-     * displays icons of players
+     * displays icons of AI
      *
      * @author Thivagar
      */
-    public void displayIcons() {
-        File ply1 = new File(cardFile, "userIcon.png");
+    public void displayIcons() { 
+        File ply1 = new File(cardFile, "userIcon.png"); //setup
         imgComp2 user = new imgComp2(ply1.getAbsolutePath(), 100, 100);
         File ai1 = new File(cardFile, "aiIcon.png");
         imgComp2 aiImage = new imgComp2(ai1.getAbsolutePath(), 100, 100);
@@ -339,16 +362,15 @@ public class UnoView extends JPanel {
         this.name1.setOpaque(false);
         this.name1.setText(this.nameInput.getText());
         this.name1.setFont(new Font("Times New Roman", 1, 30));
-        if (this.nameInput.getText().isEmpty()) {
+        if (this.nameInput.getText().isEmpty()) { //if user doesnt input a username
             this.name1.setText("GUEST");
         }
         this.name1.setEditable(false);
         this.add(icon1);
         this.add(name1);
 
-        // System.out.println(aiImage.getAbsol);
         this.aiIcon[0].add(aiImage);
-        this.aiIcon[1].add(aiImage2);
+        this.aiIcon[1].add(aiImage2); 
         this.aiIcon[2].add(aiImage3);
         this.aiIcon[0].setOpaque(false);
         this.aiIcon[1].setOpaque(false);
@@ -357,21 +379,21 @@ public class UnoView extends JPanel {
         this.aiName[0].setBackground(new Color(0, 0, 0, 0));
         this.aiName[1].setBackground(new Color(0, 0, 0, 0));
         this.aiName[2].setBackground(new Color(0, 0, 0, 0));
-        this.aiName[0].setFont(new Font("Times New Roman", 1, 30));
+        this.aiName[0].setFont(new Font("Times New Roman", 1, 30));//set fonts
         this.aiName[0].setEditable(false);
         this.aiName[1].setFont(new Font("Times New Roman", 1, 30));
         this.aiName[1].setEditable(false);
         this.aiName[2].setFont(new Font("Times New Roman", 1, 30));
         this.aiName[2].setEditable(false);
 
-        this.aiIcon[0].setBounds(1600, 200, 100, 100);
+        this.aiIcon[0].setBounds(1600, 200, 100, 100); //set location/size
         this.aiIcon[1].setBounds(50, 200, 100, 100);
         this.aiIcon[2].setBounds(850, 10, 100, 100);
         this.aiName[0].setBounds(1700, 250, 100, 100);
         this.aiName[1].setBounds(950, 50, 100, 150);
         this.aiName[2].setBounds(150, 250, 100, 100);
 
-        this.add(aiIcon[0]);
+        this.add(aiIcon[0]); //add to gui
         this.add(aiName[0]);
         this.add(aiIcon[1]);
         this.add(aiName[1]);
@@ -379,6 +401,12 @@ public class UnoView extends JPanel {
         this.add(aiName[2]);
     }
 
+    /**
+     * postGameMenu
+     * displays the post game menu after all rounds have been played
+     *
+     * @author Tanner
+     */
     public void postGameMenu() {
         this.removeAll();
         pauseMenu.quitGameButton = new JButton("Return to Main Menu");
@@ -401,9 +429,10 @@ public class UnoView extends JPanel {
     }
 
     /**
-     * Displays Uno and Uno Block buttons
+     * displayUnoButtons
+     * displays uno button
      *
-     * someone do this because idk what to do here
+     * @author Tanner
      */
     public void displayUnoButtons() {
         this.add(this.unoButton);
@@ -424,7 +453,7 @@ public class UnoView extends JPanel {
         PauseMenuListener pauseGame = new PauseMenuListener(this.model, this);
         System.out.println("REGISTERED");
         // set listeners
-        for (KeyListener listener : this.getKeyListeners()) {
+        for (KeyListener listener : this.getKeyListeners()) { //remove previous listeners to prevent double counting
             this.removeKeyListener(listener);
         }
         for (ActionListener listener : this.pauseMenu.resumeButton.getActionListeners()) {
@@ -433,12 +462,13 @@ public class UnoView extends JPanel {
             this.pauseMenu.resumeButton.removeActionListener(listener);
 
         }
+
         if (this.model.getState() == model.GAME) { // if rounds have been chosen
             System.out.println("REGISTERED2.0");
 
             for (MouseListener listener : this.deck.getMouseListeners()) { // remove prior listeners
                 this.deck.removeMouseListener(listener);
-            } // SHOULD CHANGE LATER
+            } 
 
             for (int x = 0; x < cards.size(); x++) { // for each card
                 for (MouseListener listener : this.cards.get(x).getMouseListeners()) { // remove prior listeners
@@ -447,6 +477,7 @@ public class UnoView extends JPanel {
                 this.cards.get(x).addMouseListener(setup);
             }
 
+            //add listeners that quantity is always constant
             this.deck.addMouseListener(addCard);
             this.addKeyListener(pauseGame);
 
@@ -459,7 +490,10 @@ public class UnoView extends JPanel {
     }
 
     /**
-     * Assigns a controller to the buttons in main menu and game selection
+     * registerStarterControllers
+     * registers controllers at start of game
+     *
+     * @author Thivagar
      */
     private void registerStarterControllers() {
         MenuListener mSelect = new MenuListener(this.model);
@@ -469,7 +503,10 @@ public class UnoView extends JPanel {
     }
 
     /**
-     * Assigns a controller to the buttons in post game menu
+     * registerPostGameControllers
+     * registers controllers after game has finished
+     *
+     * @author Tanner
      */
     private void registerPostGameControllers() {
         MenuListener mSelect = new MenuListener(this.model);
@@ -485,6 +522,7 @@ public class UnoView extends JPanel {
      * returns all the card visuals
      *
      * @author Thivagar
+     * @return this.cards
      */
     public ArrayList<RoundedJPane> getCards() {
         return this.cards;
@@ -520,7 +558,7 @@ public class UnoView extends JPanel {
         this.refresh();
     }
 
-    /**
+    /**updateCard
      * raises or lowers selected card depends on mouse position
      *
      * @author Thivagar
@@ -533,30 +571,46 @@ public class UnoView extends JPanel {
         }
     }
 
+    /**nextRound
+     * sets next round
+     *
+     * @author Thivagar
+     */
     public void nextRound() {
         this.roundCount++;
-        JTextField display = new JTextField("Round " + (this.roundCount + 1) + " Starts Now!");
         // Timer timer = new Timer();
         if (roundCount == this.model.getNumberOfRound()) {
             this.model.reset();
         } else {
             this.removeAll();
             this.model.startGame();
-            display.setBounds(400, 300, 1000, 200);
-            display.setBackground(new Color(0, 0, 0, 0));
-            display.setEditable(false);
-            display.setBorder(BorderFactory.createEmptyBorder());
-            this.model.setState(this.model.GAME);
-            display.setFont(new Font("Times New Roman", 1, 30));
             this.model.placeStarterCard();
             this.update();
-            this.add(display);
             this.refresh();
         }
     }
 
-    /**
+    /**displayRoundCount
+     * displays current round
+     *
+     * @author Thivagar
+     */
+    public void displayRoundCount() {
+        JTextField display = new JTextField("Round " + (this.roundCount + 1));
+
+        display.setBounds(400, 300, 1000, 200);
+        display.setBackground(new Color(0, 0, 0, 0));
+        display.setEditable(false);
+        display.setBorder(BorderFactory.createEmptyBorder());
+        display.setFont(new Font("Times New Roman", 1, 30));
+        this.add(display);
+
+    }
+
+    /**removeComp
      * Removes all components when returning to main menu
+     * 
+     * @author Thivagar 
      */
     private void removeComp() {
         System.out.println("RESET OK");
@@ -588,11 +642,7 @@ public class UnoView extends JPanel {
                 this.displayDeck();
                 this.displayCurrentCard();
                 this.displayIcons();
-                this.displayUnoButtons();
-                System.out.println("TESTTT3");
-                //if (this.model.checkIfRoundIsOver()){
-
-                //}
+                this.displayRoundCount();
                 break;
             case 3:
                 this.setPauseState();
@@ -621,35 +671,53 @@ public class UnoView extends JPanel {
         this.refresh();
     }
 
+    /**
+     * displayColourSelectors
+     * display buttons for wild cards
+     *
+     * @author Thivagar
+     */
     public void displayColourSelectors() {
 
-        red.setBackground(Color.red);
-        blue.setBackground(Color.blue);
-        yellow.setBackground(Color.yellow);
-        green.setBackground(Color.green);
+        RED.setBackground(Color.red);
+        BLUE.setBackground(Color.blue);
+        YELLOW.setBackground(Color.yellow);
+        GREEN.setBackground(Color.green);
 
-        red.setBounds(300, 300, 100, 50);
-        blue.setBounds(500, 300, 100, 50);
-        yellow.setBounds(300, 500, 100, 50);
-        green.setBounds(500, 500, 100, 50);
+        RED.setBounds(300, 300, 100, 50);
+        BLUE.setBounds(500, 300, 100, 50);
+        YELLOW.setBounds(300, 500, 100, 50);
+        GREEN.setBounds(500, 500, 100, 50);
 
-        this.add(red);
-        this.add(green);
-        this.add(yellow);
-        this.add(blue);
+        this.add(RED);
+        this.add(GREEN);
+        this.add(YELLOW);
+        this.add(BLUE);
         this.registerColourControllers();
         this.refresh();
 
     }
 
+/**
+     * registerColourControllers
+     * register controllers for color selection
+     *
+     * @author Thivagar
+     */    
     public void registerColourControllers() {
         colourListener cSelect = new colourListener(this.model);
-        this.red.addActionListener(cSelect);
-        this.blue.addActionListener(cSelect);// tba
-        this.yellow.addActionListener(cSelect);
-        this.green.addActionListener(cSelect);
+        this.RED.addActionListener(cSelect);
+        this.BLUE.addActionListener(cSelect);// tba
+        this.YELLOW.addActionListener(cSelect);
+        this.GREEN.addActionListener(cSelect);
     }
 
+    /**
+     * removeAccess
+     * remove ability for user to make a move
+     *
+     * @author Thivagar
+     */  
     public void removeAccess() {
         for (JComponent comp : this.aiCards) {
             comp.setEnabled(false);
@@ -659,6 +727,12 @@ public class UnoView extends JPanel {
 
     }
 
+    /**
+     * addAccess
+     * add ability for user to make a move
+     *
+     * @author Thivagar
+     */ 
     public void addAccess() {
         for (JComponent comp : this.aiCards) {
             comp.setEnabled(true);
@@ -668,10 +742,11 @@ public class UnoView extends JPanel {
     }
 
     /**
-     * Pauses the game and displays the pause menu
+     * setPauseState
+     * sets if pause menu is visible
      *
-     *
-     */
+     * @author Thivagar
+     */ 
     private void setPauseState() {
 
         this.pauseMenu.setBounds(0, 0, 1920, 1080);

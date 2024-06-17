@@ -24,17 +24,6 @@ public class UnoStartUp {
         test.setContentPane(a);
         test.setVisible(true);
 
-        // Code from
-        // https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
-        }
+        
     }
 }
