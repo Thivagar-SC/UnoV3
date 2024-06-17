@@ -391,7 +391,7 @@ public class UnoModel {
             this.deck = new Deck();
             this.gameResultOutput(); // placed here to test
 
-            for (int x = 1; x <= 7; x++) {
+            for (int x = 1; x <= this.view.getNumOfStartingCards(); x++) {
                 this.player.addCard(this.deck.drawCard(), "TBA");
                 this.aiEnemy[0].addCard(this.deck.drawCard(), "TBA");
                 this.aiEnemy[1].addCard(this.deck.drawCard(), "TBA");

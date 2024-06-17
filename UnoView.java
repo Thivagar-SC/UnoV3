@@ -50,7 +50,10 @@ public class UnoView extends JPanel {
     private JTextArea[] aiName = new JTextArea[3];
     private JButton returnToMainMenu;
     private JButton restartGame;
-
+    private JPanel mods = new JPanel();
+    private JPanel startingCards = new JPanel();
+    private JTextArea numCards = new JTextArea("Number of Starting Cards: ");
+    private JTextArea actualNum = new JTextArea("7");
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
 
@@ -110,7 +113,6 @@ public class UnoView extends JPanel {
         this.startGame.setPreferredSize(new Dimension(200, 100));
         this.quitGame.setText("Quit Game");
         this.quitGame.setPreferredSize(new Dimension(200, 100));
-
         this.setBackground(Color.PINK);
         this.menu.add(this.startGame);
         this.menu.add(this.quitGame);
@@ -144,10 +146,28 @@ public class UnoView extends JPanel {
         this.gameSelect.add(playerName);
         this.gameSelect.add(nameInput);
         this.gameSelect.add(playGame);
+        this.mods.setBorder(BorderFactory.createTitledBorder("Game Modifications"));
+        this.mods.setPreferredSize(new Dimension(200,600));
+        this.mods.setLayout(new BoxLayout(this.mods, BoxLayout.Y_AXIS));
+        this.mods.add(deckModifier);
+        this.startingCards.add(numCards);
+        numCards.setEditable(false);
+        numCards.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.startingCards.add(actualNum);
+        this.mods.add(startingCards);
         this.add(gameSelect, BorderLayout.CENTER);
-        this.add(deckModifier, BorderLayout.SOUTH);
+        this.add(mods, BorderLayout.SOUTH);
         this.refresh();
 
+    }
+
+    public int getNumOfStartingCards(){
+        try {
+            return Integer.parseInt(this.actualNum.getText());
+
+        } catch (Exception e) {
+            return 7;
+        }
     }
 
     private void setAiHands(){
