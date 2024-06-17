@@ -8,20 +8,12 @@ import java.io.*;
  */
 public class UnoModel {
     private UnoView view;
-    // private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
-    private String gameState;
     private int turn = 0;
     private Player player;
-    // private UnoAi ai;
     private Deck deck;
-    private boolean safe;
     private int numberOfRounds;
-    private List<Card> recentCards;
     private List<Card> cardsInHand;
-    private List<Integer> points;
-    private List<String> winners;
-    private List<Player> players;
     public File saveFile;
     private int direction = 1;
     // GUI variables
@@ -622,7 +614,7 @@ public class UnoModel {
                 output.println("Winner of this game: " + aiWinner);
             }
 
-            output.println(" Your total score: " + player.getTotalScore());
+            output.println("Your total score: " + player.getTotalScore());
 
             for (int i = 0; i < 3; i++)
             {
