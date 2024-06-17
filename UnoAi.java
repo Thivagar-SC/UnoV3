@@ -34,38 +34,38 @@ public class UnoAi {
         }
         */
         if (currentlyPlacedCard.getValue() == 13) {
-            for (int x = 0; x < cards.size(); x++) {
+           /**  for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 13) {
                     cards.remove(x);
                     currentCard = cardCheck;
                     model.nextTurn(1);
                     return;
-                } else {
+                } else {*/
                     for (int y = 0; y < 4; y++) {
                         model.drawCard();
 
                     }
 
-                }
-            }
+              //  }
+           // }
         }
     
         if (currentlyPlacedCard.getValue() == 11) {
-            for (int x = 0; x < cards.size(); x++) {
+         /**    for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 11) {
                     cards.remove(x);
                     currentCard = cardCheck;
                     model.nextTurn(1);
                     return;
-                } else {
+                } else {  */
                     for (int y = 0; y < 2; y++) {
                         model.drawCard();
                     }
 
-                }
-            }
+                //}
+          //  }
         }
       
     boolean placeCard = false;
@@ -87,10 +87,7 @@ public class UnoAi {
             {
                 return;
             }
-            if(currentlyPlacedCard.getValue() == 11)
-            {
-
-            }
+           
             if(currentlyPlacedCard.getValue() == 12)
             {
                 model.nextTurn(1);
@@ -128,20 +125,7 @@ public class UnoAi {
         return totalScore;
     }
 
-    /**
-     * Hits UNO when the AI's hand has one card
-     */
-    public void hitUNO() {
-           
-}
-
-    /**
-     * Hits a block when to counter UNO other players
-     */
-    public void hitBlock() {
-
-    }
-
+   
     /**
      * Adds a card to the AI's hand
      *
