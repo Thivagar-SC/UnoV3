@@ -205,7 +205,6 @@ public class UnoModel {
         }
         System.out.println("THE CARD LOCATION" + cardIndex);
         
-        // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getValue() == 13) {
             this.currentlyPlacedCard = cardToPlace;
