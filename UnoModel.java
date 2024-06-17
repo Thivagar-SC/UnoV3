@@ -78,7 +78,13 @@ public class UnoModel {
      */
     public void nextTurn(int skip) // Avaneesh
     {
-        turn = (turn + skip * direction);
+        turn = (turn + (skip+1) * direction);
+        if (turn == 4){
+            turn = 0;
+        }
+        if (turn == -1){
+            turn = 4;
+        }
     }
 
     /**
@@ -259,6 +265,18 @@ public class UnoModel {
             return;
         }
         this.safeState = safeState;
+    }
+
+    public void nextUser(){
+        //cause movement
+        aiEnemy[turn].placeCard(-1, this.currentlyPlacedCard);
+
+        int skipCount = 0;
+
+        if (this.getCurrentCard().getValue()==12){
+            skipCount++;
+        }
+        this.nextTurn(skipCount);
     }
 
     /**
