@@ -7,9 +7,10 @@
  * @since 2024/06/12
  */
 public class Card {
-    private final int cardFaceValue; // value of card
+    private int cardFaceValue; // value of card
     private int colour; // color of card
     private final int scoreValue; // score value of cards
+    
 
     /**
      * Card
@@ -74,6 +75,9 @@ public class Card {
      */
     public void changeColour(int newColour) {
         colour = newColour;
+    }
+    public void changeValue(int newValue){
+         cardFaceValue = newValue;
     }
 
 }
