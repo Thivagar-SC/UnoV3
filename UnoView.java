@@ -45,7 +45,7 @@ public class UnoView extends JPanel {
     private JPanel[] aiIcon = new JPanel[3];
     private JPanel[] aiCards = new JPanel[3];
     private boolean playerTurn = true; //temp
-    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
+    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();
     private int roundCount = 0;
     private JTextArea[] aiName = new JTextArea[3];
     private JButton returnToMainMenu;
@@ -320,7 +320,7 @@ public class UnoView extends JPanel {
         this.name1.setOpaque(false);
         this.name1.setText(this.nameInput.getText());
         this.name1.setFont(new Font("Times New Roman", 1, 30));
-        if (this.nameInput.getText().equals("")) {
+        if (this.nameInput.getText().isEmpty()) {
             this.name1.setText("GUEST");
         }
         this.name1.setEditable(false);
@@ -362,7 +362,6 @@ public class UnoView extends JPanel {
 
     public void postGameMenu()
     {
-
         this.removeAll();
         pauseMenu.quitGameButton = new JButton("Return to Main Menu");
         restartGame = new JButton("Restart Game");
@@ -404,7 +403,7 @@ public class UnoView extends JPanel {
         // Variable Declaration
         CardSelector setup = new CardSelector(this.model); // Setup
         deckListener addCard = new deckListener(this.model);
-        escListener pauseGame = new escListener(this.model, this);
+        PauseMenuListener pauseGame = new PauseMenuListener(this.model, this);
         System.out.println("REGISTERED");
         // set listeners
         for (KeyListener listener : this.getKeyListeners()) {
@@ -456,7 +455,8 @@ public class UnoView extends JPanel {
      */
     private void registerPostGameControllers() {
         MenuListener mSelect = new MenuListener(this.model);
-        escListener pMenu = new escListener(this.model, this);
+        PauseMenuListener pMenu = new PauseMenuListener(this.model, this);
+
         this.returnToMainMenu.addActionListener(pMenu);
         this.restartGame.addActionListener(mSelect);// tba
         this.quitGame.addActionListener(mSelect);
@@ -564,7 +564,7 @@ public class UnoView extends JPanel {
                 this.gameSetup();
                 break;
             case 2:
-                if (this.playerTurn == false){
+                if (!this.playerTurn){
                 this.addAccess();
                 }
                 this.displayCards();
@@ -573,6 +573,7 @@ public class UnoView extends JPanel {
                 this.displayIcons();
                 this.displayUnoButtons();
                 System.out.println("TESTTT3");
+                this.postGameMenu();
                 break;
             case 3:
                 this.setPauseState();
@@ -590,8 +591,8 @@ public class UnoView extends JPanel {
                 this.displayCurrentCard();
                 this.displayIcons();
                 this.displayUnoButtons();
-                this.removeAccess();
-               this.model.nextUser();
+                this.addAccess();
+                this.model.nextUser();
                 break;
 
             default:
@@ -644,7 +645,7 @@ public class UnoView extends JPanel {
             comp.setEnabled(true);
         }
             deck.setEnabled(true);
-    
+            playerTurn = false;
         }   
 
     /**
