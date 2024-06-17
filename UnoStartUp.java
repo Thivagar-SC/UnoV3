@@ -23,7 +23,5 @@ public class UnoStartUp {
         test.setResizable(false);
         test.setContentPane(a);
         test.setVisible(true);
-
-        
     }
 }

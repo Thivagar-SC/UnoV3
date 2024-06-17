@@ -43,22 +43,29 @@ public class UnoButton extends JButton implements MouseListener {
         System.out.println("Uno CALLED!");
         model.setUNOState(model.CALLED);
     }
-/**
+
+    /**
+ * Not set
  * @author Tanner
+ * @param e Not set
  */
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
 /**
+ * Not set
  * @author Tanner
+ * @param e Not set
  */
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 /**
+ * Not set
  * @author Tanner
+ * @param e Not set
  */
     @Override
     public void mouseEntered(MouseEvent e) {

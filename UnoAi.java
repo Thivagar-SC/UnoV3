@@ -12,11 +12,7 @@ public class UnoAi {
     private int playerNumber; // value for player order
     private Card currentCard; //the current card
     private UnoModel model; //
-/**
- * @author Avaneesh
- * @param playerNumber
- * @param model
- */
+
 /**
  * UnoAi
  * UnoAi constructor
