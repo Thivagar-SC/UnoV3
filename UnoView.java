@@ -45,14 +45,22 @@ public class UnoView extends JPanel {
     private JPanel[] aiIcon = new JPanel[3];
     private JPanel[] aiCards = new JPanel[3];
     private boolean playerTurn = true; //temp
-    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
+    private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();
     private int roundCount = 0;
     private JTextArea[] aiName = new JTextArea[3];
     private JButton returnToMainMenu;
     private JButton restartGame;
-
+    private JPanel mods = new JPanel();
+    private JPanel startingCards = new JPanel();
+    private JTextArea numCards = new JTextArea("Number of Starting Cards: ");
+    private JTextArea actualNum = new JTextArea("7");
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
+
+    private JButton red = new JButton("Red");
+        private JButton blue = new JButton("Blue");
+        private JButton yellow = new JButton("Yellow");
+        private JButton green = new JButton("Green");
 
     /**
      * UnoView
@@ -105,7 +113,6 @@ public class UnoView extends JPanel {
         this.startGame.setPreferredSize(new Dimension(200, 100));
         this.quitGame.setText("Quit Game");
         this.quitGame.setPreferredSize(new Dimension(200, 100));
-
         this.setBackground(Color.PINK);
         this.menu.add(this.startGame);
         this.menu.add(this.quitGame);
@@ -139,10 +146,32 @@ public class UnoView extends JPanel {
         this.gameSelect.add(playerName);
         this.gameSelect.add(nameInput);
         this.gameSelect.add(playGame);
-        this.add(gameSelect, BorderLayout.CENTER);
-        this.add(deckModifier, BorderLayout.SOUTH);
+        this.mods.setBorder(BorderFactory.createTitledBorder("Game Modifications"));
+        this.mods.setPreferredSize(new Dimension(200,600));
+        this.mods.setLayout(new BoxLayout(this.mods, BoxLayout.Y_AXIS));
+        this.mods.add(deckModifier);
+        this.startingCards.add(numCards);
+        numCards.setEditable(false);
+        numCards.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.startingCards.add(actualNum);
+        this.mods.add(startingCards);
+        this.actualNum.setFont(new Font("Times New Roman",1,30));
+        this.numCards.setFont(new Font("Times New Roman",1,30));
+        this.deckModifier.setFont(new Font("Times New Roman",1,30));
+        this.actualNum.setPreferredSize(new Dimension(400,50));
+        this.add(gameSelect, BorderLayout.CENTER);  
+        this.add(mods, BorderLayout.SOUTH);
         this.refresh();
 
+    }
+
+    public int getNumOfStartingCards(){
+        try {
+            return Integer.parseInt(this.actualNum.getText());
+
+        } catch (Exception e) {
+            return 7;
+        }
     }
 
     private void setAiHands(){
@@ -315,7 +344,7 @@ public class UnoView extends JPanel {
         this.name1.setOpaque(false);
         this.name1.setText(this.nameInput.getText());
         this.name1.setFont(new Font("Times New Roman", 1, 30));
-        if (this.nameInput.getText().equals("")) {
+        if (this.nameInput.getText().isEmpty()) {
             this.name1.setText("GUEST");
         }
         this.name1.setEditable(false);
@@ -357,7 +386,6 @@ public class UnoView extends JPanel {
 
     public void postGameMenu()
     {
-
         this.removeAll();
         pauseMenu.quitGameButton = new JButton("Return to Main Menu");
         restartGame = new JButton("Restart Game");
@@ -399,7 +427,7 @@ public class UnoView extends JPanel {
         // Variable Declaration
         CardSelector setup = new CardSelector(this.model); // Setup
         deckListener addCard = new deckListener(this.model);
-        escListener pauseGame = new escListener(this.model, this);
+        PauseMenuListener pauseGame = new PauseMenuListener(this.model, this);
         System.out.println("REGISTERED");
         // set listeners
         for (KeyListener listener : this.getKeyListeners()) {
@@ -451,7 +479,8 @@ public class UnoView extends JPanel {
      */
     private void registerPostGameControllers() {
         MenuListener mSelect = new MenuListener(this.model);
-        escListener pMenu = new escListener(this.model, this);
+        PauseMenuListener pMenu = new PauseMenuListener(this.model, this);
+
         this.returnToMainMenu.addActionListener(pMenu);
         this.restartGame.addActionListener(mSelect);// tba
         this.quitGame.addActionListener(mSelect);
@@ -559,7 +588,7 @@ public class UnoView extends JPanel {
                 this.gameSetup();
                 break;
             case 2:
-                if (this.playerTurn == false){
+                if (!this.playerTurn){
                 this.addAccess();
                 }
                 this.displayCards();
@@ -585,8 +614,8 @@ public class UnoView extends JPanel {
                 this.displayCurrentCard();
                 this.displayIcons();
                 this.displayUnoButtons();
-                this.removeAccess();
-               this.model.nextUser();
+                this.addAccess();
+                this.model.nextUser();
                 break;
 
             default:
@@ -594,6 +623,35 @@ public class UnoView extends JPanel {
         }
 
         this.refresh();
+    }
+
+    public void displayColourSelectors(){
+
+        red.setBackground(Color.red);
+        blue.setBackground(Color.blue);
+        yellow.setBackground(Color.yellow);
+        green.setBackground(Color.green);
+
+        red.setBounds(300,300,100,50);
+        blue.setBounds(500,300,100,50);
+        yellow.setBounds(300,500,100,50);
+        green.setBounds(500,500,100,50);
+
+        this.add(red);
+        this.add(green);
+        this.add(yellow);
+        this.add(blue);
+        this.registerColourControllers();
+        this.refresh();
+
+    }
+
+    public void registerColourControllers(){
+        colourListener cSelect = new colourListener(this.model);
+        this.red.addActionListener(cSelect);
+        this.blue.addActionListener(cSelect);// tba
+        this.yellow.addActionListener(cSelect);
+        this.green.addActionListener(cSelect);
     }
 
     public void removeAccess(){
@@ -610,7 +668,7 @@ public class UnoView extends JPanel {
             comp.setEnabled(true);
         }
             deck.setEnabled(true);
-    
+            playerTurn = false;
         }   
 
     /**

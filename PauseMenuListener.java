@@ -1,11 +1,18 @@
 import java.awt.event.*;
 
-public class escListener implements KeyListener, ActionListener {
+/**
+ * escListener
+ * Detects whether user hits escape key to open pause menu
+ *
+ * @author Tanner
+ * @since 2024/06/12
+ */
+public class PauseMenuListener implements KeyListener, ActionListener {
     private UnoView view;
     private UnoModel model;
     private PauseMenu pauseMenu;
 
-    public escListener(UnoModel model, UnoView view) {
+    public PauseMenuListener (UnoModel model, UnoView view) {
         this.model = model;
         this.view = view;
     }

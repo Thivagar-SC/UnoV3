@@ -18,7 +18,7 @@ public class UnoStartUp {
     public static void main(String[] args) {
         UnoModel b = new UnoModel();
         UnoView a = new UnoView(b);
-        JFrame test = new JFrame();
+        JFrame test = new JFrame("UNO");
         test.setSize(new Dimension(1920, 1080));
         test.setResizable(false);
         test.setContentPane(a);

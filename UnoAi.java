@@ -66,7 +66,8 @@ public class UnoAi {
         for (int x = 0; x < cards.size(); x++ ) {
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
-                    || cardToPlace.getValue() == currentlyPlacedCard.getValue() || cardToPlace.getValue() == 13
+                    || cardToPlace.getValue() == currentlyPlacedCard.getValue()
+                    || cardToPlace.getValue() == 13
                     || cardToPlace.getValue() == 14) {
                 cards.remove(x);
                 currentCard = cardToPlace;

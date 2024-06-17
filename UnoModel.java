@@ -133,6 +133,12 @@ public class UnoModel {
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
+            if (turn == 0){
+                cardsInHand = this.player.getHand();
+            }
+            else{
+                cardsInHand = this.aiEnemy[turn].getHand();
+            }
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 13) {
@@ -146,6 +152,13 @@ public class UnoModel {
             }
         }
         if (currentlyPlacedCard.getValue() == 11) {
+            if (turn == 0){
+                cardsInHand = this.player.getHand();
+            }
+            else{
+                cardsInHand = this.aiEnemy[turn].getHand();
+            }
+            this.view.update(); //possibly temp
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 11) {
@@ -159,7 +172,8 @@ public class UnoModel {
             }
         }
 
-        if (turn == 0){
+        if (turn == 0)
+        {
             System.out.println("blah");
         int cardIndex = -1;
         for (int x = 0; x < this.view.getCards().size(); x++) {
@@ -171,6 +185,18 @@ public class UnoModel {
         
         // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
+        if (cardToPlace.getValue() == 13) {
+            this.currentlyPlacedCard = cardToPlace;
+            this.player.getHand().remove(cardIndex);
+            this.view.displayColourSelectors();
+            return;
+        }
+        if (cardToPlace.getValue() == 14) {
+            this.currentlyPlacedCard = cardToPlace;
+            this.player.getHand().remove(cardIndex);
+            this.view.displayColourSelectors();
+            return;
+        }
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
             this.player.getHand().remove(cardIndex);
@@ -183,12 +209,6 @@ public class UnoModel {
             } else if (cardToPlace.getValue() == 12) {
                 nextTurn(2);
             }
-        }
-        if (cardToPlace.getValue() == 13) {
-            
-        }
-        if (cardToPlace.getValue() == 14) {
-
         }
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()){
@@ -266,6 +286,10 @@ public class UnoModel {
     public void changeColour(int colour) 
     {
         currentlyPlacedCard.changeColour(colour);
+        this.view.update();
+        //this.nextTurn(0);
+        //this.state = this.AI_TURN;
+        //this.view.update();
     }
 
     /**
@@ -368,7 +392,7 @@ public class UnoModel {
             this.deck = new Deck();
             this.gameResultOutput(); // placed here to test
 
-            for (int x = 1; x <= 7; x++) {
+            for (int x = 1; x <= this.view.getNumOfStartingCards(); x++) {
                 this.player.addCard(this.deck.drawCard(), "TBA");
                 this.aiEnemy[0].addCard(this.deck.drawCard(), "TBA");
                 this.aiEnemy[1].addCard(this.deck.drawCard(), "TBA");
