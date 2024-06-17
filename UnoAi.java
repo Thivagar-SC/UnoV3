@@ -6,11 +6,10 @@ import java.util.ArrayList;
 // * @since 2024/06/12
 // */
 public class UnoAi {
-    private double delayTime; // delays the time of the AI's actions
     private ArrayList<Card> cards; // list of cards ai has
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
-    private Card currentCard; 
+    private Card currentCard;
     private UnoModel model;
 
     // I aint commenting this yet
@@ -19,77 +18,51 @@ public class UnoAi {
         this.wonRound = false;
         this.cards = new ArrayList<>();
         this.model = model;
-        this.delayTime = 3000;
     }
 
-    public ArrayList<Card> getHand(){
+    public ArrayList<Card> getHand() {
         return this.cards;
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
-     /**   try {
-            Thread.sleep((long) delayTime);
-        } catch (InterruptedException e) {
-        System.out.println("delay");
+        if (cards.size() == 0) {
+            this.wonRound = true;
+            return;
         }
-        */
+
         if (currentlyPlacedCard.getValue() == 13) {
-           /**  for (int x = 0; x < cards.size(); x++) {
-                Card cardCheck = cards.get(x);
-                if (cardCheck.getValue() == 13) {
-                    cards.remove(x);
-                    currentCard = cardCheck;
-                    model.nextTurn(1);
-                    return;
-                } else {*/
-                    for (int y = 0; y < 4; y++) {
-                        model.drawCard();
 
-                    }
+            for (int y = 0; y < 4; y++) {
+                model.drawCard();
 
-              //  }
-           // }
+            }
         }
-    
+
         if (currentlyPlacedCard.getValue() == 11) {
-         /**    for (int x = 0; x < cards.size(); x++) {
-                Card cardCheck = cards.get(x);
-                if (cardCheck.getValue() == 11) {
-                    cards.remove(x);
-                    currentCard = cardCheck;
-                    model.nextTurn(1);
-                    return;
-                } else {  */
-                    for (int y = 0; y < 2; y++) {
-                        model.drawCard();
-                    }
 
-                //}
-          //  }
+            for (int y = 0; y < 2; y++) {
+                model.drawCard();
+            }
         }
-      
-    boolean placeCard = false;
-        for (int x = 0; x < cards.size(); x++ ) { //Loops through all the cards 
+
+        boolean placeCard = false;
+        for (int x = 0; x < cards.size(); x++) { // Loops through all the cards
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                     || cardToPlace.getValue() == currentlyPlacedCard.getValue()
                     || cardToPlace.getValue() == 13
                     || cardToPlace.getValue() == 14) {
                 cards.remove(x);
-                currentCard = cardToPlace;
-                model.placeCard(cardToPlace,null,this.playerNumber);
+                model.placeCard(cardToPlace, null, this.playerNumber);
                 placeCard = true;
 
-
-                return; //prevent the ai from placing multiple cards
+                return; // prevent the ai from placing multiple cards
             }
-            if(currentlyPlacedCard.getValue() == 10)
-            {
+            if (currentlyPlacedCard.getValue() == 10) {
                 return;
             }
-           
-            if(currentlyPlacedCard.getValue() == 12)
-            {
+
+            if (currentlyPlacedCard.getValue() == 12) {
                 model.nextTurn(1);
                 return;
             }
@@ -106,26 +79,22 @@ public class UnoAi {
                 cardToPlace.changeColour(color);
                 return;
             }
-                   
-            
+
         }
-        
-        if(placeCard == false)
-        {
-           model.drawCard();
+
+        if (placeCard == false) {
+            model.drawCard();
         }
     }
 
     public int getAITotalScore() {
         int totalScore = 0;
-        for (Card card : cards)
-        {
+        for (Card card : cards) {
             totalScore += card.getScoreValue();
         }
         return totalScore;
     }
 
-   
     /**
      * Adds a card to the AI's hand
      *
@@ -141,4 +110,3 @@ public class UnoAi {
     }
 
 }
-        

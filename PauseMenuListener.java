@@ -10,13 +10,18 @@ import java.awt.event.*;
 public class PauseMenuListener implements KeyListener, ActionListener {
     private UnoView view;
     private UnoModel model;
-    private PauseMenu pauseMenu;
 
     public PauseMenuListener (UnoModel model, UnoView view) {
         this.model = model;
         this.view = view;
     }
 
+    /**
+     * Handles the input of the pause menu
+     *
+     * @author Tanner
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
         System.out.println("RUNNING");
         if (e.getActionCommand().equals("Resume")) {
@@ -34,8 +39,8 @@ public class PauseMenuListener implements KeyListener, ActionListener {
      * keyPressed
      * detects user key pressed
      * 
-     * @author tba
-     * @param e - TBA
+     * @author Tanner
+     * @param e - Not set
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -46,7 +51,7 @@ public class PauseMenuListener implements KeyListener, ActionListener {
      * keyTyped
      * Not set
      * 
-     * @author tba
+     * @author Tanner
      * @param e - Not set
      */
     @Override
@@ -57,7 +62,7 @@ public class PauseMenuListener implements KeyListener, ActionListener {
      * keyReleased
      * Not set
      * 
-     * @author tba
+     * @author Tanner
      * @param e - Not set
      */
     @Override
