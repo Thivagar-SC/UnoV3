@@ -1,0 +1,9 @@
+LAST GAME'S RESULTS: 
+
+Player's name: GUEST
+You lost!
+Winner of this game: null
+Your total score: 0
+Total score of AI#1: 0
+Total score of AI#2: 0
+Total score of AI#3: 0
