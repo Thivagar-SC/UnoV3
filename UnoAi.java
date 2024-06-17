@@ -12,7 +12,6 @@ public class UnoAi {
     private int playerNumber; // value for player order
     private Card currentCard;
     private UnoModel model;
-    int totalScore = 0;
 
     // I aint commenting this yet
     public UnoAi(int playerNumber, UnoModel model) {
@@ -21,7 +20,6 @@ public class UnoAi {
         this.cards = new ArrayList<>();
         this.model = model;
         this.delayTime = 3000;
-        this.totalScore = 0;
     }
 
     public ArrayList<Card> getHand() {
@@ -93,7 +91,7 @@ public class UnoAi {
     }
 
     public int getAITotalScore() {
-
+        int totalScore = 0;
         for (Card card : cards) {
             totalScore += card.getScoreValue();
         }
