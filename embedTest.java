@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.net.*;
 
 public class embedTest {
     /**
