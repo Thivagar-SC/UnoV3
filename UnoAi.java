@@ -68,26 +68,26 @@ public class UnoAi {
                     || cardToPlace.getValue() == 14) {
                 cards.remove(x);
                 currentCard = cardToPlace;
-                model.placeCard(cardToPlace,null,this.playerNumber);
-                return; //prevent the ai from placing multiple cards
-            }
-            if(currentlyPlacedCard.getValue() == 10)
+                if(currentlyPlacedCard.getValue() == 10)
             {
-                return;
+            //    return;
             }
             if(currentlyPlacedCard.getValue() == 12)
             {
-                model.nextTurn(1);return;
+                model.nextTurn(1);//return;
             }
             if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
-                return;
+                //return;
             }
             if (currentlyPlacedCard.getValue() == 14) {
                 double randomColor = (Math.random() * 4);
                 int color = (int) Math.round(randomColor);
                 cardToPlace.changeColour(color);
-                return;
+              //  return;
+            }
+                model.placeCard(cardToPlace,null,this.playerNumber);
+                return; //prevent the ai from placing multiple cards
             }
             
             
