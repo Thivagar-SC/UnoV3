@@ -29,6 +29,7 @@ public class UnoModel {
     private int state; // state of game
     private int safeState;
     private UnoAi[] aiEnemy = new UnoAi[3];
+    private UnoAi aiWinner;
 
     public final int MENU = 0;
     public final int SELECTION = 1;
@@ -125,19 +126,20 @@ public class UnoModel {
     public void checkIfRoundIsOver() {
         for (int i = 0; i < 3; i++)
         {
-            UnoAi aiWinner = this.aiEnemy[i];
+            aiWinner = this.aiEnemy[i];
             if (aiWinner.getHand().isEmpty())
             {
                 int totalScore = 0;
                 totalScore += aiWinner.getAITotalScore();
             }
-
-            if (player.getHand().isEmpty()) {
-                int totalScore = 0;
-                totalScore += player.getTotalScore();
-            }
         }
-        player.setWon();
+        if (player.getHand().isEmpty())
+        {
+            int totalScore = 0;
+            totalScore += player.getTotalScore();
+            player.setWon();
+        }
+
     }
 
     /**
@@ -153,18 +155,24 @@ public class UnoModel {
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
-
             if (turn == 0){
                 cardsInHand = this.player.getHand();
             }
             else{
                 cardsInHand = this.aiEnemy[turn-1].getHand();
             }
-           
+            for (int x = 0; x < cardsInHand.size(); x++) {
+                Card cardCheck = cardsInHand.get(x);
+                if (cardCheck.getValue() == 13)
+                {
+
+                } else {
                     for (int y = 0; y < 4; y++) {
-                        drawCard(); 
+                        drawCard();
+                    }
+
+                }
             }
-            this.getCurrentCard().changeValue(-1);
         }
         if (currentlyPlacedCard.getValue() == 11) {
             if (turn == 0){
@@ -174,12 +182,19 @@ public class UnoModel {
                 cardsInHand = this.aiEnemy[turn-1].getHand();
             }
             //this.view.update(); //possibly temp
-           
+            for (int x = 0; x < cardsInHand.size(); x++) {
+                Card cardCheck = cardsInHand.get(x);
+                if (cardCheck.getValue() == 11) {
+                    this.player.getHand().remove(x);
+                    this.currentlyPlacedCard = cardCheck;
+                    nextTurn(1);
+                } else {
                     for (int y = 0; y < 2; y++) {
                         drawCard();
-                    }    
-            this.getCurrentCard().changeValue(-1);
-     
+                    }
+
+                }
+            }
         }
 
         if (turn == 0)
@@ -242,10 +257,6 @@ public class UnoModel {
     private void plusTwoCard() 
     {
         int totalStack = 2;
-        for(int x = 0; x < 2 ; x++)
-        {
-            drawCard();
-        }
         int nextPlayer = (turn + direction);
 
     }
@@ -579,15 +590,9 @@ public class UnoModel {
         this.view.update();
     }
 
-    public Card getCurrentCard() {
+    public Card getCurrentCard()
+    {
         return this.currentlyPlacedCard;
-    }
-
-    /**
-     * Sorts the winner and the rest by the scores
-     */
-    public void sortByScore() {
-
     }
 
     /**
@@ -610,16 +615,20 @@ public class UnoModel {
 
             if (player.hasWon()) {
                 output.println("You won!");
-            } else {
+            }
+            else
+            {
                 output.println("You lost!");
+                output.println("Winner of this game: " + aiWinner);
             }
 
-            output.println("Total scores: " + player.getTotalScore());
+            output.println(" Your total score: " + player.getTotalScore());
 
             for (int i = 0; i < 3; i++)
             {
                 output.println("Total score of AI#" + (i+1) + ": " + aiEnemy[i].getAITotalScore());
             }
+
 
             // More
             output.close();
