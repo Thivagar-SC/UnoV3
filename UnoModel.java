@@ -73,10 +73,10 @@ public class UnoModel {
 
     /**
      * Moves to the next turn.
-     *
+     *@author Avaneesh
      * @param skip number of players to skip.
      */
-    public void nextTurn(int skip) // Avaneesh
+    public void nextTurn(int skip) 
     {
         System.out.println(turn);
         turn = turn + direction;
@@ -134,14 +134,14 @@ public class UnoModel {
 
     /**
      * Places a card from a player's hand.
-     *
+     * @author Avaneesh
      * @param card     the card to be placed.
      * @param playerID ID of the player placing the card.
      */
-    public void placeCard(Card aCard,RoundedJPane card, int playerID) // Avaneesh
+    public void placeCard(Card aCard,RoundedJPane card, int playerID) 
     {
         System.out.println("stuff");
-        if (card!=null){
+        if (card!=null){    
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
@@ -174,7 +174,9 @@ public class UnoModel {
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 11) {
+                    this.player.getHand().remove(x);
                     this.currentlyPlacedCard = cardCheck;
+                    nextTurn(1);
                 } else {
                     for (int y = 0; y < 2; y++) {
                         drawCard();
@@ -239,9 +241,10 @@ public class UnoModel {
 
 
     /**
+     * @author Avaneesh
      * Adds 2 cards to the player's hand if no counter
      */
-    private void plusTwoCard() // Avaneesh
+    private void plusTwoCard() 
     {
         int totalStack = 2;
         int nextPlayer = (turn + direction);
@@ -291,10 +294,10 @@ public class UnoModel {
 
     /**
      * Changes the color of the next card to be played.
-     *
+     *@author Avaneesh
      * @param colour - the new color.
      */
-    public void changeColour(int colour) // Avaneesh
+    public void changeColour(int colour) 
     {
         currentlyPlacedCard.changeColour(colour);
         this.view.update();

@@ -10,7 +10,7 @@ public class UnoAi {
     private ArrayList<Card> cards; // list of cards ai has
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
-    private Card currentCard;
+    private Card currentCard; //
     private UnoModel model;
 
     // I aint commenting this yet
@@ -27,16 +27,20 @@ public class UnoAi {
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
-//        try {
-//            Thread.sleep((long) delayTime);
-//        } catch (InterruptedException e) {
-//        System.out.println("delay");
-//        }
+     /**   try {
+            Thread.sleep((long) delayTime);
+        } catch (InterruptedException e) {
+        System.out.println("delay");
+        }
+        */
         if (currentlyPlacedCard.getValue() == 13) {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 13) {
-
+                    cards.remove(x);
+                    currentCard = cardCheck;
+                    model.nextTurn(1);
+                    return;
                 } else {
                     for (int y = 0; y < 4; y++) {
                         model.drawCard();
@@ -51,7 +55,10 @@ public class UnoAi {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 11) {
-
+                    cards.remove(x);
+                    currentCard = cardCheck;
+                    model.nextTurn(1);
+                    return;
                 } else {
                     for (int y = 0; y < 2; y++) {
                         model.drawCard();
@@ -60,8 +67,9 @@ public class UnoAi {
                 }
             }
         }
+      
     boolean placeCard = false;
-        for (int x = 0; x < cards.size(); x++) {
+        for (int x = 0; x < cards.size(); x++ ) { //Loops through all the cards 
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                     || cardToPlace.getValue() == currentlyPlacedCard.getValue()
@@ -71,6 +79,8 @@ public class UnoAi {
                 currentCard = cardToPlace;
                 model.placeCard(cardToPlace,null,this.playerNumber);
                 placeCard = true;
+
+
                 return; //prevent the ai from placing multiple cards
             }
             if(currentlyPlacedCard.getValue() == 10)
@@ -79,7 +89,8 @@ public class UnoAi {
             }
             if(currentlyPlacedCard.getValue() == 12)
             {
-                model.nextTurn(1);return;
+                model.nextTurn(1);
+                return;
             }
             if (currentlyPlacedCard.getValue() == 13) {
                 double randomColor = (Math.random() * 4);
@@ -94,26 +105,21 @@ public class UnoAi {
                 cardToPlace.changeColour(color);
                 return;
             }
-          
-            
-               //model.drawCard();
-               //return;
+                   
             
         }
+        
         if(placeCard == false)
         {
            model.drawCard();
         }
-        
     }
 
     /**
      * Hits UNO when the AI's hand has one card
      */
     public void hitUNO() {
-        if (cards.size() == 1) {
-
-    }   
+           
 }
 
     /**
