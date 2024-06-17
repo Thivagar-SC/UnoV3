@@ -573,7 +573,6 @@ public class UnoView extends JPanel {
                 this.displayIcons();
                 this.displayUnoButtons();
                 System.out.println("TESTTT3");
-                this.postGameMenu();
                 break;
             case 3:
                 this.setPauseState();
