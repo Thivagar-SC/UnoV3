@@ -590,6 +590,9 @@ public class UnoView extends JPanel {
                 this.displayIcons();
                 this.displayUnoButtons();
                 System.out.println("TESTTT3");
+                //if (this.model.checkIfRoundIsOver()){
+
+                //}
                 break;
             case 3:
                 this.setPauseState();
