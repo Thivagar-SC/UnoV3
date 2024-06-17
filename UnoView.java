@@ -356,7 +356,7 @@ public class UnoView extends JPanel {
         quitGame = new JButton("Quit Game");
 
         this.setLayout(new BorderLayout());
-        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 100));
+        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 95));
         this.restartGame.setPreferredSize(new Dimension(300, 100));
         this.restartGame.setFont(new Font("Arial", Font.BOLD, 20));
         this.quitGame.setPreferredSize(new Dimension(300, 100));
@@ -368,8 +368,6 @@ public class UnoView extends JPanel {
         this.postGame.add(this.quitGame);
         this.add(this.postGame, BorderLayout.SOUTH);
         this.refresh();
-
-
     }
 
     /**

@@ -491,7 +491,14 @@ public class UnoModel {
         try {
             PrintWriter output = new PrintWriter("SaveFiles/" + saveFile.getName());
             output.println("LAST GAME'S RESULTS: \n");
-            output.println("Player's name: " + player.getPlayerName());
+            if (player.getPlayerName().isEmpty())
+            {
+                output.println("Player's name: " + "GUEST");
+            }
+            else
+            {
+                output.println("Player's name: " + player.getPlayerName());
+            }
 
             if (player.hasWon()) {
                 output.println("You won!");
