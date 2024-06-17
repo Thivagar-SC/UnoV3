@@ -6,7 +6,6 @@ import java.util.ArrayList;
 // * @since 2024/06/12
 // */
 public class UnoAi {
-    private double delayTime; // delays the time of the AI's actions
     private ArrayList<Card> cards; // list of cards ai has
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
@@ -19,7 +18,6 @@ public class UnoAi {
         this.wonRound = false;
         this.cards = new ArrayList<>();
         this.model = model;
-        this.delayTime = 3000;
     }
 
     public ArrayList<Card> getHand() {
@@ -27,9 +25,8 @@ public class UnoAi {
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
-        wonRound = false;
         if (cards.size() == 0) {
-            wonRound = true;
+            this.wonRound = true;
             return;
         }
 
