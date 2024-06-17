@@ -73,10 +73,10 @@ public class UnoModel {
 
     /**
      * Moves to the next turn.
-     *
+     *@author Avaneesh
      * @param skip number of players to skip.
      */
-    public void nextTurn(int skip) // Avaneesh
+    public void nextTurn(int skip) 
     {
         System.out.println(turn);
         turn = (turn + (skip+1) * direction);
@@ -122,14 +122,14 @@ public class UnoModel {
 
     /**
      * Places a card from a player's hand.
-     *
+     * @author Avaneesh
      * @param card     the card to be placed.
      * @param playerID ID of the player placing the card.
      */
-    public void placeCard(Card aCard,RoundedJPane card, int playerID) // Avaneesh
+    public void placeCard(Card aCard,RoundedJPane card, int playerID) 
     {
         System.out.println("stuff");
-        if (card!=null){
+        if (card!=null){    
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
@@ -205,10 +205,12 @@ public class UnoModel {
     }
     }
 
+
     /**
+     * @author Avaneesh
      * Adds 2 cards to the player's hand if no counter
      */
-    private void plusTwoCard() // Avaneesh
+    private void plusTwoCard() 
     {
         int totalStack = 2;
         int nextPlayer = (turn + direction);
@@ -258,10 +260,10 @@ public class UnoModel {
 
     /**
      * Changes the color of the next card to be played.
-     *
+     *@author Avaneesh
      * @param colour - the new color.
      */
-    public void changeColour(int colour) // Avaneesh
+    public void changeColour(int colour) 
     {
         currentlyPlacedCard.changeColour(colour);
     }
