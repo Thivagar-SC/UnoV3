@@ -15,6 +15,7 @@ public class UnoButton extends JButton implements MouseListener {
 
     /**
      * Default constructor
+     * @author Tanner
      */
     public UnoButton() {
         isActive = false;
@@ -23,6 +24,8 @@ public class UnoButton extends JButton implements MouseListener {
     /**
      * Enables the UNO Button only when the player is not safe or safe and has 2
      * cards in hand
+     * 
+     * @author Tanner
      */
     public void update() {
         isActive = player.getUnoState() == model.NOT_SAFE
@@ -31,30 +34,39 @@ public class UnoButton extends JButton implements MouseListener {
 
     /**
      * Handles the input of the UNO Button
+     * @author Tanner
      * @param e
+     * 
      */
-
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("Uno CALLED!");
         model.setUNOState(model.CALLED);
     }
-
+/**
+ * @author Tanner
+ */
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
-
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
-
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseEntered(MouseEvent e) {
 
     }
-
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseExited(MouseEvent e) {
 

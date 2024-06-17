@@ -104,6 +104,15 @@ public class Player {
         return playerName;
     }
 
+    /**
+     * getUnoState
+     * gets the uno state
+     * 
+     * @author Tanner
+     * @return model.SAFE
+     * @return model.NOT_SAFE
+     * 
+     */
     public int getUnoState() {
         if (getHand().size() != 1) {
             return model.SAFE;
@@ -134,8 +143,7 @@ public class Player {
      */
     public int getTotalScore() {
         totalScore = 0;
-        for (Card card : cards)
-        {
+        for (Card card : cards) {
             totalScore += card.getScoreValue();
         }
         return totalScore;
@@ -199,14 +207,16 @@ public class Player {
         for (int x = 0; x < cards.size(); x++) { // for each card
             int color = cards.get(x).getColour();
             int endIndex = x;
-            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { //Find the cards with the same color 
-                                                                                          
+            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // Find the cards with the
+                                                                                          // same color
+
             }
 
-            for (int a = x; a < cards.size(); a++) { // u can do this
+            for (int a = x; a < cards.size(); a++) { //sort cards by value within the same color
                 minIndex = a;
-                for (int y = a + 1; y < cards.size(); y++) { //sort the cards by value of the same color
-                    if (cards.get(y).getValue() < cards.get(minIndex).getValue()) {//find the the card with the lowest value
+                for (int y = a + 1; y < cards.size(); y++) { // sort the cards by value of the same color
+                    if (cards.get(y).getValue() < cards.get(minIndex).getValue()) {// find the the card with the lowest
+                                                                                   // value
                         minIndex = y;
                     }
                 }
