@@ -82,6 +82,9 @@ public class UnoAi {
                 model.nextTurn(1);return;
             }
             if (currentlyPlacedCard.getValue() == 13) {
+                double randomColor = (Math.random() * 4);
+                int color = (int) Math.round(randomColor);
+                cardToPlace.changeColour(color);
                 model.nextTurn(1);
                 return;
             }
