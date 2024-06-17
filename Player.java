@@ -209,7 +209,7 @@ public class Player {
             int endIndex = x;
             while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // Find the cards with the
                                                                                           // same color
-
+                endIndex++;
             }
 
             for (int a = x; a < cards.size(); a++) { //sort cards by value within the same color

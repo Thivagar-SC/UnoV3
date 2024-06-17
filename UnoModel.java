@@ -154,7 +154,8 @@ public class UnoModel
             totalScore += player.getTotalScore();
             player.setWon();
         }
-
+        this.setState(this.ENDGAME);
+        this.view.update();
     }
 
     /**
