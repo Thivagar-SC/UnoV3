@@ -10,7 +10,7 @@ public class UnoAi {
     private ArrayList<Card> cards; // list of cards ai has
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
-    private Card currentCard; //
+    private Card currentCard; 
     private UnoModel model;
 
     // I aint commenting this yet
@@ -87,6 +87,10 @@ public class UnoAi {
             {
                 return;
             }
+            if(currentlyPlacedCard.getValue() == 11)
+            {
+
+            }
             if(currentlyPlacedCard.getValue() == 12)
             {
                 model.nextTurn(1);
@@ -113,6 +117,15 @@ public class UnoAi {
         {
            model.drawCard();
         }
+    }
+
+    public int getAITotalScore() {
+        int totalScore = 0;
+        for (Card card : cards)
+        {
+            totalScore += card.getScoreValue();
+        }
+        return totalScore;
     }
 
     /**
