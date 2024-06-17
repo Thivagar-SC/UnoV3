@@ -54,6 +54,11 @@ public class UnoView extends JPanel {
     private UnoButton unoButton = new UnoButton();
     private UnoBlockButton unoBlockButton = new UnoBlockButton();
 
+    private JButton red = new JButton("Red");
+        private JButton blue = new JButton("Blue");
+        private JButton yellow = new JButton("Yellow");
+        private JButton green = new JButton("Green");
+
     /**
      * UnoView
      * UnoView Constructor
@@ -594,6 +599,35 @@ public class UnoView extends JPanel {
         }
 
         this.refresh();
+    }
+
+    public void displayColourSelectors(){
+
+        red.setBackground(Color.red);
+        blue.setBackground(Color.blue);
+        yellow.setBackground(Color.yellow);
+        green.setBackground(Color.green);
+
+        red.setBounds(300,300,100,50);
+        blue.setBounds(500,300,100,50);
+        yellow.setBounds(300,500,100,50);
+        green.setBounds(500,500,100,50);
+
+        this.add(red);
+        this.add(green);
+        this.add(yellow);
+        this.add(blue);
+        this.registerColourControllers();
+        this.refresh();
+
+    }
+
+    public void registerColourControllers(){
+        colourListener cSelect = new colourListener(this.model);
+        this.red.addActionListener(cSelect);
+        this.blue.addActionListener(cSelect);// tba
+        this.yellow.addActionListener(cSelect);
+        this.green.addActionListener(cSelect);
     }
 
     public void removeAccess(){

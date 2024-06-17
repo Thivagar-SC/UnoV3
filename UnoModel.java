@@ -146,6 +146,7 @@ public class UnoModel {
             }
         }
         if (currentlyPlacedCard.getValue() == 11) {
+            this.view.update(); //possibly temp
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 11) {
@@ -159,7 +160,8 @@ public class UnoModel {
             }
         }
 
-        if (turn == 0){
+        if (turn == 0)
+        {
             System.out.println("blah");
         int cardIndex = -1;
         for (int x = 0; x < this.view.getCards().size(); x++) {
@@ -171,6 +173,13 @@ public class UnoModel {
         
         // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
+        if (cardToPlace.getValue() == 13) {
+            
+        }
+        if (cardToPlace.getValue() == 14) {
+            this.view.displayColourSelectors();
+            return;
+        }
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()) {
             this.player.getHand().remove(cardIndex);
@@ -183,12 +192,6 @@ public class UnoModel {
             } else if (cardToPlace.getValue() == 12) {
                 nextTurn(2);
             }
-        }
-        if (cardToPlace.getValue() == 13) {
-            
-        }
-        if (cardToPlace.getValue() == 14) {
-
         }
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                 || cardToPlace.getValue() == currentlyPlacedCard.getValue()){
@@ -203,6 +206,11 @@ public class UnoModel {
         this.currentlyPlacedCard = aCard;
         this.view.update();
     }
+    }
+
+    public void setColour(int colour){
+        this.currentlyPlacedCard.changeColour(colour);
+        this.view.update();
     }
 
     /**
