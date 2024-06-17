@@ -31,6 +31,7 @@ public class Card {
      * Gets score value based on the cards
      * Number cards are their own number values
      * Wild and Wild +4 are worth 50, others are 20
+     * 
      * @authur Avaneesh
      * @return the value based on the cards
      */
@@ -47,6 +48,7 @@ public class Card {
     /**
      * getValue
      * returns value of card
+     * 
      * @author Avaneesh
      * @return cardFaceValue
      * 
