@@ -162,7 +162,9 @@ public class UnoModel {
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 11) {
-
+                    this.player.getHand().remove(x);
+                    this.currentlyPlacedCard = cardCheck;
+                    nextTurn(1);
                 } else {
                     for (int y = 0; y < 2; y++) {
                         drawCard();

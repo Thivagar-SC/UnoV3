@@ -55,7 +55,7 @@ public class Player {
      * places a card out of the users hand
      *
      * @param cardIndex - location of users card in hand
-     * @author tba
+     * @author Avaneesh
      */
     public void placeCard(int cardIndex) {
         cards.remove(cardIndex);
@@ -66,7 +66,7 @@ public class Player {
      * returns the hand of the user
      *
      * @return cards
-     * @author tba
+     * @author Avaneesh
      */
     public ArrayList<Card> getHand() {
         return cards;
@@ -76,7 +76,7 @@ public class Player {
      * setSelectable
      * sets if user can select his cards
      *
-     * @author tba
+     * @author Avaneesh
      */
     public void setSelectable() {
         this.selectable = !this.selectable;
@@ -87,7 +87,7 @@ public class Player {
      * returns if users turn
      *
      * @return THISS IS AN ERROR JKNEJN
-     * @author tba
+     * @author Avaneesh
      */
     public boolean setGetSelectable() {
         return setGetSelectable();
@@ -199,7 +199,7 @@ public class Player {
         for (int x = 0; x < cards.size(); x++) { // for each card
             int color = cards.get(x).getColour();
             int endIndex = x;
-            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // tba u do this i cant be
+            while (endIndex < cards.size() && cards.get(endIndex).getColour() == color) { // 
                                                                                           // bothered
                 endIndex++;
             }

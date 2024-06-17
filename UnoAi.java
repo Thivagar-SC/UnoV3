@@ -37,7 +37,10 @@ public class UnoAi {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 13) {
-                    
+                    cards.remove(x);
+                    currentCard = cardCheck;
+                    model.nextTurn(1);
+                    return;
                 } else {
                     for (int y = 0; y < 4; y++) {
                         model.drawCard();
@@ -52,7 +55,10 @@ public class UnoAi {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
                 if (cardCheck.getValue() == 11) {
-
+                    cards.remove(x);
+                    currentCard = cardCheck;
+                    model.nextTurn(1);
+                    return;
                 } else {
                     for (int y = 0; y < 2; y++) {
                         model.drawCard();
@@ -63,7 +69,7 @@ public class UnoAi {
         }
       
     boolean placeCard = false;
-        for (int x = 0; x < cards.size(); x++ ) {
+        for (int x = 0; x < cards.size(); x++ ) { //Loops through all the cards 
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
                     || cardToPlace.getValue() == currentlyPlacedCard.getValue()
@@ -73,6 +79,8 @@ public class UnoAi {
                 currentCard = cardToPlace;
                 model.placeCard(cardToPlace,null,this.playerNumber);
                 placeCard = true;
+
+
                 return; //prevent the ai from placing multiple cards
             }
             if(currentlyPlacedCard.getValue() == 10)
@@ -81,7 +89,8 @@ public class UnoAi {
             }
             if(currentlyPlacedCard.getValue() == 12)
             {
-                model.nextTurn(1);return;
+                model.nextTurn(1);
+                return;
             }
             if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
@@ -93,10 +102,7 @@ public class UnoAi {
                 cardToPlace.changeColour(color);
                 return;
             }
-          
-          
-               //model.drawCard();
-               //return;
+                   
             
         }
         
