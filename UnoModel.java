@@ -153,6 +153,7 @@ public class UnoModel {
             }
         }
         System.out.println("THE CARD LOCATION" + cardIndex);
+        this.aiEnemy[1].addCard(deck.drawCard(), "sg"); //test
         // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
