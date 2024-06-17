@@ -12,11 +12,7 @@ public class Deck {
     private final int numberCards = 80; // 80 number cards including number 0 to 9
     private int topOfDeck;
 
-    private final int COLOUR_RED = 0; // ID for colours
-    private final int COLOUR_BLUE = 1;
-    private final int COLOUR_YELLOW = 2;
-    private final int COLOUR_GREEN = 3;
-    private final int COLOUR_BLACK = 4;
+    private final int COLOUR_BLACK = 4; // Color BLACK for Wild cards
 
     private boolean selectable = true; // Sets selectable to not equal itself
 
@@ -24,14 +20,13 @@ public class Deck {
      * Deck
      * Default constructor of deck
      *
-     * @author tba
+     * @author Tanner
      * @since 2024/06/12
      */
     public Deck() {
         super();
         deck = new ArrayList<>();
         this.fillDeck();
-        topOfDeck = deck.size() - 1;
     }
 
     /**
@@ -40,7 +35,7 @@ public class Deck {
      * If the deck is empty, calls fillDeck() to refill the deck.
      *
      * @return The card drawn from the deck.
-     * @author tba
+     * @author Tanner
      */
     public Card drawCard() {
         if (deck.isEmpty()) {
@@ -55,7 +50,7 @@ public class Deck {
      * fillDeck
      * Refills and shuffles deck if all cards are drawn or a new game started
      *
-     * @author tba
+     * @author Tanner
      */
     public void fillDeck() {
         deck.clear();
@@ -68,7 +63,7 @@ public class Deck {
      * removeCard
      * Removes the first card from the deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void removeCard() {
         deck.remove(0);
@@ -84,7 +79,7 @@ public class Deck {
      * addSpecialCards
      * adds all non number cards to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addSpecialCards() {
         addPlusTwoCards();
@@ -98,7 +93,7 @@ public class Deck {
      * addPlusFourCards
      * adds +4 cards to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addPlusFourCards() {
         for (int i = 0; i < 4; i++) {
@@ -110,7 +105,7 @@ public class Deck {
      * addWildCards
      * adds colour changing cards to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addWildCards() {
         for (int i = 0; i < 4; i++) {
@@ -122,7 +117,7 @@ public class Deck {
      * addBlockCards
      * adds skip turn card to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addBlockCards() {
         for (int i = 0; i < 4; i++) {
@@ -135,7 +130,7 @@ public class Deck {
      * addReverseCards
      * adds reverse action order card to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addReverseCards() {
         for (int i = 0; i < 4; i++) {
@@ -148,7 +143,7 @@ public class Deck {
      * addPlusTwoCards
      * adds draw 2 card to deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addPlusTwoCards() {
         for (int i = 0; i < 4; i++) {
@@ -161,7 +156,7 @@ public class Deck {
      * addNumberCards
      * Method to add 80 number cards from 4 different colours to the deck
      *
-     * @author tba
+     * @author Tanner
      */
     public void addNumberCards() {
         for (int cardFaceValue = 0; cardFaceValue < numberCards / 8; cardFaceValue++) {
@@ -178,7 +173,7 @@ public class Deck {
      * getSelectable
      * returns if the deck is currently available to be pressed
      *
-     * @author tba
+     * @author Tanner
      */
     public boolean getSelectable() {
         return selectable;
@@ -188,7 +183,7 @@ public class Deck {
      * setSelectable
      * sets if the deck should be allowed to be accessed by the user
      *
-     * @author tba
+     * @author Tanner
      */
     public void setSelectable(boolean selectable) {
         this.selectable = selectable;
