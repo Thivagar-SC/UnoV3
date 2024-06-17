@@ -15,7 +15,11 @@ public class UnoBlockButton extends UnoButton implements MouseListener
         super();
     }
 
-    /** Button can only be active when user has 1 card in hand and is NOT SAFE */
+    /**
+     * update
+     * Button can only be active when user has 1 card in hand and is NOT SAFE
+     *
+     */
     @Override
     public void update()
     {
@@ -27,7 +31,7 @@ public class UnoBlockButton extends UnoButton implements MouseListener
     }
 
     /**
-     *  Handles the input of UNO Block Button
+     * Sends information to the model from UNO block button
      *
      * @param e - mouse event
      */

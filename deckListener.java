@@ -8,7 +8,7 @@ import java.awt.event.*;
  * @since 2024/06/12
  */
 public class deckListener implements MouseListener {
-    private UnoModel model;// model of UNO game
+    private UnoModel model; // model of UNO game
 
     /**
      * deckListener
