@@ -60,7 +60,7 @@ public class UnoAi {
                 }
             }
         }
-    
+    boolean placeCard = false;
         for (int x = 0; x < cards.size(); x++) {
             Card cardToPlace = cards.get(x);
             if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
@@ -69,6 +69,7 @@ public class UnoAi {
                 cards.remove(x);
                 currentCard = cardToPlace;
                 model.placeCard(cardToPlace,null,this.playerNumber);
+                placeCard = true;
                 return; //prevent the ai from placing multiple cards
             }
             if(currentlyPlacedCard.getValue() == 10)
@@ -89,11 +90,15 @@ public class UnoAi {
                 cardToPlace.changeColour(color);
                 return;
             }
+          
             
+               //model.drawCard();
+               //return;
             
-               // model.drawCard();
-                //return;
-            
+        }
+        if(placeCard == false)
+        {
+           model.drawCard();
         }
         
     }
