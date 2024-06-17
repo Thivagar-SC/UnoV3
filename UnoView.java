@@ -146,6 +146,26 @@ public class UnoView extends JPanel {
         List<RoundedJPane> hand2 = new ArrayList<RoundedJPane>();
         List<RoundedJPane> hand3 = new ArrayList<RoundedJPane>();
         File caImg = new File(cardFile,"_HiddenCard.png");
+        aiCards[0] = new JPanel();
+        aiCards[1] = new JPanel();
+        aiCards[2] = new JPanel();
+        aiCards[0].setLayout(null);
+        aiCards[1].setLayout(null);
+        aiCards[2].setLayout(null);
+        aiCards[0].setBackground(new Color(0,0,0,0));
+        aiCards[1].setBackground(new Color(0,0,0,0));
+        aiCards[2].setBackground(new Color(0,0,0,0));
+
+        
+
+
+        aiCards[0].setBounds(10,350,400,112);
+        this.add(aiCards[0]);
+        aiCards[1].setBounds(1400,350,400,112);
+        this.add(aiCards[1]);
+        aiCards[2].setBounds(750,140,400,112);
+        this.add(aiCards[2]);
+
         aiHands.add(0, hand1);
         aiHands.add(1, hand2);
         aiHands.add(2, hand3);
@@ -155,9 +175,11 @@ public class UnoView extends JPanel {
                 img.setBounds(0,0,70,112);
                 aiHands.get(x).add(new RoundedJPane(60,5));//colour doesnt need to be accurate as player wont see ai cards until placed
                 aiHands.get(x).get(y).add(img);
-                aiHands.get(x).get(y).setBounds(10+y*100,1+x*100,70,112);
+                aiHands.get(x).get(y).setBounds((int) Math.round(
+                    (((300) / (this.model.getAi()[x].getHand().size() + 1) * y))
+                             + 20),0,70,112);
                 aiHands.get(x).get(y).setBackground(new Color(0,0,0,0));
-                this.add(aiHands.get(x).get(y));
+                aiCards[x].add(aiHands.get(x).get(y));
             }
         }
 
@@ -334,7 +356,7 @@ public class UnoView extends JPanel {
         quitGame = new JButton("Quit Game");
 
         this.setLayout(new BorderLayout());
-        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 100));
+        pauseMenu.quitToMainMenuButton.setPreferredSize(new Dimension(300, 95));
         this.restartGame.setPreferredSize(new Dimension(300, 100));
         this.restartGame.setFont(new Font("Arial", Font.BOLD, 20));
         this.quitGame.setPreferredSize(new Dimension(300, 100));
@@ -346,8 +368,6 @@ public class UnoView extends JPanel {
         this.postGame.add(this.quitGame);
         this.add(this.postGame, BorderLayout.SOUTH);
         this.refresh();
-
-
     }
 
     /**
