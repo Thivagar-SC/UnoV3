@@ -185,16 +185,19 @@ public class UnoModel {
             }
         }
         if (cardToPlace.getValue() == 13) {
-
+            
         }
         if (cardToPlace.getValue() == 14) {
 
         }
+        if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
+                || cardToPlace.getValue() == currentlyPlacedCard.getValue()){
         System.out.println(this.state);
         this.view.update();
         System.out.println("TESTTT2");
         this.setState(this.AI_TURN);
         this.view.update();
+                }
     }
     else{
         this.currentlyPlacedCard = aCard;
