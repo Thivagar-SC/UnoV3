@@ -148,7 +148,7 @@ public class Player {
      * @return playerNumber
      * @author Avaneesh
      */
-    public int GetPlayerID() {
+    public int getPlayerID() {
         return playerNumber;
     }
 
