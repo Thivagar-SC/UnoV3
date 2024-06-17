@@ -1,5 +1,9 @@
 
+import javax.management.timer.Timer;
 import javax.swing.*;
+
+import javafx.event.ActionEvent;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -42,7 +46,7 @@ public class UnoView extends JPanel {
     private JPanel[] aiCards = new JPanel[3];
     private boolean playerTurn = true; //temp
     private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
-
+    private int roundCount = 0;
     private JTextArea[] aiName = new JTextArea[3];
     private JButton returnToMainMenu;
     private JButton restartGame;
@@ -222,6 +226,8 @@ public class UnoView extends JPanel {
         } catch (Exception e) {
 
         }
+        this.displayIcons();
+                
     }
 
     /**
@@ -230,7 +236,7 @@ public class UnoView extends JPanel {
      *
      * @author Thivagar
      */
-    private void displayCurrentCard() {
+    public void displayCurrentCard() {
         this.currentCard = new RoundedJPane(50, this.model.getCurrentCard().getColour());
         ImgComponent a = new ImgComponent(
                 new File(cardFile, (this.model.getCurrentCard().getValue() + ".png").trim()).getAbsolutePath());
@@ -274,6 +280,9 @@ public class UnoView extends JPanel {
         this.setAiHands();
         this.registerControllers(); // new card also needs to be clickable
         this.refresh();
+        this.displayDeck();
+        System.out.println("TEST 4");
+                
     }
 
 
@@ -344,7 +353,6 @@ public class UnoView extends JPanel {
         this.add(aiName[1]);
         this.add(aiIcon[2]);
         this.add(aiName[2]);
-
     }
 
     public void postGameMenu()
@@ -378,6 +386,7 @@ public class UnoView extends JPanel {
     public void displayUnoButtons() {
         this.add(this.unoButton);
         this.add(this.unoBlockButton);
+        this.refresh();
     }
 
     /**
@@ -391,7 +400,7 @@ public class UnoView extends JPanel {
         CardSelector setup = new CardSelector(this.model); // Setup
         deckListener addCard = new deckListener(this.model);
         escListener pauseGame = new escListener(this.model, this);
-
+        System.out.println("REGISTERED");
         // set listeners
         for (KeyListener listener : this.getKeyListeners()) {
             this.removeKeyListener(listener);
@@ -403,6 +412,8 @@ public class UnoView extends JPanel {
 
         }
         if (this.model.getState() == model.GAME) { // if rounds have been chosen
+            System.out.println("REGISTERED2.0");
+
             for (MouseListener listener : this.deck.getMouseListeners()) { // remove prior listeners
                 this.deck.removeMouseListener(listener);
             } // SHOULD CHANGE LATER
@@ -499,6 +510,29 @@ public class UnoView extends JPanel {
         }
     }
 
+    public void nextRound(){
+        this.roundCount++;
+        JTextField display = new JTextField("Round "+(this.roundCount+1)+" Starts Now!");
+        //Timer timer = new Timer();
+        if (roundCount == this.model.getNumberOfRound()){
+            this.model.reset();
+        }
+        else{
+        this.removeAll();
+        this.model.startGame();
+        display.setBounds(400,300,1000,200);
+        display.setBackground(new Color(0,0,0,0));
+        display.setEditable(false);
+        display.setBorder(BorderFactory.createEmptyBorder());
+            this.model.setState(this.model.GAME);
+        display.setFont(new Font("Times New Roman",1,30));
+        this.model.placeStarterCard();
+        this.update();
+        this.add(display);
+        this.refresh();
+        }
+    }
+
     /**
      * Removes all components when returning to main menu
      */
@@ -530,9 +564,10 @@ public class UnoView extends JPanel {
                 }
                 this.displayCards();
                 this.displayDeck();
-                this.displayIcons();
                 this.displayCurrentCard();
+                this.displayIcons();
                 this.displayUnoButtons();
+                System.out.println("TESTTT3");
                 break;
             case 3:
                 this.setPauseState();
@@ -547,10 +582,11 @@ public class UnoView extends JPanel {
                 case 6:
                 this.displayCards();
                 this.displayDeck();
-                this.displayIcons();
                 this.displayCurrentCard();
+                this.displayIcons();
                 this.displayUnoButtons();
                 this.removeAccess();
+               this.model.nextUser();
                 break;
 
             default:

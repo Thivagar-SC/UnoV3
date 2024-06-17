@@ -27,11 +27,11 @@ public class UnoAi {
     }
 
     public void placeCard(int cardIndex, Card currentlyPlacedCard) {
-        try {
-            Thread.sleep((long) delayTime);
-        } catch (InterruptedException e) {
-        System.out.println("delay");
-        }
+//        try {
+//            Thread.sleep((long) delayTime);
+//        } catch (InterruptedException e) {
+//        System.out.println("delay");
+//        }
         if (currentlyPlacedCard.getValue() == 13) {
             for (int x = 0; x < cards.size(); x++) {
                 Card cardCheck = cards.get(x);
@@ -68,26 +68,31 @@ public class UnoAi {
                     || cardToPlace.getValue() == 14) {
                 cards.remove(x);
                 currentCard = cardToPlace;
-                model.placeCard(cardToPlace);
+                model.placeCard(cardToPlace,null,this.playerNumber);
+                return; //prevent the ai from placing multiple cards
             }
             if(currentlyPlacedCard.getValue() == 10)
             {
-                
+                return;
             }
             if(currentlyPlacedCard.getValue() == 12)
             {
-                model.nextTurn(1);
+                model.nextTurn(1);return;
             }
             if (currentlyPlacedCard.getValue() == 13) {
                 model.nextTurn(1);
-
+                return;
             }
             if (currentlyPlacedCard.getValue() == 14) {
                 double randomColor = (Math.random() * 4);
                 int color = (int) Math.round(randomColor);
                 cardToPlace.changeColour(color);
+                return;
             }
             
+            
+               // model.drawCard();
+                //return;
             
         }
         

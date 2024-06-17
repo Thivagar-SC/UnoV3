@@ -11,7 +11,7 @@ public class UnoModel {
     // private PauseMenu pauseMenu;
     private Card currentlyPlacedCard;
     private String gameState;
-    private int turn;
+    private int turn = 0;
     private Player player;
     // private UnoAi ai;
     private Deck deck;
@@ -78,6 +78,7 @@ public class UnoModel {
      */
     public void nextTurn(int skip) // Avaneesh
     {
+        System.out.println(turn);
         turn = (turn + (skip+1) * direction);
         if (turn == 4){
             turn = 0;
@@ -85,6 +86,7 @@ public class UnoModel {
         if (turn == -1){
             turn = 4;
         }
+        System.out.println(turn);
     }
 
     /**
@@ -124,8 +126,12 @@ public class UnoModel {
      * @param card     the card to be placed.
      * @param playerID ID of the player placing the card.
      */
-    public void placeCard(RoundedJPane card, int playerID) // Avaneesh
+    public void placeCard(Card aCard,RoundedJPane card, int playerID) // Avaneesh
     {
+        System.out.println("stuff");
+        if (card!=null){
+            turn = 0;
+        }
         if (currentlyPlacedCard.getValue() == 13) {
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
@@ -153,6 +159,8 @@ public class UnoModel {
             }
         }
 
+        if (turn == 0){
+            System.out.println("blah");
         int cardIndex = -1;
         for (int x = 0; x < this.view.getCards().size(); x++) {
             if (card.equals(this.view.getCards().get(x))) {
@@ -160,7 +168,7 @@ public class UnoModel {
             }
         }
         System.out.println("THE CARD LOCATION" + cardIndex);
-        this.aiEnemy[1].addCard(deck.drawCard(), "sg"); //test
+        
         // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getColour() == currentlyPlacedCard.getColour()
@@ -182,9 +190,12 @@ public class UnoModel {
         if (cardToPlace.getValue() == 14) {
 
         }
+        System.out.println(this.state);
+        this.view.update();
+        System.out.println("TESTTT2");
         this.setState(this.AI_TURN);
         this.view.update();
-        
+    }
     }
 
     /**
@@ -269,7 +280,10 @@ public class UnoModel {
 
     public void nextUser(){
         //cause movement
-        aiEnemy[turn].placeCard(-1, this.currentlyPlacedCard);
+        this.state = this.GAME;
+        this.view.update();
+        this.state = this.AI_TURN;
+        System.out.println("AI TURN");
 
         int skipCount = 0;
 
@@ -277,6 +291,22 @@ public class UnoModel {
             skipCount++;
         }
         this.nextTurn(skipCount);
+        if (turn == 0){
+            this.state = this.GAME;
+            if (this.player.getHand().size()==0){
+                this.nextRound();
+                return;
+            }
+        }
+        else{
+            aiEnemy[turn-1].placeCard(-1, this.currentlyPlacedCard);
+            if(this.aiEnemy[turn-1].getHand().size()==0){
+                this.nextRound();
+                return;
+            }
+        }
+        
+        this.view.update();
     }
 
     /**
@@ -310,6 +340,7 @@ public class UnoModel {
     public void startGame() {
         int numberRounds;
         String nameOfPlayer;
+        this.turn = 0;
         this.createSaveFile();
         this.state = SELECTION;
         this.menuSelection = false;
@@ -388,6 +419,7 @@ public class UnoModel {
      * Places the first card in the pile to start off the game
      */
     public void placeStarterCard() {
+        this.turn = 0;
         Card cuCard = this.deck.drawCard();
         while (cuCard.getValue() > 9) // while card is invalid to start with
         {
@@ -438,7 +470,8 @@ public class UnoModel {
      * Moves to the next round.
      */
     public void nextRound() {
-
+        this.view.nextRound();
+        
     }
 
     /**
@@ -485,8 +518,15 @@ public class UnoModel {
     }
 
     public void drawCard() {
-        this.state = this.GAME;
+        //this.state = this.GAME;
+        if (this.turn == 0){
         this.player.addCard(this.deck.drawCard(), "TBA");
+        this.view.update();
+        this.state = this.AI_TURN;
+        }
+        else{
+            this.aiEnemy[this.turn-1].addCard(this.deck.drawCard(), "TBA");
+        }
         this.view.update();
     }
 
