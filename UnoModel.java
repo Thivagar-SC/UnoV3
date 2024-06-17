@@ -123,7 +123,15 @@ public class UnoModel {
      * Checks if the current round is over.
      */
     public void checkIfRoundIsOver() {
-        for (Player player : players) {
+        for (int i = 0; i < 3; i++)
+        {
+            UnoAi aiWinner = this.aiEnemy[i];
+            if (aiWinner.getHand().isEmpty())
+            {
+                int totalScore = 0;
+                totalScore += aiWinner.getAITotalScore();
+            }
+
             if (player.getHand().isEmpty()) {
                 int totalScore = 0;
                 totalScore += player.getTotalScore();
@@ -615,6 +623,12 @@ public class UnoModel {
             }
 
             output.println("Total scores: " + player.getTotalScore());
+
+            for (int i = 0; i < 3; i++)
+            {
+                output.println("Total score of AI#" + (i+1) + ": " + aiEnemy[i].getAITotalScore());
+            }
+
             // More
             output.close();
 

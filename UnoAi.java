@@ -119,6 +119,15 @@ public class UnoAi {
         }
     }
 
+    public int getAITotalScore() {
+        int totalScore = 0;
+        for (Card card : cards)
+        {
+            totalScore += card.getScoreValue();
+        }
+        return totalScore;
+    }
+
     /**
      * Hits UNO when the AI's hand has one card
      */
