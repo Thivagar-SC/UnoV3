@@ -40,7 +40,7 @@ public class UnoView extends JPanel {
     private JTextArea name1 = new JTextArea("Guest");
     private JPanel[] aiIcon = new JPanel[3];
     private JPanel[] aiCards = new JPanel[3];
-   
+    private boolean playerTurn = true; //temp
     private List<List<RoundedJPane>> aiHands = new ArrayList<List<RoundedJPane>>();  
 
     private JTextArea[] aiName = new JTextArea[3];
@@ -525,6 +525,9 @@ public class UnoView extends JPanel {
                 this.gameSetup();
                 break;
             case 2:
+                if (this.playerTurn == false){
+                this.addAccess();
+                }
                 this.displayCards();
                 this.displayDeck();
                 this.displayIcons();
@@ -541,6 +544,14 @@ public class UnoView extends JPanel {
             case 5:
                 this.removeComp();
                 break;
+                case 6:
+                this.displayCards();
+                this.displayDeck();
+                this.displayIcons();
+                this.displayCurrentCard();
+                this.displayUnoButtons();
+                this.removeAccess();
+                break;
 
             default:
                 break;
@@ -548,6 +559,23 @@ public class UnoView extends JPanel {
 
         this.refresh();
     }
+
+    public void removeAccess(){
+            for (JComponent comp : this.aiCards) {
+                comp.setEnabled(false);
+            }
+                deck.setEnabled(false);
+                playerTurn = true;
+        
+    }
+
+    public void addAccess(){
+        for (JComponent comp : this.aiCards) {
+            comp.setEnabled(true);
+        }
+            deck.setEnabled(true);
+    
+        }   
 
     /**
      * Pauses the game and displays the pause menu

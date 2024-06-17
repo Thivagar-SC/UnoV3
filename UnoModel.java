@@ -36,6 +36,7 @@ public class UnoModel {
     public final int PAUSED = 3;
     public final int ENDGAME = 4;
     public final int RESET = 5;
+    public final int AI_TURN= 6;
 
     public final int SAFE = 0;
     public final int CALLED = 1;
@@ -175,9 +176,9 @@ public class UnoModel {
         if (cardToPlace.getValue() == 14) {
 
         }
-
+        this.setState(this.AI_TURN);
         this.view.update();
-
+        
     }
 
     /**
