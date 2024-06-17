@@ -153,23 +153,18 @@ public class UnoModel {
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
+
             if (turn == 0){
                 cardsInHand = this.player.getHand();
             }
             else{
                 cardsInHand = this.aiEnemy[turn-1].getHand();
             }
-            for (int x = 0; x < cardsInHand.size(); x++) {
-                Card cardCheck = cardsInHand.get(x);
-                if (cardCheck.getValue() == 13) {
-
-                } else {
+           
                     for (int y = 0; y < 4; y++) {
-                        drawCard();
-                    }
-
-                }
+                        drawCard(); 
             }
+            this.getCurrentCard().changeValue(-1);
         }
         if (currentlyPlacedCard.getValue() == 11) {
             if (turn == 0){
@@ -179,19 +174,12 @@ public class UnoModel {
                 cardsInHand = this.aiEnemy[turn-1].getHand();
             }
             //this.view.update(); //possibly temp
-            for (int x = 0; x < cardsInHand.size(); x++) {
-                Card cardCheck = cardsInHand.get(x);
-                if (cardCheck.getValue() == 11) {
-                    this.player.getHand().remove(x);
-                    this.currentlyPlacedCard = cardCheck;
-                    nextTurn(1);
-                } else {
+           
                     for (int y = 0; y < 2; y++) {
                         drawCard();
-                    }
-
-                }
-            }
+                    }    
+            this.getCurrentCard().changeValue(-1);
+     
         }
 
         if (turn == 0)
@@ -254,6 +242,10 @@ public class UnoModel {
     private void plusTwoCard() 
     {
         int totalStack = 2;
+        for(int x = 0; x < 2 ; x++)
+        {
+            drawCard();
+        }
         int nextPlayer = (turn + direction);
 
     }
