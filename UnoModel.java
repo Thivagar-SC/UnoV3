@@ -29,6 +29,7 @@ public class UnoModel {
     private int state; // state of game
     private int safeState;
     private UnoAi[] aiEnemy = new UnoAi[3];
+    private UnoAi aiWinner;
 
     public final int MENU = 0;
     public final int SELECTION = 1;
@@ -125,19 +126,20 @@ public class UnoModel {
     public void checkIfRoundIsOver() {
         for (int i = 0; i < 3; i++)
         {
-            UnoAi aiWinner = this.aiEnemy[i];
+            aiWinner = this.aiEnemy[i];
             if (aiWinner.getHand().isEmpty())
             {
                 int totalScore = 0;
                 totalScore += aiWinner.getAITotalScore();
             }
-
-            if (player.getHand().isEmpty()) {
-                int totalScore = 0;
-                totalScore += player.getTotalScore();
-            }
         }
-        player.setWon();
+        if (player.getHand().isEmpty())
+        {
+            int totalScore = 0;
+            totalScore += player.getTotalScore();
+            player.setWon();
+        }
+
     }
 
     /**
@@ -161,7 +163,8 @@ public class UnoModel {
             }
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
-                if (cardCheck.getValue() == 13) {
+                if (cardCheck.getValue() == 13)
+                {
 
                 } else {
                     for (int y = 0; y < 4; y++) {
@@ -587,15 +590,9 @@ public class UnoModel {
         this.view.update();
     }
 
-    public Card getCurrentCard() {
+    public Card getCurrentCard()
+    {
         return this.currentlyPlacedCard;
-    }
-
-    /**
-     * Sorts the winner and the rest by the scores
-     */
-    public void sortByScore() {
-
     }
 
     /**
@@ -618,8 +615,11 @@ public class UnoModel {
 
             if (player.hasWon()) {
                 output.println("You won!");
-            } else {
+            }
+            else
+            {
                 output.println("You lost!");
+                output.println("Winner of this game: " + aiWinner);
             }
 
             output.println("Total scores: " + player.getTotalScore());
@@ -628,6 +628,7 @@ public class UnoModel {
             {
                 output.println("Total score of AI#" + (i+1) + ": " + aiEnemy[i].getAITotalScore());
             }
+
 
             // More
             output.close();
