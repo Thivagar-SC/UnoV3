@@ -68,6 +68,7 @@ public class UnoAi {
                     || cardToPlace.getValue() == 14) {
                 cards.remove(x);
                 currentCard = cardToPlace;
+                model.placeCard(cardToPlace);
             }
             if(currentlyPlacedCard.getValue() == 10)
             {
