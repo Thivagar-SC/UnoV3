@@ -9,10 +9,17 @@ public class UnoAi {
     private ArrayList<Card> cards; // list of cards ai has
     private boolean wonRound; // ai won the game
     private int playerNumber; // value for player order
-    private Card currentCard;
-    private UnoModel model;
+    private Card currentCard; //the current card
+    private UnoModel model; //
 
-    // I aint commenting this yet
+/**
+ * UnoAi
+ * UnoAi constructor
+ * 
+ * @author Avaneesh
+ * @param playerNumber - player id
+ * @param model - model of Uno
+ */
     public UnoAi(int playerNumber, UnoModel model) {
         this.playerNumber = playerNumber;
         this.wonRound = false;
