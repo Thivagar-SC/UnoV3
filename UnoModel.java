@@ -133,6 +133,12 @@ public class UnoModel {
             turn = 0;
         }
         if (currentlyPlacedCard.getValue() == 13) {
+            if (turn == 0){
+                cardsInHand = this.player.getHand();
+            }
+            else{
+                cardsInHand = this.aiEnemy[turn].getHand();
+            }
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 13) {
@@ -146,6 +152,12 @@ public class UnoModel {
             }
         }
         if (currentlyPlacedCard.getValue() == 11) {
+            if (turn == 0){
+                cardsInHand = this.player.getHand();
+            }
+            else{
+                cardsInHand = this.aiEnemy[turn].getHand();
+            }
             this.view.update(); //possibly temp
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
@@ -174,9 +186,14 @@ public class UnoModel {
         // Player currentPlayer = players.get(playerID); temporary removal -tk
         Card cardToPlace = player.getHand().get(cardIndex);
         if (cardToPlace.getValue() == 13) {
-            
+            this.currentlyPlacedCard = cardToPlace;
+            this.player.getHand().remove(cardIndex);
+            this.view.displayColourSelectors();
+            return;
         }
         if (cardToPlace.getValue() == 14) {
+            this.currentlyPlacedCard = cardToPlace;
+            this.player.getHand().remove(cardIndex);
             this.view.displayColourSelectors();
             return;
         }
@@ -208,10 +225,6 @@ public class UnoModel {
     }
     }
 
-    public void setColour(int colour){
-        this.currentlyPlacedCard.changeColour(colour);
-        this.view.update();
-    }
 
     /**
      * Adds 2 cards to the player's hand if no counter
@@ -272,6 +285,10 @@ public class UnoModel {
     public void changeColour(int colour) // Avaneesh
     {
         currentlyPlacedCard.changeColour(colour);
+        this.view.update();
+        //this.nextTurn(0);
+        //this.state = this.AI_TURN;
+        //this.view.update();
     }
 
     /**
