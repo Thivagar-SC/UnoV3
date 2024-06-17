@@ -196,6 +196,10 @@ public class UnoModel {
         this.setState(this.AI_TURN);
         this.view.update();
     }
+    else{
+        this.currentlyPlacedCard = aCard;
+        this.view.update();
+    }
     }
 
     /**
@@ -280,8 +284,7 @@ public class UnoModel {
 
     public void nextUser(){
         //cause movement
-        this.state = this.GAME;
-        this.view.update();
+        
         this.state = this.AI_TURN;
         System.out.println("AI TURN");
 
@@ -299,11 +302,15 @@ public class UnoModel {
             }
         }
         else{
+            System.out.println("AI: "+turn);
+            try{
             aiEnemy[turn-1].placeCard(-1, this.currentlyPlacedCard);
             if(this.aiEnemy[turn-1].getHand().size()==0){
                 this.nextRound();
                 return;
             }
+        }
+        catch(Exception e){}
         }
         
         this.view.update();
