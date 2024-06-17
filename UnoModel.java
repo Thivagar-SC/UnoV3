@@ -79,13 +79,24 @@ public class UnoModel {
     public void nextTurn(int skip) 
     {
         System.out.println(turn);
-        turn = (turn + (skip+1) * direction);
+        turn = turn + direction;
         if (turn == 4){
             turn = 0;
         }
         if (turn == -1){
-            turn = 4;
+            turn = 3;
         }
+        for (int x = 0; x<skip;x++){
+            turn = turn + direction;
+
+        
+        if (turn == 4){
+            turn = 0;
+        }
+        if (turn == -1){
+            turn = 3;
+        }
+    }
         System.out.println(turn);
     }
 
@@ -105,6 +116,7 @@ public class UnoModel {
      */
     public void setState(int state) {
         this.state = state;
+        this.view.update();
     }
 
     /**
@@ -137,7 +149,7 @@ public class UnoModel {
                 cardsInHand = this.player.getHand();
             }
             else{
-                cardsInHand = this.aiEnemy[turn].getHand();
+                cardsInHand = this.aiEnemy[turn-1].getHand();
             }
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
@@ -156,9 +168,9 @@ public class UnoModel {
                 cardsInHand = this.player.getHand();
             }
             else{
-                cardsInHand = this.aiEnemy[turn].getHand();
+                cardsInHand = this.aiEnemy[turn-1].getHand();
             }
-            this.view.update(); //possibly temp
+            //this.view.update(); //possibly temp
             for (int x = 0; x < cardsInHand.size(); x++) {
                 Card cardCheck = cardsInHand.get(x);
                 if (cardCheck.getValue() == 11) {
