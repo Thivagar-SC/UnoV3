@@ -31,8 +31,8 @@ public class Card {
      * Gets score value based on the cards
      * Number cards are their own number values
      * Wild and Wild +4 are worth 50, others are 20
-     *
-     * @author Avaneesh
+     * 
+     * @authur Avaneesh
      * @return the value based on the cards
      */
     public int getScoreValue() {
@@ -48,7 +48,7 @@ public class Card {
     /**
      * getValue
      * returns value of card
-     *
+     * 
      * @author Avaneesh
      * @return cardFaceValue
      * 
@@ -78,4 +78,16 @@ public class Card {
     public void changeColour(int newColour) {
         colour = newColour;
     }
+
+    /**
+     * changeValue
+     * changes the value of a card
+     * 
+     * @author Avaneesh 
+     * @param newValue - value will change to
+     */
+    public void changeValue(int newValue){
+         cardFaceValue = newValue;
+    }
+
 }

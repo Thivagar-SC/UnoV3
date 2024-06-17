@@ -6,15 +6,16 @@ import java.awt.event.*;
  * Button to call UNO when player has one hand in hand
  *
  * @author Tanner
- * @since 2024/06/13
+ * since 2024/06/13
  */
 public class UnoButton extends JButton implements MouseListener {
     public UnoModel model; // model of UNO game
     public Player player; // player of UNO game
-    public boolean isActive; // whether the button is active or not
+    public boolean isActive;
 
     /**
      * Default constructor
+     * @author Tanner
      */
     public UnoButton() {
         isActive = false;
@@ -23,7 +24,7 @@ public class UnoButton extends JButton implements MouseListener {
     /**
      * Enables the UNO Button only when the player is not safe or safe and has 2
      * cards in hand
-     *
+     * 
      * @author Tanner
      */
     public void update() {
@@ -32,47 +33,40 @@ public class UnoButton extends JButton implements MouseListener {
     }
 
     /**
-     * Sends information to the model from the UNO button
-     * @param e - mouse event
+     * Handles the input of the UNO Button
+     * @author Tanner
+     * @param e
+     * 
      */
-
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("Uno CALLED!");
         model.setUNOState(model.CALLED);
     }
-
-    /**
-     * Not set
-     * @param e Not set
-     */
+/**
+ * @author Tanner
+ */
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
-
-    /**
-     * Not set
-     * @param e Not set
-     */
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
-
-    /**
-     * Not set
-     * @param e Not set
-     */
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseEntered(MouseEvent e) {
 
     }
-
-    /**
-     * Not set
-     * @param e Not set
-     */
+/**
+ * @author Tanner
+ */
     @Override
     public void mouseExited(MouseEvent e) {
 
