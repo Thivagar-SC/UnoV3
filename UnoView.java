@@ -155,7 +155,11 @@ public class UnoView extends JPanel {
         numCards.setBorder(BorderFactory.createLineBorder(Color.black));
         this.startingCards.add(actualNum);
         this.mods.add(startingCards);
-        this.add(gameSelect, BorderLayout.CENTER);
+        this.actualNum.setFont(new Font("Times New Roman",1,30));
+        this.numCards.setFont(new Font("Times New Roman",1,30));
+        this.deckModifier.setFont(new Font("Times New Roman",1,30));
+        this.actualNum.setPreferredSize(new Dimension(400,50));
+        this.add(gameSelect, BorderLayout.CENTER);  
         this.add(mods, BorderLayout.SOUTH);
         this.refresh();
 
